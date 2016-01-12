@@ -22,6 +22,7 @@
 		B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CB1C44B18C00A8A6FC /* MDShopManagementViewController.m */; };
 		B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */; };
 		B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */; };
+		B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDClassesViewController.m; sourceTree = "<group>"; };
 		B59A99D01C44B1BB00A8A6FC /* MDPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPersonalCenterViewController.h; sourceTree = "<group>"; };
 		B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPersonalCenterViewController.m; sourceTree = "<group>"; };
+		B59A99D41C44F64800A8A6FC /* LDynamicLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDynamicLabel.h; sourceTree = "<group>"; };
+		B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDynamicLabel.m; sourceTree = "<group>"; };
 		FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +197,7 @@
 		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B59A99D31C44F5AA00A8A6FC /* LDynamicLabel */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -318,6 +322,15 @@
 				B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */,
 			);
 			path = "Personal Center";
+			sourceTree = "<group>";
+		};
+		B59A99D31C44F5AA00A8A6FC /* LDynamicLabel */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99D41C44F64800A8A6FC /* LDynamicLabel.h */,
+				B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */,
+			);
+			path = LDynamicLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +520,7 @@
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
+				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
 				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
 				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
 				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,

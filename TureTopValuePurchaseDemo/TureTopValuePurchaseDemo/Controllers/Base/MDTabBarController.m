@@ -56,35 +56,18 @@
     [[UINavigationBar appearance] setTintColor:GRAY_COLOR]; //设置导航字体的颜色
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];  //设置导航的颜色
     
-    UITabBarItem *tabBarItem;
-    tabBarItem = [self.tabBar.items objectAtIndex:0];
-    [tabBarItem setImage:[[UIImage imageNamed:@"home_tabbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:@"home_tabbar_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:@"首页"];
-    
-    
-    tabBarItem = [self.tabBar.items objectAtIndex:1];
-    [tabBarItem setImage:[[UIImage imageNamed:@"classes_tabbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:@"classes_tabbar_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:@"类目"];
-    
-    
-    tabBarItem = [self.tabBar.items objectAtIndex:2];
-    [tabBarItem setImage:[[UIImage imageNamed:@"shop_tabbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:@"shop_tabbar_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:@"店铺"];
-    
-    
-    tabBarItem = [self.tabBar.items objectAtIndex:3];
-    [tabBarItem setImage:[[UIImage imageNamed:@"cart_tabbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:@"cart_tabbar_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:@"购物车"];
-    
-    
-    tabBarItem = [self.tabBar.items objectAtIndex:4];
-    [tabBarItem setImage:[[UIImage imageNamed:@"personal_tabbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:@"personal_tabbar_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:@"我的"];
+    [self setupTabbarItemWithIndex:0 imageNamed:@"home_tabbar" selectedImageNamed:@"home_tabbar_selected" title:@"首页"];
+    [self setupTabbarItemWithIndex:1 imageNamed:@"classes_tabbar" selectedImageNamed:@"classes_tabbar_selected" title:@"类目"];
+    [self setupTabbarItemWithIndex:2 imageNamed:@"shop_tabbar" selectedImageNamed:@"shop_tabbar_selected" title:@"店铺"];
+    [self setupTabbarItemWithIndex:3 imageNamed:@"cart_tabbar" selectedImageNamed:@"cart_tabbar_selected" title:@"购物车"];
+    [self setupTabbarItemWithIndex:4 imageNamed:@"personal_tabbar" selectedImageNamed:@"personal_tabbar_selected" title:@"我的"];
+}
+
+-(void)setupTabbarItemWithIndex:(NSInteger)index imageNamed:(NSString*)imageName selectedImageNamed:(NSString*)selectedImageName title:(NSString*)title{
+    UITabBarItem *tabBarItem = [self.tabBar.items objectAtIndex:index];
+    [tabBarItem setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem setSelectedImage:[[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem setTitle:title];
 }
 
 @end
