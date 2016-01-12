@@ -1,0 +1,756 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */; };
+		B59A99791C449ED600A8A6FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99781C449ED600A8A6FC /* main.m */; };
+		B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A997B1C449ED600A8A6FC /* AppDelegate.m */; };
+		B59A99841C449ED600A8A6FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B59A99831C449ED600A8A6FC /* Assets.xcassets */; };
+		B59A99871C449ED600A8A6FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B59A99851C449ED600A8A6FC /* LaunchScreen.storyboard */; };
+		B59A99921C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99911C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.m */; };
+		B59A999D1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A999C1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.m */; };
+		B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99B71C44ACBB00A8A6FC /* MDNavigationController.m */; };
+		B59A99BB1C44AEA200A8A6FC /* MDTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99BA1C44AEA200A8A6FC /* MDTabBarController.m */; };
+		B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99BE1C44AFD900A8A6FC /* MDHomeViewController.m */; };
+		B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99C51C44B0CC00A8A6FC /* MDWebViewController.m */; };
+		B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99C81C44B13E00A8A6FC /* MDCartViewController.m */; };
+		B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CB1C44B18C00A8A6FC /* MDShopManagementViewController.m */; };
+		B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */; };
+		B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B59A998E1C449ED600A8A6FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B59A996C1C449ED600A8A6FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59A99731C449ED600A8A6FC;
+			remoteInfo = TureTopValuePurchaseDemo;
+		};
+		B59A99991C449ED600A8A6FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B59A996C1C449ED600A8A6FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59A99731C449ED600A8A6FC;
+			remoteInfo = TureTopValuePurchaseDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59A99741C449ED600A8A6FC /* TureTopValuePurchaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TureTopValuePurchaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59A99781C449ED600A8A6FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B59A997A1C449ED600A8A6FC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B59A997B1C449ED600A8A6FC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B59A99831C449ED600A8A6FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B59A99861C449ED600A8A6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B59A99881C449ED600A8A6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59A998D1C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TureTopValuePurchaseDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59A99911C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TureTopValuePurchaseDemoTests.m; sourceTree = "<group>"; };
+		B59A99931C449ED600A8A6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59A99981C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TureTopValuePurchaseDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59A999C1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TureTopValuePurchaseDemoUITests.m; sourceTree = "<group>"; };
+		B59A999E1C449ED600A8A6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59A99B31C44A44600A8A6FC /* TureTopValuePurchase-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TureTopValuePurchase-Prefix.pch"; sourceTree = "<group>"; };
+		B59A99B41C44A72800A8A6FC /* GlobalMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMacros.h; sourceTree = "<group>"; };
+		B59A99B61C44ACBB00A8A6FC /* MDNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNavigationController.h; sourceTree = "<group>"; };
+		B59A99B71C44ACBB00A8A6FC /* MDNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDNavigationController.m; sourceTree = "<group>"; };
+		B59A99B91C44AEA200A8A6FC /* MDTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTabBarController.h; sourceTree = "<group>"; };
+		B59A99BA1C44AEA200A8A6FC /* MDTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTabBarController.m; sourceTree = "<group>"; };
+		B59A99BD1C44AFD900A8A6FC /* MDHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeViewController.h; sourceTree = "<group>"; };
+		B59A99BE1C44AFD900A8A6FC /* MDHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeViewController.m; sourceTree = "<group>"; };
+		B59A99C41C44B0CC00A8A6FC /* MDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWebViewController.h; sourceTree = "<group>"; };
+		B59A99C51C44B0CC00A8A6FC /* MDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWebViewController.m; sourceTree = "<group>"; };
+		B59A99C71C44B13E00A8A6FC /* MDCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCartViewController.h; sourceTree = "<group>"; };
+		B59A99C81C44B13E00A8A6FC /* MDCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCartViewController.m; sourceTree = "<group>"; };
+		B59A99CA1C44B18C00A8A6FC /* MDShopManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDShopManagementViewController.h; sourceTree = "<group>"; };
+		B59A99CB1C44B18C00A8A6FC /* MDShopManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDShopManagementViewController.m; sourceTree = "<group>"; };
+		B59A99CD1C44B1A100A8A6FC /* MDClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDClassesViewController.h; sourceTree = "<group>"; };
+		B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDClassesViewController.m; sourceTree = "<group>"; };
+		B59A99D01C44B1BB00A8A6FC /* MDPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPersonalCenterViewController.h; sourceTree = "<group>"; };
+		B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPersonalCenterViewController.m; sourceTree = "<group>"; };
+		FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B59A99711C449ED600A8A6FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A998A1C449ED600A8A6FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A99951C449ED600A8A6FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21D5BDD9096F68415C707616 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */,
+				77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		35EDC44EDBC14BCDEB06F646 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B59A996B1C449ED600A8A6FC = {
+			isa = PBXGroup;
+			children = (
+				B59A99761C449ED600A8A6FC /* TureTopValuePurchaseDemo */,
+				B59A99901C449ED600A8A6FC /* TureTopValuePurchaseDemoTests */,
+				B59A999B1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests */,
+				B59A99751C449ED600A8A6FC /* Products */,
+				21D5BDD9096F68415C707616 /* Pods */,
+				35EDC44EDBC14BCDEB06F646 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B59A99751C449ED600A8A6FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99741C449ED600A8A6FC /* TureTopValuePurchaseDemo.app */,
+				B59A998D1C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.xctest */,
+				B59A99981C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B59A99761C449ED600A8A6FC /* TureTopValuePurchaseDemo */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99B21C44A2B700A8A6FC /* Macros */,
+				B59A99B11C44A29E00A8A6FC /* Categories */,
+				B59A99B01C44A29300A8A6FC /* Resources */,
+				B59A99AF1C44A28900A8A6FC /* Helpers */,
+				B59A99AE1C44A26E00A8A6FC /* DataControllers */,
+				B59A99AD1C44A26700A8A6FC /* Controllers */,
+				B59A99AC1C44A26100A8A6FC /* Models */,
+				B59A99AB1C44A25B00A8A6FC /* Views */,
+				B59A99AA1C44A24F00A8A6FC /* Vendors */,
+				B59A99771C449ED600A8A6FC /* Supporting Files */,
+			);
+			path = TureTopValuePurchaseDemo;
+			sourceTree = "<group>";
+		};
+		B59A99771C449ED600A8A6FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B59A997A1C449ED600A8A6FC /* AppDelegate.h */,
+				B59A997B1C449ED600A8A6FC /* AppDelegate.m */,
+				B59A99851C449ED600A8A6FC /* LaunchScreen.storyboard */,
+				B59A99881C449ED600A8A6FC /* Info.plist */,
+				B59A99781C449ED600A8A6FC /* main.m */,
+				B59A99B31C44A44600A8A6FC /* TureTopValuePurchase-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B59A99901C449ED600A8A6FC /* TureTopValuePurchaseDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99911C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.m */,
+				B59A99931C449ED600A8A6FC /* Info.plist */,
+			);
+			path = TureTopValuePurchaseDemoTests;
+			sourceTree = "<group>";
+		};
+		B59A999B1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B59A999C1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.m */,
+				B59A999E1C449ED600A8A6FC /* Info.plist */,
+			);
+			path = TureTopValuePurchaseDemoUITests;
+			sourceTree = "<group>";
+		};
+		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		B59A99AB1C44A25B00A8A6FC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B59A99AC1C44A26100A8A6FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B59A99AD1C44A26700A8A6FC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99C31C44B03A00A8A6FC /* Personal Center */,
+				B59A99C21C44B00800A8A6FC /* Classes */,
+				B59A99C11C44B00100A8A6FC /* Shop */,
+				B59A99C01C44AFF600A8A6FC /* Cart */,
+				B59A99BC1C44AFB200A8A6FC /* Home */,
+				B59A99B51C44AC6B00A8A6FC /* Base */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B59A99AE1C44A26E00A8A6FC /* DataControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataControllers;
+			sourceTree = "<group>";
+		};
+		B59A99AF1C44A28900A8A6FC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B59A99B01C44A29300A8A6FC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99831C449ED600A8A6FC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B59A99B11C44A29E00A8A6FC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		B59A99B21C44A2B700A8A6FC /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99B41C44A72800A8A6FC /* GlobalMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		B59A99B51C44AC6B00A8A6FC /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99B61C44ACBB00A8A6FC /* MDNavigationController.h */,
+				B59A99B71C44ACBB00A8A6FC /* MDNavigationController.m */,
+				B59A99B91C44AEA200A8A6FC /* MDTabBarController.h */,
+				B59A99BA1C44AEA200A8A6FC /* MDTabBarController.m */,
+				B59A99C41C44B0CC00A8A6FC /* MDWebViewController.h */,
+				B59A99C51C44B0CC00A8A6FC /* MDWebViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B59A99BC1C44AFB200A8A6FC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99BD1C44AFD900A8A6FC /* MDHomeViewController.h */,
+				B59A99BE1C44AFD900A8A6FC /* MDHomeViewController.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B59A99C01C44AFF600A8A6FC /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99C71C44B13E00A8A6FC /* MDCartViewController.h */,
+				B59A99C81C44B13E00A8A6FC /* MDCartViewController.m */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		B59A99C11C44B00100A8A6FC /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99CA1C44B18C00A8A6FC /* MDShopManagementViewController.h */,
+				B59A99CB1C44B18C00A8A6FC /* MDShopManagementViewController.m */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		B59A99C21C44B00800A8A6FC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99CD1C44B1A100A8A6FC /* MDClassesViewController.h */,
+				B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B59A99C31C44B03A00A8A6FC /* Personal Center */ = {
+			isa = PBXGroup;
+			children = (
+				B59A99D01C44B1BB00A8A6FC /* MDPersonalCenterViewController.h */,
+				B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */,
+			);
+			path = "Personal Center";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B59A99731C449ED600A8A6FC /* TureTopValuePurchaseDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59A99A11C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemo" */;
+			buildPhases = (
+				B67B820E65DB22CE5C1943F4 /* Check Pods Manifest.lock */,
+				B59A99701C449ED600A8A6FC /* Sources */,
+				B59A99711C449ED600A8A6FC /* Frameworks */,
+				B59A99721C449ED600A8A6FC /* Resources */,
+				DDE98F5D839AF410A6F96D7B /* Embed Pods Frameworks */,
+				8B7B16BFBB4B455A3BB21147 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TureTopValuePurchaseDemo;
+			productName = TureTopValuePurchaseDemo;
+			productReference = B59A99741C449ED600A8A6FC /* TureTopValuePurchaseDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B59A998C1C449ED600A8A6FC /* TureTopValuePurchaseDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59A99A41C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemoTests" */;
+			buildPhases = (
+				B59A99891C449ED600A8A6FC /* Sources */,
+				B59A998A1C449ED600A8A6FC /* Frameworks */,
+				B59A998B1C449ED600A8A6FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B59A998F1C449ED600A8A6FC /* PBXTargetDependency */,
+			);
+			name = TureTopValuePurchaseDemoTests;
+			productName = TureTopValuePurchaseDemoTests;
+			productReference = B59A998D1C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B59A99971C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59A99A71C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemoUITests" */;
+			buildPhases = (
+				B59A99941C449ED600A8A6FC /* Sources */,
+				B59A99951C449ED600A8A6FC /* Frameworks */,
+				B59A99961C449ED600A8A6FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B59A999A1C449ED600A8A6FC /* PBXTargetDependency */,
+			);
+			name = TureTopValuePurchaseDemoUITests;
+			productName = TureTopValuePurchaseDemoUITests;
+			productReference = B59A99981C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B59A996C1C449ED600A8A6FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "铭道超值购";
+				TargetAttributes = {
+					B59A99731C449ED600A8A6FC = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					B59A998C1C449ED600A8A6FC = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = B59A99731C449ED600A8A6FC;
+					};
+					B59A99971C449ED600A8A6FC = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = B59A99731C449ED600A8A6FC;
+					};
+				};
+			};
+			buildConfigurationList = B59A996F1C449ED600A8A6FC /* Build configuration list for PBXProject "TureTopValuePurchaseDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B59A996B1C449ED600A8A6FC;
+			productRefGroup = B59A99751C449ED600A8A6FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B59A99731C449ED600A8A6FC /* TureTopValuePurchaseDemo */,
+				B59A998C1C449ED600A8A6FC /* TureTopValuePurchaseDemoTests */,
+				B59A99971C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B59A99721C449ED600A8A6FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59A99871C449ED600A8A6FC /* LaunchScreen.storyboard in Resources */,
+				B59A99841C449ED600A8A6FC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A998B1C449ED600A8A6FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A99961C449ED600A8A6FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B7B16BFBB4B455A3BB21147 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B67B820E65DB22CE5C1943F4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DDE98F5D839AF410A6F96D7B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B59A99701C449ED600A8A6FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59A99BB1C44AEA200A8A6FC /* MDTabBarController.m in Sources */,
+				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
+				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
+				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
+				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
+				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
+				B59A99791C449ED600A8A6FC /* main.m in Sources */,
+				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
+				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
+				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A99891C449ED600A8A6FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59A99921C449ED600A8A6FC /* TureTopValuePurchaseDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59A99941C449ED600A8A6FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59A999D1C449ED600A8A6FC /* TureTopValuePurchaseDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B59A998F1C449ED600A8A6FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B59A99731C449ED600A8A6FC /* TureTopValuePurchaseDemo */;
+			targetProxy = B59A998E1C449ED600A8A6FC /* PBXContainerItemProxy */;
+		};
+		B59A999A1C449ED600A8A6FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B59A99731C449ED600A8A6FC /* TureTopValuePurchaseDemo */;
+			targetProxy = B59A99991C449ED600A8A6FC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B59A99851C449ED600A8A6FC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B59A99861C449ED600A8A6FC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B59A999F1C449ED600A8A6FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B59A99A01C449ED600A8A6FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B59A99A21C449ED600A8A6FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/TureTopValuePurchaseDemo/TureTopValuePurchase-Prefix.pch";
+				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B59A99A31C449ED600A8A6FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B59A99A51C449ED600A8A6FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TureTopValuePurchaseDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TureTopValuePurchaseDemo.app/TureTopValuePurchaseDemo";
+			};
+			name = Debug;
+		};
+		B59A99A61C449ED600A8A6FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TureTopValuePurchaseDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TureTopValuePurchaseDemo.app/TureTopValuePurchaseDemo";
+			};
+			name = Release;
+		};
+		B59A99A81C449ED600A8A6FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TureTopValuePurchaseDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = TureTopValuePurchaseDemo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B59A99A91C449ED600A8A6FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TureTopValuePurchaseDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = TureTopValuePurchaseDemo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B59A996F1C449ED600A8A6FC /* Build configuration list for PBXProject "TureTopValuePurchaseDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59A999F1C449ED600A8A6FC /* Debug */,
+				B59A99A01C449ED600A8A6FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59A99A11C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59A99A21C449ED600A8A6FC /* Debug */,
+				B59A99A31C449ED600A8A6FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59A99A41C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59A99A51C449ED600A8A6FC /* Debug */,
+				B59A99A61C449ED600A8A6FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59A99A71C449ED600A8A6FC /* Build configuration list for PBXNativeTarget "TureTopValuePurchaseDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59A99A81C449ED600A8A6FC /* Debug */,
+				B59A99A91C449ED600A8A6FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B59A996C1C449ED600A8A6FC /* Project object */;
+}

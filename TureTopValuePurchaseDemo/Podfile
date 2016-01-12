@@ -1,0 +1,14 @@
+platform :ios, "7.0"
+
+pod "Masonry"
+pod "AFNetworking","~> 2.6.3"
+pod "MBProgressHUD"
+pod "SDWebImage"
+pod "TPKeyboardAvoiding"
+pod "SWTableViewCell"
+pod "MJRefresh"
+pod "MJExtension"
+
+target :TureTopValuePurchaseDemoTests, :exclusive => true do
+  # pod 'Masonry'
+end
