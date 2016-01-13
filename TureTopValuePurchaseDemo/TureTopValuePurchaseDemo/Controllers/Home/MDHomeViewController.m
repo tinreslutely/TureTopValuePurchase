@@ -8,6 +8,8 @@
 
 #import "MDHomeViewController.h"
 
+#import "LDSearchBar.h"
+
 @interface MDHomeViewController ()
 
 @end
@@ -18,11 +20,16 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self.navigationItem setTitle:@"首页"];
+    [self initView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+
+-(void)initView{
+    self.navigationItem.titleView = [[LDSearchBar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-100, 30)];
 }
 
 @end

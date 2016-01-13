@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RDVTabBarController.h"
 
-@interface MDTabBarController : UITabBarController
+@interface MDTabBarController : RDVTabBarController
 
 @end

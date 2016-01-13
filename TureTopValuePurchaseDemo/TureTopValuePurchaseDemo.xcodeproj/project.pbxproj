@@ -23,6 +23,8 @@
 		B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */; };
 		B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */; };
 		B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */; };
+		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
+		B5B67CAC1C464F0B00E7A902 /* LDSearchNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,11 @@
 		B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPersonalCenterViewController.m; sourceTree = "<group>"; };
 		B59A99D41C44F64800A8A6FC /* LDynamicLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDynamicLabel.h; sourceTree = "<group>"; };
 		B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDynamicLabel.m; sourceTree = "<group>"; };
+		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
+		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
+		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
+		B5B67CAA1C464F0B00E7A902 /* LDSearchNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchNavigationBar.h; sourceTree = "<group>"; };
+		B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchNavigationBar.m; sourceTree = "<group>"; };
 		FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +204,7 @@
 		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B5B67CA61C4628D800E7A902 /* LDSearchBar */,
 				B59A99D31C44F5AA00A8A6FC /* LDynamicLabel */,
 			);
 			path = Vendors;
@@ -254,6 +262,7 @@
 		B59A99B11C44A29E00A8A6FC /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B5B67CA41C45E2EA00E7A902 /* MDEnum.h */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -331,6 +340,17 @@
 				B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */,
 			);
 			path = LDynamicLabel;
+			sourceTree = "<group>";
+		};
+		B5B67CA61C4628D800E7A902 /* LDSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				B5B67CA71C4629F600E7A902 /* LDSearchBar.h */,
+				B5B67CA81C4629F600E7A902 /* LDSearchBar.m */,
+				B5B67CAA1C464F0B00E7A902 /* LDSearchNavigationBar.h */,
+				B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */,
+			);
+			path = LDSearchBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,10 +536,12 @@
 				B59A99BB1C44AEA200A8A6FC /* MDTabBarController.m in Sources */,
 				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
+				B5B67CAC1C464F0B00E7A902 /* LDSearchNavigationBar.m in Sources */,
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
+				B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */,
 				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
 				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
 				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
@@ -658,6 +680,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TureTopValuePurchaseDemo/TureTopValuePurchase-Prefix.pch";
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -671,6 +694,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

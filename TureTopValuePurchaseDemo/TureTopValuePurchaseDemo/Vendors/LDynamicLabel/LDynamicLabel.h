@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,LDLabelDirectionType){
+    LDLabelDirectionTypeCrossWise,//横向
+    LDLabelDirectionTypeLengthWise//纵向
+};
+
 @interface LDynamicLabel : UILabel
+
+-(void)setDirectionType:(LDLabelDirectionType)type;
+-(void)setForce:(BOOL)force;
 
 @end

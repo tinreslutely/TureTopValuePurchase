@@ -15,6 +15,8 @@
 #import "MDCartViewController.h"
 #import "MDHomeViewController.h"
 
+#import "RDVTabBarItem.h"
+
 @interface MDTabBarController ()
 
 @end
@@ -24,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupTabBarController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,18 +35,20 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+    [self setupTabBarController];
     [self setupTabBar];
 }
 
 #pragma mark private methods
 
 -(void)setupTabBarController{
-    
-    [self addChildViewController:[[MDNavigationController alloc] initWithRootViewController:[[MDHomeViewController alloc] init]]];
-    [self addChildViewController:[[MDNavigationController alloc] initWithRootViewController:[[MDClassesViewController alloc] init]]];
-    [self addChildViewController:[[MDNavigationController alloc] initWithRootViewController:[[MDShopManagementViewController alloc] init]]];
-    [self addChildViewController:[[MDNavigationController alloc] initWithRootViewController:[[MDCartViewController alloc] init]]];
-    [self addChildViewController:[[MDNavigationController alloc] initWithRootViewController:[[MDPersonalCenterViewController alloc] init]]];
+    [self setViewControllers:@[
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDHomeViewController alloc] init]],
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDClassesViewController alloc] init]],
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDShopManagementViewController alloc] init]],
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDCartViewController alloc] init]],
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDPersonalCenterViewController alloc] init]]
+                              ]];
 }
 
 -(void)setupTabBar{
@@ -61,13 +64,16 @@
     [self setupTabbarItemWithIndex:2 imageNamed:@"shop_tabbar" selectedImageNamed:@"shop_tabbar_selected" title:@"店铺"];
     [self setupTabbarItemWithIndex:3 imageNamed:@"cart_tabbar" selectedImageNamed:@"cart_tabbar_selected" title:@"购物车"];
     [self setupTabbarItemWithIndex:4 imageNamed:@"personal_tabbar" selectedImageNamed:@"personal_tabbar_selected" title:@"我的"];
+    [self setSelectedIndex:0];
 }
 
 -(void)setupTabbarItemWithIndex:(NSInteger)index imageNamed:(NSString*)imageName selectedImageNamed:(NSString*)selectedImageName title:(NSString*)title{
-    UITabBarItem *tabBarItem = [self.tabBar.items objectAtIndex:index];
-    [tabBarItem setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setSelectedImage:[[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem setTitle:title];
+    RDVTabBarItem *item = [self.tabBar.items objectAtIndex:index];
+    [item setFinishedSelectedImage:[UIImage imageNamed:selectedImageName] withFinishedUnselectedImage:[UIImage imageNamed:imageName]];
+    [item setUnselectedTitleAttributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:10], NSForegroundColorAttributeName: TAB_COLOR}];
+    [item setSelectedTitleAttributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:10], NSForegroundColorAttributeName: TAB_SELECTED_COLOR}];
+    [item setTitlePositionAdjustment:UIOffsetMake(0, 5)];
+    [item setTitle:title];
 }
 
 @end

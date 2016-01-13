@@ -9,6 +9,9 @@
 #ifndef TureTopValuePurchase_Prefix_pch
 #define TureTopValuePurchase_Prefix_pch
 
+#import <Foundation/Foundation.h>
 #import "GlobalMacros.h"
+#import "MDEnum.h"
+#import "Masonry.h"
 
 #endif /* TureTopValuePurchase_Prefix_pch */

@@ -32,4 +32,5 @@
 #define INPUT_COLOR UIColorFromRGB(106.0,106.0,106.0)
 
 
+#define __IPHONE_SYSTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
 #endif

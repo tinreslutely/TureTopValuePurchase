@@ -8,6 +8,7 @@ pod "TPKeyboardAvoiding"
 pod "SWTableViewCell"
 pod "MJRefresh"
 pod "MJExtension"
+pod "RDVTabBarController"
 
 target :TureTopValuePurchaseDemoTests, :exclusive => true do
   # pod 'Masonry'
