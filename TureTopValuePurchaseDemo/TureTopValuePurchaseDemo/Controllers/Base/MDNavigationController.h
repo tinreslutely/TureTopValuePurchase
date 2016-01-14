@@ -10,4 +10,6 @@
 
 @interface MDNavigationController : UINavigationController
 
+-(void)setAlpha:(float)alphaValue;
+
 @end

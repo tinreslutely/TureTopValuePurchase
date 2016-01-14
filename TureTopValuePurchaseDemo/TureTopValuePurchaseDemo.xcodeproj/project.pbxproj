@@ -23,8 +23,13 @@
 		B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */; };
 		B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */; };
 		B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */; };
+		B59E89FD1C472F64005CEA25 /* data-home.json in Resources */ = {isa = PBXBuildFile; fileRef = B59E89FC1C472F64005CEA25 /* data-home.json */; };
+		B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A031C47304C005CEA25 /* LDUtils.m */; };
+		B59E8A081C47375E005CEA25 /* MDHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A071C47375E005CEA25 /* MDHomeModel.m */; };
+		B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */; };
+		B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A181C475272005CEA25 /* ImageCarouselView.m */; };
+		B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */; };
 		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
-		B5B67CAC1C464F0B00E7A902 /* LDSearchNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,11 +85,20 @@
 		B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPersonalCenterViewController.m; sourceTree = "<group>"; };
 		B59A99D41C44F64800A8A6FC /* LDynamicLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDynamicLabel.h; sourceTree = "<group>"; };
 		B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDynamicLabel.m; sourceTree = "<group>"; };
+		B59E89FC1C472F64005CEA25 /* data-home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "data-home.json"; sourceTree = "<group>"; };
+		B59E8A021C47304C005CEA25 /* LDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDUtils.h; sourceTree = "<group>"; };
+		B59E8A031C47304C005CEA25 /* LDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDUtils.m; sourceTree = "<group>"; };
+		B59E8A061C47375E005CEA25 /* MDHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeModel.h; sourceTree = "<group>"; };
+		B59E8A071C47375E005CEA25 /* MDHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeModel.m; sourceTree = "<group>"; };
+		B59E8A101C4740C8005CEA25 /* MDHomeDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeDataController.h; sourceTree = "<group>"; };
+		B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeDataController.m; sourceTree = "<group>"; };
+		B59E8A171C475272005CEA25 /* ImageCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCarouselView.h; sourceTree = "<group>"; };
+		B59E8A181C475272005CEA25 /* ImageCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselView.m; sourceTree = "<group>"; };
+		B59E8A191C475272005CEA25 /* ImageCarouselViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCarouselViewCell.h; sourceTree = "<group>"; };
+		B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselViewCell.m; sourceTree = "<group>"; };
 		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
 		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
 		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
-		B5B67CAA1C464F0B00E7A902 /* LDSearchNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchNavigationBar.h; sourceTree = "<group>"; };
-		B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchNavigationBar.m; sourceTree = "<group>"; };
 		FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +218,8 @@
 		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B59E8A161C475261005CEA25 /* ImageCarouselView */,
+				B59E89FE1C472FE4005CEA25 /* LDUtils */,
 				B5B67CA61C4628D800E7A902 /* LDSearchBar */,
 				B59A99D31C44F5AA00A8A6FC /* LDynamicLabel */,
 			);
@@ -220,6 +236,7 @@
 		B59A99AC1C44A26100A8A6FC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B59E8A051C4736CA005CEA25 /* Home */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +257,7 @@
 		B59A99AE1C44A26E00A8A6FC /* DataControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B59E8A091C47380C005CEA25 /* Home */,
 			);
 			path = DataControllers;
 			sourceTree = "<group>";
@@ -254,6 +272,7 @@
 		B59A99B01C44A29300A8A6FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B59E89FB1C472F44005CEA25 /* Data */,
 				B59A99831C449ED600A8A6FC /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -342,13 +361,57 @@
 			path = LDynamicLabel;
 			sourceTree = "<group>";
 		};
+		B59E89FB1C472F44005CEA25 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B59E89FC1C472F64005CEA25 /* data-home.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B59E89FE1C472FE4005CEA25 /* LDUtils */ = {
+			isa = PBXGroup;
+			children = (
+				B59E8A021C47304C005CEA25 /* LDUtils.h */,
+				B59E8A031C47304C005CEA25 /* LDUtils.m */,
+			);
+			path = LDUtils;
+			sourceTree = "<group>";
+		};
+		B59E8A051C4736CA005CEA25 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B59E8A061C47375E005CEA25 /* MDHomeModel.h */,
+				B59E8A071C47375E005CEA25 /* MDHomeModel.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B59E8A091C47380C005CEA25 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B59E8A101C4740C8005CEA25 /* MDHomeDataController.h */,
+				B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B59E8A161C475261005CEA25 /* ImageCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				B59E8A171C475272005CEA25 /* ImageCarouselView.h */,
+				B59E8A181C475272005CEA25 /* ImageCarouselView.m */,
+				B59E8A191C475272005CEA25 /* ImageCarouselViewCell.h */,
+				B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */,
+			);
+			path = ImageCarouselView;
+			sourceTree = "<group>";
+		};
 		B5B67CA61C4628D800E7A902 /* LDSearchBar */ = {
 			isa = PBXGroup;
 			children = (
 				B5B67CA71C4629F600E7A902 /* LDSearchBar.h */,
 				B5B67CA81C4629F600E7A902 /* LDSearchBar.m */,
-				B5B67CAA1C464F0B00E7A902 /* LDSearchNavigationBar.h */,
-				B5B67CAB1C464F0B00E7A902 /* LDSearchNavigationBar.m */,
 			);
 			path = LDSearchBar;
 			sourceTree = "<group>";
@@ -461,6 +524,7 @@
 			files = (
 				B59A99871C449ED600A8A6FC /* LaunchScreen.storyboard in Resources */,
 				B59A99841C449ED600A8A6FC /* Assets.xcassets in Resources */,
+				B59E89FD1C472F64005CEA25 /* data-home.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,17 +598,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B59A99BB1C44AEA200A8A6FC /* MDTabBarController.m in Sources */,
+				B59E8A081C47375E005CEA25 /* MDHomeModel.m in Sources */,
+				B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */,
+				B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */,
 				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
-				B5B67CAC1C464F0B00E7A902 /* LDSearchNavigationBar.m in Sources */,
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
+				B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
 				B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */,
 				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
 				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
 				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
+				B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */,
 				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

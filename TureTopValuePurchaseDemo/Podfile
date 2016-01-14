@@ -9,6 +9,7 @@ pod "SWTableViewCell"
 pod "MJRefresh"
 pod "MJExtension"
 pod "RDVTabBarController"
+pod 'SDCycleScrollView','~> 1.6'
 
 target :TureTopValuePurchaseDemoTests, :exclusive => true do
   # pod 'Masonry'

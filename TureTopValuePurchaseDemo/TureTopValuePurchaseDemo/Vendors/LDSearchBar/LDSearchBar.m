@@ -12,7 +12,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
-        [self.layer setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.layer setBorderColor:[[UIColor whiteColor] CGColor]];
         [self.layer setBorderWidth:1];
         [self.layer setCornerRadius:5];
         [self.layer setMasksToBounds:YES];

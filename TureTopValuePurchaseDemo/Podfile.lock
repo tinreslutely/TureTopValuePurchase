@@ -25,6 +25,8 @@ PODS:
   - MJExtension (3.0.9)
   - MJRefresh (3.1.0)
   - RDVTabBarController (1.1.9)
+  - SDCycleScrollView (1.6):
+    - SDWebImage (~> 3.7)
   - SDWebImage (3.7.4):
     - SDWebImage/Core (= 3.7.4)
   - SDWebImage/Core (3.7.4)
@@ -38,6 +40,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - RDVTabBarController
+  - SDCycleScrollView (~> 1.6)
   - SDWebImage
   - SWTableViewCell
   - TPKeyboardAvoiding
@@ -49,6 +52,7 @@ SPEC CHECKSUMS:
   MJExtension: 116781b18cb25cee39619e16617f62bb7433ea4e
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   RDVTabBarController: 67794f7a7a37f8e32f046f85ac67d06ab92d624a
+  SDCycleScrollView: 436ccec76258f9f280365af5c07b289a71382601
   SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7

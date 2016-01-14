@@ -55,9 +55,9 @@
     if([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]){
         navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self setAlpha];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self setAlpha];
+//    });
     
 }
 
@@ -74,14 +74,9 @@
 }
 
 #pragma mark private methods
--(void)setAlpha{
-    if (_changing == NO) {
-        _changing = YES;
-        [UIView animateWithDuration:1 animations:^{
-            _alphaView.alpha = _alphaView.alpha == 0.0 ? 1.0 : 0.0;
-        } completion:^(BOOL finished) {
-            _changing = NO;
-        }];
+-(void)setAlpha:(float)alphaValue{
+    if(alphaValue > 0){
+        _alphaView.alpha = alphaValue;
     }
 }
 
