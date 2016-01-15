@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "MDHomeModel.h"
-#import "ImageCarouselView.h"
+
 #import "SDCycleScrollView.h"
 
-@interface MDHomeDataController : NSObject<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,ImageCarouselViewDelegate>
+@interface MDHomeDataController : NSObject
 
--(void)refreshDataWithCompletion:(void(^)(BOOL state))completion;
-
-@property(nonatomic,copy) void (^scrollBlock)(float scrollY);
+-(void)requestDataWithType:(NSString*)type completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel*> *list))completion;
 @end

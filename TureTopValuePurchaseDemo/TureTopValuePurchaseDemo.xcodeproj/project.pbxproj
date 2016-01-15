@@ -30,6 +30,11 @@
 		B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A181C475272005CEA25 /* ImageCarouselView.m */; };
 		B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */; };
 		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
+		B5FFCEC01C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEB91C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m */; };
+		B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEBB1C489B020096B438 /* MDHomeLikeProductTableViewCell.m */; };
+		B5FFCEC21C489B020096B438 /* MDHomeRedClassesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEBD1C489B020096B438 /* MDHomeRedClassesTableViewCell.m */; };
+		B5FFCEC31C489B020096B438 /* MDHomeRedShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEBF1C489B020096B438 /* MDHomeRedShopTableViewCell.m */; };
+		B5FFCEC61C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEC51C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +104,16 @@
 		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
 		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
 		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
+		B5FFCEB81C489B020096B438 /* MDHomeBannerFoundationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeBannerFoundationTableViewCell.h; sourceTree = "<group>"; };
+		B5FFCEB91C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeBannerFoundationTableViewCell.m; sourceTree = "<group>"; };
+		B5FFCEBA1C489B020096B438 /* MDHomeLikeProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeLikeProductTableViewCell.h; sourceTree = "<group>"; };
+		B5FFCEBB1C489B020096B438 /* MDHomeLikeProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeLikeProductTableViewCell.m; sourceTree = "<group>"; };
+		B5FFCEBC1C489B020096B438 /* MDHomeRedClassesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeRedClassesTableViewCell.h; sourceTree = "<group>"; };
+		B5FFCEBD1C489B020096B438 /* MDHomeRedClassesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeRedClassesTableViewCell.m; sourceTree = "<group>"; };
+		B5FFCEBE1C489B020096B438 /* MDHomeRedShopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeRedShopTableViewCell.h; sourceTree = "<group>"; };
+		B5FFCEBF1C489B020096B438 /* MDHomeRedShopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeRedShopTableViewCell.m; sourceTree = "<group>"; };
+		B5FFCEC41C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeLikeProductTipTableViewCell.h; sourceTree = "<group>"; };
+		B5FFCEC51C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHomeLikeProductTipTableViewCell.m; sourceTree = "<group>"; };
 		FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,6 +244,7 @@
 		B59A99AB1C44A25B00A8A6FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B5FFCEAA1C488C5E0096B438 /* Home */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,6 +432,31 @@
 			path = LDSearchBar;
 			sourceTree = "<group>";
 		};
+		B5FFCEAA1C488C5E0096B438 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFCEB71C489AB90096B438 /* Cell */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B5FFCEB71C489AB90096B438 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B5FFCEB81C489B020096B438 /* MDHomeBannerFoundationTableViewCell.h */,
+				B5FFCEB91C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m */,
+				B5FFCEBA1C489B020096B438 /* MDHomeLikeProductTableViewCell.h */,
+				B5FFCEBB1C489B020096B438 /* MDHomeLikeProductTableViewCell.m */,
+				B5FFCEBC1C489B020096B438 /* MDHomeRedClassesTableViewCell.h */,
+				B5FFCEBD1C489B020096B438 /* MDHomeRedClassesTableViewCell.m */,
+				B5FFCEBE1C489B020096B438 /* MDHomeRedShopTableViewCell.h */,
+				B5FFCEBF1C489B020096B438 /* MDHomeRedShopTableViewCell.m */,
+				B5FFCEC41C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.h */,
+				B5FFCEC51C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,7 +638,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FFCEC21C489B020096B438 /* MDHomeRedClassesTableViewCell.m in Sources */,
 				B59A99BB1C44AEA200A8A6FC /* MDTabBarController.m in Sources */,
+				B5FFCEC61C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m in Sources */,
 				B59E8A081C47375E005CEA25 /* MDHomeModel.m in Sources */,
 				B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */,
 				B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */,
@@ -607,10 +650,13 @@
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
 				B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */,
+				B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
+				B5FFCEC31C489B020096B438 /* MDHomeRedShopTableViewCell.m in Sources */,
 				B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */,
 				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
 				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
+				B5FFCEC01C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m in Sources */,
 				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
 				B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */,
 				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,

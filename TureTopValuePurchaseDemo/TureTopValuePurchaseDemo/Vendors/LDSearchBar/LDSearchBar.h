@@ -10,4 +10,9 @@
 
 @interface LDSearchBar : UIView
 
+@property(nonatomic,strong) UIButton *leftButton;
+@property(nonatomic,strong) UIButton *rightButton;
+
+-(instancetype)initWithNavigationItem:(UINavigationItem*)navigationItem;
+
 @end
