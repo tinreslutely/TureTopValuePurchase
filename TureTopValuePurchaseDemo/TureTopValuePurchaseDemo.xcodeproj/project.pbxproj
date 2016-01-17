@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */; };
 		B59A99791C449ED600A8A6FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99781C449ED600A8A6FC /* main.m */; };
 		B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A997B1C449ED600A8A6FC /* AppDelegate.m */; };
@@ -55,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		086CAAB41C49E5D000D23761 /* MDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchViewController.h; sourceTree = "<group>"; };
+		086CAAB51C49E5D000D23761 /* MDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchViewController.m; sourceTree = "<group>"; };
+		086CAAB71C49F28800D23761 /* LDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchViewController.h; sourceTree = "<group>"; };
+		086CAAB81C49F28800D23761 /* LDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchViewController.m; sourceTree = "<group>"; };
 		77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59A99741C449ED600A8A6FC /* TureTopValuePurchaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TureTopValuePurchaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -328,6 +334,8 @@
 			children = (
 				B59A99BD1C44AFD900A8A6FC /* MDHomeViewController.h */,
 				B59A99BE1C44AFD900A8A6FC /* MDHomeViewController.m */,
+				086CAAB41C49E5D000D23761 /* MDSearchViewController.h */,
+				086CAAB51C49E5D000D23761 /* MDSearchViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -428,6 +436,8 @@
 			children = (
 				B5B67CA71C4629F600E7A902 /* LDSearchBar.h */,
 				B5B67CA81C4629F600E7A902 /* LDSearchBar.m */,
+				086CAAB71C49F28800D23761 /* LDSearchViewController.h */,
+				086CAAB81C49F28800D23761 /* LDSearchViewController.m */,
 			);
 			path = LDSearchBar;
 			sourceTree = "<group>";
@@ -527,6 +537,7 @@
 				TargetAttributes = {
 					B59A99731C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = S9997395XD;
 					};
 					B59A998C1C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -645,6 +656,7 @@
 				B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */,
 				B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */,
 				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
+				086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
@@ -653,6 +665,7 @@
 				B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
 				B5FFCEC31C489B020096B438 /* MDHomeRedShopTableViewCell.m in Sources */,
+				086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */,
 				B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */,
 				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
 				B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */,
@@ -791,6 +804,8 @@
 			baseConfigurationReference = FB15C2096A20AF01F7CECC40 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TureTopValuePurchaseDemo/TureTopValuePurchase-Prefix.pch";
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
@@ -798,6 +813,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -806,12 +822,15 @@
 			baseConfigurationReference = 77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

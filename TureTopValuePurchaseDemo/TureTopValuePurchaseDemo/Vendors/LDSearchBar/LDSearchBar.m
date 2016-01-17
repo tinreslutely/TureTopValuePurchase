@@ -8,9 +8,13 @@
 
 #import "LDSearchBar.h"
 
+@interface LDSearchBar()<UITextFieldDelegate>
+
+@end
+
 @implementation LDSearchBar
 
-@synthesize leftButton,rightButton;
+@synthesize searchTextFiled,leftButton,rightButton;
 
 
 -(instancetype)initWithNavigationItem:(UINavigationItem*)navigationItem{
@@ -24,6 +28,26 @@
         [self setupNavigationItem:navigationItem];
     }
     return self;
+}
+
+-(instancetype)initWithNavigationItem:(UINavigationItem*)navigationItem hasLeftButton:(BOOL)hasLeftButton{
+    if(self = [super initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH - 80, 31)]){
+        [self.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [self.layer setBorderWidth:1];
+        [self.layer setCornerRadius:2];
+        [self.layer setMasksToBounds:YES];
+        [self setBackgroundColor:[UIColor whiteColor]];
+        [self bringSearchBar];
+        hasLeftButton ? [self setupNavigationItem:navigationItem] : [self setupNotLeftViewNavigationItem:navigationItem];
+    }
+    return self;
+}
+
+#pragma mark UITextFieldDelegate
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if([self.delegate respondsToSelector:@selector(searchBar:willStartEditingWithTextField:)]){
+        [self.delegate searchBar:self willStartEditingWithTextField:textField];
+    }
 }
 
 #pragma mark private methods
@@ -49,6 +73,32 @@
     }
     navigationItem.titleView = self;
 }
+
+-(void)setupNotLeftViewNavigationItem:(UINavigationItem*)navigationItem{
+    leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [leftButton setContentMode:UIViewContentModeScaleToFill];
+    if(__IPHONE_SYSTEM_VERSION > 7){
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        negativeSpacer.width = -10;
+        navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:leftButton]];
+    }
+    else{
+        [navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:leftButton]];
+    }
+    rightButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 30, 30)];
+    if(__IPHONE_SYSTEM_VERSION > 7){
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        negativeSpacer.width = -10;
+        navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:rightButton]];
+    }
+    else{
+        [navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:rightButton]];
+    }
+    navigationItem.titleView = self;
+}
+
+
+
 -(void)bringSearchBar{
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
@@ -69,13 +119,14 @@
 //        make.centerY.equalTo(self);
 //    }];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
-    [textField setTextAlignment:NSTextAlignmentLeft];
-    [textField setTextColor:[UIColor grayColor]];
-    [textField setFont:[UIFont systemFontOfSize:14]];
-    [textField setPlaceholder:@"搜索商品"];
-    [self addSubview:textField];
-    [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+    searchTextFiled = [[UITextField alloc] initWithFrame:CGRectZero];
+    [searchTextFiled setTextAlignment:NSTextAlignmentLeft];
+    [searchTextFiled setTextColor:[UIColor grayColor]];
+    [searchTextFiled setFont:[UIFont systemFontOfSize:14]];
+    [searchTextFiled setPlaceholder:@"搜索商品"];
+    [searchTextFiled setDelegate:self];
+    [self addSubview:searchTextFiled];
+    [searchTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(imageView.mas_right).with.offset(8);

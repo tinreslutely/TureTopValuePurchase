@@ -9,6 +9,8 @@
 #import "MDHomeViewController.h"
 #import "MDHomeDataController.h"
 #import "MDNavigationController.h"
+#import "MDSearchViewController.h"
+#import "LDSearchViewController.h"
 
 #import "MDHomeBannerFoundationTableViewCell.h"
 #import "MDHomeLikeProductTableViewCell.h"
@@ -18,7 +20,7 @@
 
 #import "LDSearchBar.h"
 
-@interface MDHomeViewController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,ImageCarouselViewDelegate>
+@interface MDHomeViewController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,ImageCarouselViewDelegate,LDSearchBarDelegate>
 
 @end
 
@@ -51,17 +53,24 @@
     [self initData];
     [self initView];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:YES];
+    [self refreshData];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
-    [self refreshData];
+    //[self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
+    //[self refreshData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark LDSearchBarDelegate
+-(void)searchBar:(LDSearchBar *)searchBar willStartEditingWithTextField:(UITextField *)textField{
+    [textField resignFirstResponder];
+    MDNavigationController *navigationController = [[MDNavigationController alloc] initWithRootViewController:[[MDSearchViewController alloc] init]];
+    [self presentViewController:[[LDSearchViewController alloc] init] animated:NO completion:nil];
+}
 
 #pragma mark UIScrollViewDelegate
 // 当开始滚动视图时，执行该方法。一次有效滑动（开始滑动，滑动一小段距离，只要手指不松开，只算一次滑动），只执行一次。
@@ -84,24 +93,13 @@
         [navigationController setAlpha:0.0001];
         [navigationController setNavigationBarHidden:NO animated:NO];
     }
+    NSLog(@"%f",scrollY);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     float scrollY = scrollView.contentOffset.y;
+    NSLog(@"%f,%hhd",scrollY,_isDragging);
     [self makeNavigationBarAlphaForScrollWithscrollY:scrollView.contentOffset.y isFirst:NO];
-//    MDNavigationController *navigationController = (MDNavigationController*)self.navigationController;
-//    if(scrollY == 0 && _isDragging){
-//        [navigationController setAlpha:0.0001];
-//        [navigationController setNavigationBarHidden:NO animated:NO];
-//    }else if(scrollY > 0 && scrollY < 94){
-//        [navigationController setAlpha:(scrollY * 0.01)];
-//        [navigationController setNavigationBarHidden:NO animated:NO];
-//    }else if(scrollY >= 94){
-//        [navigationController setAlpha:0.94];
-//    }else if(scrollY < 0){
-//        [navigationController setAlpha:0.0001];
-//        if(_isDragging)[navigationController setNavigationBarHidden:YES animated:NO];
-//    }
 }
 
 
@@ -225,6 +223,7 @@
 
 -(void)initView{
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
+    [searchBar setDelegate: self];
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
     [searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
     
@@ -243,7 +242,7 @@
 -(void)makeNavigationBarAlphaForScrollWithscrollY:(float)scrollY isFirst:(BOOL)isFirst{
     MDNavigationController *navigationController = (MDNavigationController*)self.navigationController;
     if(scrollY == 0){
-        if(_isDragging || isFirst){
+        if(_isDragging || isFirst || navigationController.navigationBarHidden){
             [navigationController setAlpha:0.0001];
             [navigationController setNavigationBarHidden:NO animated:NO];
         }
