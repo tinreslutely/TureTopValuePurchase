@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
-		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; };
+		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; };
 		1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */; };
 		B59A99791C449ED600A8A6FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99781C449ED600A8A6FC /* main.m */; };
 		B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A997B1C449ED600A8A6FC /* AppDelegate.m */; };
@@ -31,6 +31,7 @@
 		B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */; };
 		B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A181C475272005CEA25 /* ImageCarouselView.m */; };
 		B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */; };
+		B5A0B2B21C4C909600C8DD6D /* LDSearchPopTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */; };
 		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
 		B5FFCEC01C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEB91C489B020096B438 /* MDHomeBannerFoundationTableViewCell.m */; };
 		B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FFCEBB1C489B020096B438 /* MDHomeLikeProductTableViewCell.m */; };
@@ -107,6 +108,8 @@
 		B59E8A181C475272005CEA25 /* ImageCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselView.m; sourceTree = "<group>"; };
 		B59E8A191C475272005CEA25 /* ImageCarouselViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCarouselViewCell.h; sourceTree = "<group>"; };
 		B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselViewCell.m; sourceTree = "<group>"; };
+		B5A0B2B01C4C909600C8DD6D /* LDSearchPopTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchPopTransition.h; sourceTree = "<group>"; };
+		B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchPopTransition.m; sourceTree = "<group>"; };
 		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
 		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
 		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
@@ -438,6 +441,8 @@
 				B5B67CA81C4629F600E7A902 /* LDSearchBar.m */,
 				086CAAB71C49F28800D23761 /* LDSearchViewController.h */,
 				086CAAB81C49F28800D23761 /* LDSearchViewController.m */,
+				B5A0B2B01C4C909600C8DD6D /* LDSearchPopTransition.h */,
+				B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */,
 			);
 			path = LDSearchBar;
 			sourceTree = "<group>";
@@ -654,6 +659,7 @@
 				B5FFCEC61C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m in Sources */,
 				B59E8A081C47375E005CEA25 /* MDHomeModel.m in Sources */,
 				B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */,
+				B5A0B2B21C4C909600C8DD6D /* LDSearchPopTransition.m in Sources */,
 				B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */,
 				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
 				086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */,
@@ -809,7 +815,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TureTopValuePurchaseDemo/TureTopValuePurchase-Prefix.pch";
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -826,7 +832,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

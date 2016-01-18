@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:YES];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initView];
 }
@@ -36,7 +37,17 @@
 
 -(void)backTap:(UIButton*)button{
     [searchText resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.2 animations:^{
+        UIView *searchBarView = [searchText superview];
+        [searchBarView setFrame:CGRectMake(40, searchBarView.frame.origin.y, searchBarView.frame.size.width-30, 30)];
+        
+    } completion:^(BOOL finished) {
+        if(finished){
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            //[weakSelf dismissViewControllerAnimated:NO completion:nil];
+        }
+    }];
 }
 
 -(void)initView{
@@ -78,12 +89,12 @@
         make.height.mas_equalTo(30);
         make.bottom.equalTo(bottomView.mas_top).with.offset(-6);
         make.right.equalTo(cancelButton.mas_left).with.offset(-5);
-        make.left.equalTo(navigationView.mas_left).with.offset(60);
+        make.left.equalTo(navigationView.mas_left).with.offset(40);
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:1 animations:^{
-            [searchBarView setFrame:CGRectMake(10, searchBarView.frame.origin.y, searchBarView.frame.size.width+50, 30)];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.2 animations:^{
+            [searchBarView setFrame:CGRectMake(10, searchBarView.frame.origin.y, searchBarView.frame.size.width+30, 30)];
         } completion:^(BOOL finished) {
             if(finished) [searchText becomeFirstResponder];
         }];
@@ -97,6 +108,10 @@
     [searchBarView.layer setCornerRadius:2];
     [searchBarView.layer setMasksToBounds:YES];
     [searchBarView setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView *checkTypeView = [[UIView alloc] init];
+    [searchBarView addSubview:checkTypeView];
+    
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
@@ -121,7 +136,7 @@
     [searchText setTextAlignment:NSTextAlignmentLeft];
     [searchText setTextColor:[UIColor grayColor]];
     [searchText setFont:[UIFont systemFontOfSize:14]];
-    [searchText setPlaceholder:@"搜索商品"];
+    [searchText setPlaceholder:@"搜索商品和店铺"];
     //[searchText setDelegate:self];
     [searchBarView addSubview:searchText];
     [searchText mas_makeConstraints:^(MASConstraintMaker *make) {

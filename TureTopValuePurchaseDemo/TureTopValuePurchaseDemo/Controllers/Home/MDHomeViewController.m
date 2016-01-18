@@ -19,8 +19,9 @@
 #import "MDHomeLikeProductTipTableViewCell.h"
 
 #import "LDSearchBar.h"
+#import "LDSearchPopTransition.h"
 
-@interface MDHomeViewController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,ImageCarouselViewDelegate,LDSearchBarDelegate>
+@interface MDHomeViewController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate,ImageCarouselViewDelegate,LDSearchBarDelegate,UINavigationControllerDelegate>
 
 @end
 
@@ -30,6 +31,7 @@
     MDHomeDataController *_dataController;
     NSArray<MDHomeRenovateChannelModel*> *_channelList;
     
+    LDSearchPopTransition *_popAnimation;
     
     NSString *_type;
     float _bannerHeight;
@@ -49,6 +51,7 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.navigationController setDelegate:self];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self initData];
     [self initView];
@@ -57,7 +60,8 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    //[self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
+    [super viewDidAppear:animated];
+    [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
     //[self refreshData];
 }
 
@@ -65,11 +69,21 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark UINavigationControllerDelegate
+-(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    if(operation == UINavigationControllerOperationPop){
+        return self.popAnimation;
+    }
+    return nil;
+}
+
 #pragma mark LDSearchBarDelegate
 -(void)searchBar:(LDSearchBar *)searchBar willStartEditingWithTextField:(UITextField *)textField{
     [textField resignFirstResponder];
     MDNavigationController *navigationController = [[MDNavigationController alloc] initWithRootViewController:[[MDSearchViewController alloc] init]];
-    [self presentViewController:[[LDSearchViewController alloc] init] animated:NO completion:nil];
+    //[self presentViewController:[[LDSearchViewController alloc] init] animated:NO completion:nil];
+    [self.navigationController pushViewController:[[LDSearchViewController alloc] init] animated:NO];
+    
 }
 
 #pragma mark UIScrollViewDelegate
@@ -93,12 +107,10 @@
         [navigationController setAlpha:0.0001];
         [navigationController setNavigationBarHidden:NO animated:NO];
     }
-    NSLog(@"%f",scrollY);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     float scrollY = scrollView.contentOffset.y;
-    NSLog(@"%f,%hhd",scrollY,_isDragging);
     [self makeNavigationBarAlphaForScrollWithscrollY:scrollView.contentOffset.y isFirst:NO];
 }
 
@@ -222,6 +234,7 @@
 }
 
 -(void)initView{
+    
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
     [searchBar setDelegate: self];
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
@@ -326,6 +339,16 @@
     [cell.titleLabel setText:model.columnName];
     [cell.imageScrollView setImageURLStringsGroup:imageURLArray];
     [cell.imageScrollView setTitlesGroup:titleArray];
+}
+
+#pragma mark getters and setters
+
+-(LDSearchPopTransition *)popAnimation
+{
+    if (!_popAnimation) {
+        _popAnimation = [[LDSearchPopTransition alloc] init];
+    }
+    return _popAnimation;
 }
 
 @end

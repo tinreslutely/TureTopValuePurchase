@@ -56,6 +56,13 @@
     [super pushViewController:viewController animated:animated];
 }
 
+-(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    if(operation == UINavigationControllerOperationPop){
+        return nil;
+    }
+    return nil;
+}
+
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]){
         navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -67,6 +74,9 @@
     if([viewController isKindOfClass:NSClassFromString(@"MDHomeViewController")]){
         _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
         [bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];
+        if(navigationController.navigationBarHidden == YES){
+            [navigationController setNavigationBarHidden:NO];
+        }
     }else{
         _alphaView.backgroundColor = UIColorFromRGBA(255, 255, 255, 1);
         [bottomBorder setBackgroundColor:UIColorFromRGBA(170, 170, 170, 1)];
@@ -78,6 +88,11 @@
     if(alphaValue > 0){
         _alphaView.alpha = alphaValue;
     }
+}
+
+-(void)setNavigationBarHidden:(BOOL)navigationBarHidden{
+    [super setNavigationBarHidden:navigationBarHidden];
+    [_alphaView setHidden:navigationBarHidden];
 }
 
 @end

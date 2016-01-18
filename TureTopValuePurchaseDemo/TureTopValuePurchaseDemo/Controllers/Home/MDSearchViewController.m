@@ -18,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem hasLeftButton:NO];

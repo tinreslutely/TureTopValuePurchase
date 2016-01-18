@@ -23,7 +23,7 @@
         [self.layer setBorderWidth:1];
         [self.layer setCornerRadius:2];
         [self.layer setMasksToBounds:YES];
-        [self setBackgroundColor:[UIColor whiteColor]];
+        //[self setBackgroundColor:[UIColor whiteColor]];
         [self bringSearchBar];
         [self setupNavigationItem:navigationItem];
     }
@@ -100,13 +100,21 @@
 
 
 -(void)bringSearchBar{
+    UIView *imageViewGroup = [[UIView alloc] init];
+    [imageViewGroup setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview: imageViewGroup];
+    [imageViewGroup mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.centerY.equalTo(self);
+    }];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [imageView setBackgroundColor:[UIColor whiteColor]];
     [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
-    [self addSubview:imageView];
+    [imageViewGroup addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(12, 12));
-        make.left.equalTo(self.mas_left).with.offset(8);
-        make.centerY.equalTo(self);
+        make.center.equalTo(imageViewGroup);
     }];
     
 //    UIButton *clearButton = [[UIButton alloc] init];
@@ -118,19 +126,29 @@
 //        make.right.equalTo(self.mas_right).with.offset(0);
 //        make.centerY.equalTo(self);
 //    }];
+    UIView *searchTextGroup = [[UIView alloc] init];
+    [searchTextGroup setBackgroundColor:[UIColor whiteColor]];
+    [searchTextGroup setAlpha:0.8];
+    [self addSubview:searchTextGroup];
+    [searchTextGroup mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(imageViewGroup.mas_right).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+    }];
     
     searchTextFiled = [[UITextField alloc] initWithFrame:CGRectZero];
     [searchTextFiled setTextAlignment:NSTextAlignmentLeft];
     [searchTextFiled setTextColor:[UIColor grayColor]];
     [searchTextFiled setFont:[UIFont systemFontOfSize:14]];
-    [searchTextFiled setPlaceholder:@"搜索商品"];
+    [searchTextFiled setText:@"搜索商品"];
     [searchTextFiled setDelegate:self];
-    [self addSubview:searchTextFiled];
+    [searchTextGroup addSubview:searchTextFiled];
     [searchTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.left.equalTo(imageView.mas_right).with.offset(8);
-        make.right.equalTo(self.mas_right).with.offset(5);
+        make.top.equalTo(searchTextGroup.mas_top).with.offset(0);
+        make.bottom.equalTo(searchTextGroup.mas_bottom).with.offset(0);
+        make.left.equalTo(imageViewGroup.mas_right).with.offset(8);
+        make.right.equalTo(searchTextGroup.mas_right).with.offset(5);
     }];
     
 }
