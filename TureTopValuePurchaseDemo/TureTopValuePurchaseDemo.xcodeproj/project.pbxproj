@@ -542,7 +542,7 @@
 				TargetAttributes = {
 					B59A99731C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = S9997395XD;
+						DevelopmentTeam = 7EWVM5QLAU;
 					};
 					B59A998C1C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -815,7 +815,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TureTopValuePurchaseDemo/TureTopValuePurchase-Prefix.pch";
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -832,7 +832,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = TureTopValuePurchaseDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,22 +13,23 @@
 
 @end
 
-@implementation LDSearchViewController
+@implementation LDSearchViewController{
+    float _globalHeight;
+}
 
 @synthesize searchText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:YES];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self initData];
     [self initView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,16 +39,25 @@
 -(void)backTap:(UIButton*)button{
     [searchText resignFirstResponder];
     __weak typeof(self) weakSelf = self;
+    UIView *searchView = [searchText superview];
+    UIView *searchBarView = [searchView superview];
+    UIView *checkTypeControl = [searchBarView viewWithTag:1001];
     [UIView animateWithDuration:0.2 animations:^{
-        UIView *searchBarView = [searchText superview];
-        [searchBarView setFrame:CGRectMake(40, searchBarView.frame.origin.y, searchBarView.frame.size.width-30, 30)];
-        
+        [searchBarView setFrame:CGRectMake(40, searchBarView.frame.origin.y, searchBarView.frame.size.width, 30)];
     } completion:^(BOOL finished) {
         if(finished){
             [weakSelf.navigationController popViewControllerAnimated:YES];
-            //[weakSelf dismissViewControllerAnimated:NO completion:nil];
         }
     }];
+    [UIView animateWithDuration:0.3 animations:^{
+        [searchView setFrame:CGRectMake(10, searchView.frame.origin.y, searchView.frame.size.width, 30)];
+    } completion:nil];
+    [self animationTranslationWithView:checkTypeControl duration:0.3 fromValue:0 toValue:-60];
+}
+
+#pragma mark private methods
+-(void)initData{
+    _globalHeight = 30;
 }
 
 -(void)initView{
@@ -72,21 +82,23 @@
     }];
     
     UIButton *cancelButton = [[UIButton alloc] init];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal ];
     [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(backTap:) forControlEvents:UIControlEventTouchDown];
     [navigationView addSubview:cancelButton];
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.size.mas_equalTo(CGSizeMake(30, _globalHeight));
         make.bottom.equalTo(bottomView.mas_top).with.offset(-6);
         make.right.equalTo(navigationView.mas_right).with.offset(-8);
     }];
+    [self animationScaleLayerWithView:cancelButton duration:0.2 fromValue:0.1 toValue:1];
+    
     
     UIView *searchBarView = [self bringSearchBar];
     [navigationView addSubview:searchBarView];
     [searchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(_globalHeight);
         make.bottom.equalTo(bottomView.mas_top).with.offset(-6);
         make.right.equalTo(cancelButton.mas_left).with.offset(-5);
         make.left.equalTo(navigationView.mas_left).with.offset(40);
@@ -94,9 +106,19 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.2 animations:^{
-            [searchBarView setFrame:CGRectMake(10, searchBarView.frame.origin.y, searchBarView.frame.size.width+30, 30)];
+            [searchBarView setFrame:CGRectMake(10, searchBarView.frame.origin.y, searchBarView.frame.size.width+30, _globalHeight)];
         } completion:^(BOOL finished) {
-            if(finished) [searchText becomeFirstResponder];
+            if(finished){
+               [searchText becomeFirstResponder];
+                
+                //添加清除输入内容按钮
+                float height = _globalHeight / 2;
+                UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(searchBarView.frame.size.width-height-5, height/2, height, height)];
+                [clearButton setImage:[UIImage imageNamed:@"search_close"] forState:UIControlStateNormal];
+                [clearButton setContentMode:UIViewContentModeScaleAspectFit];
+                [searchBarView addSubview:clearButton];
+                [self animationScaleLayerWithView:clearButton duration:0.2 fromValue:0.1 toValue:1];
+            }
         }];
     });
 }
@@ -109,42 +131,114 @@
     [searchBarView.layer setMasksToBounds:YES];
     [searchBarView setBackgroundColor:[UIColor whiteColor]];
     
-    UIView *checkTypeView = [[UIView alloc] init];
-    [searchBarView addSubview:checkTypeView];
-    
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
-    [searchBarView addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(12, 12));
-        make.left.equalTo(searchBarView.mas_left).with.offset(8);
-        make.centerY.equalTo(searchBarView);
+    UIControl *checkTypeControl = [[UIControl alloc] init];
+    [checkTypeControl setTag:1001];
+    [searchBarView addSubview:checkTypeControl];
+    [searchBarView sendSubviewToBack:checkTypeControl];
+    [checkTypeControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(60, _globalHeight));
+        make.left.equalTo(searchBarView.mas_left).with.offset(0);
+        make.top.equalTo(searchBarView.mas_top).with.offset(0);
     }];
     
-    //    UIButton *clearButton = [[UIButton alloc] init];
-    //    [clearButton setImage:[UIImage imageNamed:@"search_close"] forState:UIControlStateNormal];
-    //    [clearButton setContentMode:UIViewContentModeScaleAspectFit];
-    //    [self addSubview:clearButton];
-    //    [clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(self.frame.size.height/2, self.frame.size.height/2));
-    //        make.right.equalTo(self.mas_right).with.offset(0);
-    //        make.centerY.equalTo(self);
-    //    }];
+    UILabel *typeLabel = [[UILabel alloc] init];
+    [typeLabel setText:@"商品"];
+    [typeLabel setTextColor:UIColorFromRGB(161, 161, 161)];
+    [typeLabel setTextAlignment:NSTextAlignmentCenter];
+    [typeLabel setFont:[UIFont systemFontOfSize:12]];
+    [checkTypeControl addSubview:typeLabel];
+    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(32, _globalHeight));
+        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
+        make.left.equalTo(checkTypeControl.mas_left).with.offset(8);
+    }];
+    
+    UILabel *spaceLabel = [[UILabel alloc] init];
+    [spaceLabel setBackgroundColor:UIColorFromRGB(161, 161, 161)];
+    [checkTypeControl addSubview:spaceLabel];
+    [spaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(0.5);
+        make.right.equalTo(checkTypeControl.mas_right).with.offset(0);
+        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
+        make.bottom.equalTo(checkTypeControl.mas_bottom).with.offset(0);
+        
+    }];
+    
+    UIImageView *typeImageView = [[UIImageView alloc] init];
+    [typeImageView setImage:[UIImage imageNamed:@"arrow_bottom_b"]];
+    [checkTypeControl addSubview:typeImageView];
+    [typeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(10, 5));
+        make.right.equalTo(spaceLabel.mas_left).with.offset(-8);
+        make.centerY.equalTo(checkTypeControl);
+    }];
+    
+    [self animationTranslationWithView:checkTypeControl duration:0.2 fromValue:-60 toValue:0];
+    
+    UIView *searchView = [[UIView alloc] init];
+    [searchBarView addSubview:searchView];
+    [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchBarView.mas_top).with.offset(0);
+        make.bottom.equalTo(searchBarView.mas_bottom).with.offset(0);
+        make.left.equalTo(checkTypeControl.mas_right).with.offset(0);
+        make.right.equalTo(searchBarView.mas_right).with.offset(0);
+        
+    }];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [imageView setTag:1002];
+    [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
+    [searchView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(12, 12));
+        make.left.equalTo(searchView.mas_left).with.offset(8);
+        make.centerY.equalTo(searchView);
+    }];
     
     searchText = [[UITextField alloc] initWithFrame:CGRectZero];
     [searchText setTextAlignment:NSTextAlignmentLeft];
     [searchText setTextColor:[UIColor grayColor]];
     [searchText setFont:[UIFont systemFontOfSize:14]];
     [searchText setPlaceholder:@"搜索商品和店铺"];
-    //[searchText setDelegate:self];
-    [searchBarView addSubview:searchText];
+    [searchView addSubview:searchText];
     [searchText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(searchBarView.mas_top).with.offset(0);
-        make.bottom.equalTo(searchBarView.mas_bottom).with.offset(0);
+        make.top.equalTo(searchView.mas_top).with.offset(0);
+        make.bottom.equalTo(searchView.mas_bottom).with.offset(0);
         make.left.equalTo(imageView.mas_right).with.offset(8);
-        make.right.equalTo(searchBarView.mas_right).with.offset(5);
+        make.right.equalTo(searchView.mas_right).with.offset(5);
     }];
+    
     return searchBarView;
 }
+
+#pragma mark animation methods
+/*!
+ *  控件按比例放大缩小动画
+ *
+ *  @param view      指定控件
+ *  @param duration  动画时间
+ *  @param fromValue 起始比例
+ *  @param toValue   最终比例
+ */
+-(void)animationScaleLayerWithView:(UIView*)view duration:(float)duration fromValue:(float)fromValue toValue:(float)toValue{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = duration;
+    animation.repeatCount = 1;
+    animation.autoreverses = NO;
+    
+    animation.fromValue = [NSNumber numberWithFloat:fromValue];
+    animation.toValue = [NSNumber numberWithFloat:toValue];
+    [view.layer addAnimation:animation forKey:@"scale-layer"];
+}
+
+-(void)animationTranslationWithView:(UIView*)view duration:(float)duration fromValue:(float)fromValue toValue:(float)toValue{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+    animation.duration = duration;
+    animation.repeatCount = 1;
+    animation.autoreverses = NO;
+    animation.fromValue = [NSNumber numberWithFloat:fromValue];
+    animation.toValue = [NSNumber numberWithFloat:toValue];
+    [view.layer addAnimation:animation forKey:@"transform-layer"];
+}
+
 @end
