@@ -1,7 +1,7 @@
 //
 //  LDSearchBar.m
 //  TureTopValuePurchaseDemo
-//
+//  导航栏搜索控件
 //  Created by 李晓毅 on 16/1/13.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
@@ -15,7 +15,6 @@
 @implementation LDSearchBar
 
 @synthesize searchTextFiled,leftButton,rightButton;
-
 
 -(instancetype)initWithNavigationItem:(UINavigationItem*)navigationItem{
     if(self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-80, 31)]){
@@ -51,6 +50,11 @@
 }
 
 #pragma mark private methods
+/*!
+ *  配置导航栏
+ *
+ *  @param navigationItem navigationItem对象
+ */
 -(void)setupNavigationItem:(UINavigationItem*)navigationItem{
     leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [leftButton setContentMode:UIViewContentModeScaleToFill];
@@ -74,6 +78,11 @@
     navigationItem.titleView = self;
 }
 
+/*!
+ *  配置无左控件的导航栏
+ *
+ *  @param navigationItem navigationItem对象
+ */
 -(void)setupNotLeftViewNavigationItem:(UINavigationItem*)navigationItem{
     leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [leftButton setContentMode:UIViewContentModeScaleToFill];
@@ -98,7 +107,9 @@
 }
 
 
-
+/*!
+ *  创建搜索栏
+ */
 -(void)bringSearchBar{
     UIView *imageViewGroup = [[UIView alloc] init];
     [imageViewGroup setBackgroundColor:[UIColor whiteColor]];
@@ -117,15 +128,6 @@
         make.center.equalTo(imageViewGroup);
     }];
     
-//    UIButton *clearButton = [[UIButton alloc] init];
-//    [clearButton setImage:[UIImage imageNamed:@"search_close"] forState:UIControlStateNormal];
-//    [clearButton setContentMode:UIViewContentModeScaleAspectFit];
-//    [self addSubview:clearButton];
-//    [clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(self.frame.size.height/2, self.frame.size.height/2));
-//        make.right.equalTo(self.mas_right).with.offset(0);
-//        make.centerY.equalTo(self);
-//    }];
     UIView *searchTextGroup = [[UIView alloc] init];
     [searchTextGroup setBackgroundColor:[UIColor whiteColor]];
     [searchTextGroup setAlpha:0.8];
@@ -141,7 +143,7 @@
     [searchTextFiled setTextAlignment:NSTextAlignmentLeft];
     [searchTextFiled setTextColor:[UIColor grayColor]];
     [searchTextFiled setFont:[UIFont systemFontOfSize:14]];
-    [searchTextFiled setText:@"搜索商品"];
+    [searchTextFiled setText:@"搜索商品和店铺"];
     [searchTextFiled setDelegate:self];
     [searchTextGroup addSubview:searchTextFiled];
     [searchTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {

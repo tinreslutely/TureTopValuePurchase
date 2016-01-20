@@ -10,24 +10,20 @@
 
 @interface MDHomeRenovateChannelDetailModel : NSObject
 
-@property(nonatomic,assign) int columnId;
-@property(nonatomic,strong) NSString *content;
-@property(nonatomic,strong) NSString *contentAddr;//内容地址--图片路径
-@property(nonatomic,assign) int contentId;
-@property(nonatomic,strong) NSString *picAddr;
+@property(nonatomic,assign) int columnId;//模块ID
+@property(nonatomic,strong) NSString *contentAddr;//内容地址
+@property(nonatomic,assign) int contentId;//内容ID
+@property(nonatomic,strong) NSString *content;//内容
+@property(nonatomic,strong) NSString *picAddr;//图片路径
 
 @end
 
 @interface MDHomeRenovateChannelModel : NSObject
 
-@property(nonatomic,assign) int carrierType;
 @property(nonatomic,strong) NSArray<MDHomeRenovateChannelDetailModel*> *channelColumnDetails;
-@property(nonatomic,assign) int channelType;
-@property(nonatomic,strong) NSString *columnLink;
-@property(nonatomic,strong) NSString *columnName;
-@property(nonatomic,assign) int columnSort;
-@property(nonatomic,assign) int columnType;
-@property(nonatomic,assign) int shopId;
+@property(nonatomic,strong) NSString *columnName;//模块名
+@property(nonatomic,strong) NSString *columnLink;//模块跳转链接
+@property(nonatomic,assign) int columnType;//模块类型
 @end
 
 

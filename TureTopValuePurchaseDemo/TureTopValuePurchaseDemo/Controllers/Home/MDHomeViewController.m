@@ -10,7 +10,6 @@
 #import "MDHomeDataController.h"
 #import "MDNavigationController.h"
 #import "MDSearchViewController.h"
-#import "LDSearchViewController.h"
 
 #import "MDHomeBannerFoundationTableViewCell.h"
 #import "MDHomeLikeProductTableViewCell.h"
@@ -34,16 +33,16 @@
     LDSearchPopTransition *_popAnimation;
     
     NSString *_type;
-    float _bannerHeight;
-    float _imageHeight;
-    float _proImageHeight;
-    float _rmShopHeight;
+    float _bannerHeight;//广告图的高度
+    float _imageHeight;//推荐产品模块的广告图高度
+    float _proImageHeight;//推荐产品模块的产品图高度
+    float _rmShopHeight;//推荐店铺模块的店铺图高度
     
-    int _pageIndex;
-    int _pageSize;
-    int _pageTotal;
-    BOOL _isLast;
-    BOOL _isDragging;
+    int _pageIndex;//当前页
+    int _pageSize;//每页显示条数
+    int _pageTotal;//总页数
+    BOOL _isLast;//
+    BOOL _isDragging;//是否滑动（手指尚未离开屏幕）
 }
 
 #pragma mark life cycle
@@ -80,9 +79,7 @@
 #pragma mark LDSearchBarDelegate
 -(void)searchBar:(LDSearchBar *)searchBar willStartEditingWithTextField:(UITextField *)textField{
     [textField resignFirstResponder];
-    MDNavigationController *navigationController = [[MDNavigationController alloc] initWithRootViewController:[[MDSearchViewController alloc] init]];
-    //[self presentViewController:[[LDSearchViewController alloc] init] animated:NO completion:nil];
-    [self.navigationController pushViewController:[[LDSearchViewController alloc] init] animated:NO];
+    [self.navigationController pushViewController:[[MDSearchViewController alloc] init] animated:NO];
     
 }
 
@@ -110,7 +107,6 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    float scrollY = scrollView.contentOffset.y;
     [self makeNavigationBarAlphaForScrollWithscrollY:scrollView.contentOffset.y isFirst:NO];
 }
 
@@ -197,6 +193,9 @@
 
 
 #pragma mark action and event methods
+/*!
+ *  刷新数据
+ */
 -(void)refreshData{
     [_dataController requestDataWithType:@"0" completion:^(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel *> *list) {
         if(state){
@@ -207,10 +206,18 @@
     }];
 }
 
+/*!
+ *  加载你可能喜欢模块的数据
+ */
 -(void)loadData{
     
 }
 
+/*!
+ *  功能区域的点击触发事件
+ *
+ *  @param control 触发控件对象
+ */
 -(void)functionTap:(UIControl*)control{
     
 }
@@ -232,9 +239,10 @@
     _isLast = NO;
     _dataController = [[MDHomeDataController alloc] init];
 }
-
+/*!
+ *  初始化界面
+ */
 -(void)initView{
-    
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
     [searchBar setDelegate: self];
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
@@ -251,7 +259,12 @@
     }];
 }
 
-
+/*!
+ *  根据滚动的Y轴的数值改变导航栏的透明度
+ *
+ *  @param scrollY 滚动的Y轴的数值
+ *  @param isFirst 是否第一次加载控制器
+ */
 -(void)makeNavigationBarAlphaForScrollWithscrollY:(float)scrollY isFirst:(BOOL)isFirst{
     MDNavigationController *navigationController = (MDNavigationController*)self.navigationController;
     if(scrollY == 0){
@@ -272,6 +285,13 @@
 
 
 #pragma mark bring cell methods
+/*!
+ *  在重用池中获取指定的广告功能区的UITableViewCell对象，如果该对象不存在，则创建
+ *
+ *  @param tableView UITableView对象
+ *
+ *  @return UITableViewCell对象
+ */
 -(UITableViewCell*)bringBannerFunctionCellWithTableView:(UITableView*)tableView{
     static NSString *bannerFunctionCellIdentifier = @"BannerFunctionCell";//banner
     MDHomeBannerFoundationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bannerFunctionCellIdentifier];
@@ -281,6 +301,13 @@
     return cell;
 }
 
+/*!
+ *  在重用池中获取指定推荐产品的UITableViewCell对象，如果该对象不存在，则创建
+ *
+ *  @param tableView UITableView对象
+ *
+ *  @return UITableViewCell对象
+ */
 -(UITableViewCell*)bringProductRMCellWithTableView:(UITableView*)tableView{
     static NSString *productRMCellIdentifier = @"ProductRMCell";//productRM
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:productRMCellIdentifier];
@@ -290,6 +317,13 @@
     return cell;
 }
 
+/*!
+ *  在重用池中获取指定推荐店铺的UITableViewCell对象，如果该对象不存在，则创建
+ *
+ *  @param tableView UITableView对象
+ *
+ *  @return UITableViewCell对象
+ */
 -(UITableViewCell*)bringShopRMCellWithTableView:(UITableView*)tableView{
     static NSString *rmShopCellIdentifier = @"RMShopCell";//likeProduct
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:rmShopCellIdentifier];
@@ -304,6 +338,12 @@
 }
 
 #pragma mark entrust value methods
+/*!
+ *  广告功能区的UITableViewCell对象的banner控件元素赋值
+ *
+ *  @param cell  UITableViewCell对象
+ *  @param model MDHomeRenovateChannelModel数据模型
+ */
 -(void)entrustdBannerFunctionWithCell:(MDHomeBannerFoundationTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     NSMutableArray *imageURLStrings = [[NSMutableArray alloc] init];
     for (MDHomeRenovateChannelDetailModel *detailModel in model.channelColumnDetails) {
@@ -312,7 +352,12 @@
     [cell.bannerView setImageURLStringsGroup:imageURLStrings];
 }
 
-
+/*!
+ *  推荐产品的UITableViewCell对象的UIButton控件元素赋值
+ *
+ *  @param cell  UITableViewCell对象
+ *  @param model MDHomeRenovateChannelModel数据模型
+ */
 -(void)entrustdProductRMCell:(MDHomeRedClassesTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     [cell.navTitleLabel setText:model.columnName];
     if(model.channelColumnDetails.count > 0){
@@ -327,7 +372,12 @@
     }
 }
 
-
+/*!
+ *  推荐店铺的UITableViewCell对象的控件元素赋值
+ *
+ *  @param cell  UITableViewCell对象
+ *  @param model MDHomeRenovateChannelModel数据模型
+ */
 -(void)entrustdShopRMCell:(MDHomeRedShopTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     NSArray * array = model.channelColumnDetails;
     NSMutableArray *imageURLArray = [[NSMutableArray alloc] init];

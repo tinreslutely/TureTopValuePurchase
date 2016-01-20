@@ -10,13 +10,14 @@
 
 @implementation MDHomeRenovateChannelDetailModel
 
-@synthesize columnId,content,contentAddr,contentId,picAddr;
+@synthesize columnId,contentAddr,contentId,picAddr,content;
 
 @end
 
 @implementation MDHomeRenovateChannelModel
 
-@synthesize carrierType,channelColumnDetails,channelType,columnType,columnLink,columnName,columnSort,shopId;
+@synthesize channelColumnDetails,columnType,columnLink,columnName;
+
 @end
 
 @implementation MDHomeRenovateModel

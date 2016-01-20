@@ -33,4 +33,7 @@
 
 
 #define __IPHONE_SYSTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
+
+
+#define APICONFIG [MDAPIConfig sharedConfig]
 #endif

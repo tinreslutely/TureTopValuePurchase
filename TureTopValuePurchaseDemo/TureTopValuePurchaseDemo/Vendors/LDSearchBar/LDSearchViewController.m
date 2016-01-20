@@ -1,7 +1,7 @@
 //
 //  LDSearchViewController.m
 //  TureTopValuePurchaseDemo
-//
+//  搜索界面控制器--实现跳转加载和返回消失的效果
 //  Created by 李晓毅 on 16/1/16.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
@@ -36,30 +36,43 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark action and event methods
+/*!
+ *  返回事件
+ *
+ *  @param button 触发事件的对象
+ */
 -(void)backTap:(UIButton*)button{
     [searchText resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     UIView *searchView = [searchText superview];
     UIView *searchBarView = [searchView superview];
     UIView *checkTypeControl = [searchBarView viewWithTag:1001];
+    
     [UIView animateWithDuration:0.2 animations:^{
-        [searchBarView setFrame:CGRectMake(40, searchBarView.frame.origin.y, searchBarView.frame.size.width, 30)];
+        [searchBarView setFrame:CGRectMake(40, searchBarView.frame.origin.y, searchBarView.frame.size.width-30, 30)];
     } completion:^(BOOL finished) {
         if(finished){
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (ino64_t)(0.2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            });
         }
     }];
-    [UIView animateWithDuration:0.3 animations:^{
-        [searchView setFrame:CGRectMake(10, searchView.frame.origin.y, searchView.frame.size.width, 30)];
-    } completion:nil];
-    [self animationTranslationWithView:checkTypeControl duration:0.3 fromValue:0 toValue:-60];
+    [self animationTranslationWithView:searchView animationKey:@"translation-layer-left" duration:0.4 fromValue:0 toValue:-110 stopTime:0.2];
+    [self animationTranslationWithView:checkTypeControl animationKey:@"translation-layer-left" duration:0.8 fromValue:0 toValue:-220 stopTime:0];
 }
 
 #pragma mark private methods
+/*!
+ *  初始化数据
+ */
 -(void)initData{
     _globalHeight = 30;
 }
 
+/*!
+ *  初始化界面
+ */
 -(void)initView{
     UIView *navigationView = [[UIView alloc] init];
     [navigationView setBackgroundColor:[UIColor whiteColor]];
@@ -123,6 +136,11 @@
     });
 }
 
+/*!
+ *  创建搜索栏
+ *
+ *  @return 返回搜索栏对象
+ */
 -(UIView*)bringSearchBar{
     UIView *searchBarView = [[UIView alloc] init];
     [searchBarView.layer setBorderColor:[UIColorFromRGBA(170, 170, 170, 1) CGColor]];
@@ -172,8 +190,7 @@
         make.right.equalTo(spaceLabel.mas_left).with.offset(-8);
         make.centerY.equalTo(checkTypeControl);
     }];
-    
-    [self animationTranslationWithView:checkTypeControl duration:0.2 fromValue:-60 toValue:0];
+    [self animationTranslationWithView:checkTypeControl animationKey:@"translation-layer-right" duration:0.2 fromValue:-60 toValue:0 stopTime:0];
     
     UIView *searchView = [[UIView alloc] init];
     [searchBarView addSubview:searchView];
@@ -231,14 +248,31 @@
     [view.layer addAnimation:animation forKey:@"scale-layer"];
 }
 
--(void)animationTranslationWithView:(UIView*)view duration:(float)duration fromValue:(float)fromValue toValue:(float)toValue{
+/*!
+ *  控件水平方向移动动画
+ *
+ *  @param view         指定的控件
+ *  @param animationKey 控件的动画Key
+ *  @param duration     动画时间
+ *  @param fromValue    起始位置
+ *  @param toValue      终点位置
+ *  @param stopTime     暂停时间（如果时间小于0，则不需要暂停）
+ */
+-(void)animationTranslationWithView:(UIView*)view animationKey:(NSString*)animationKey duration:(float)duration fromValue:(float)fromValue toValue:(float)toValue stopTime:(float)stopTime{
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
     animation.duration = duration;
     animation.repeatCount = 1;
     animation.autoreverses = NO;
     animation.fromValue = [NSNumber numberWithFloat:fromValue];
     animation.toValue = [NSNumber numberWithFloat:toValue];
-    [view.layer addAnimation:animation forKey:@"transform-layer"];
+    [view.layer addAnimation:animation forKey:animationKey];
+    if(stopTime > 0){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(stopTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            CFTimeInterval timeInterval = [view.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+            view.layer.speed = 0;
+            view.layer.timeOffset = timeInterval;
+        });
+    }
 }
 
 @end

@@ -25,7 +25,10 @@
 		B59A99CF1C44B1A100A8A6FC /* MDClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99CE1C44B1A100A8A6FC /* MDClassesViewController.m */; };
 		B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */; };
 		B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */; };
-		B59E89FD1C472F64005CEA25 /* data-home.json in Resources */ = {isa = PBXBuildFile; fileRef = B59E89FC1C472F64005CEA25 /* data-home.json */; };
+		B59B82441C4F393300BF9AB9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B59B82431C4F393300BF9AB9 /* Localizable.strings */; };
+		B59B824C1C4F593B00BF9AB9 /* MDAPIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B59B824B1C4F593B00BF9AB9 /* MDAPIConfig.m */; };
+		B59B824F1C4F68F400BF9AB9 /* MDPageConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B59B824E1C4F68F400BF9AB9 /* MDPageConfig.m */; };
+		B59B82521C4F7C7000BF9AB9 /* MDHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B59B82511C4F7C7000BF9AB9 /* MDHttpManager.m */; };
 		B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A031C47304C005CEA25 /* LDUtils.m */; };
 		B59E8A081C47375E005CEA25 /* MDHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A071C47375E005CEA25 /* MDHomeModel.m */; };
 		B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */; };
@@ -97,7 +100,14 @@
 		B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPersonalCenterViewController.m; sourceTree = "<group>"; };
 		B59A99D41C44F64800A8A6FC /* LDynamicLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDynamicLabel.h; sourceTree = "<group>"; };
 		B59A99D51C44F64800A8A6FC /* LDynamicLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDynamicLabel.m; sourceTree = "<group>"; };
-		B59E89FC1C472F64005CEA25 /* data-home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "data-home.json"; sourceTree = "<group>"; };
+		B59B82431C4F393300BF9AB9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B59B82461C4F3D1D00BF9AB9 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		B59B824A1C4F593B00BF9AB9 /* MDAPIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAPIConfig.h; sourceTree = "<group>"; };
+		B59B824B1C4F593B00BF9AB9 /* MDAPIConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAPIConfig.m; sourceTree = "<group>"; };
+		B59B824D1C4F68F400BF9AB9 /* MDPageConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPageConfig.h; sourceTree = "<group>"; };
+		B59B824E1C4F68F400BF9AB9 /* MDPageConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPageConfig.m; sourceTree = "<group>"; };
+		B59B82501C4F7C7000BF9AB9 /* MDHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHttpManager.h; sourceTree = "<group>"; };
+		B59B82511C4F7C7000BF9AB9 /* MDHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHttpManager.m; sourceTree = "<group>"; };
 		B59E8A021C47304C005CEA25 /* LDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDUtils.h; sourceTree = "<group>"; };
 		B59E8A031C47304C005CEA25 /* LDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDUtils.m; sourceTree = "<group>"; };
 		B59E8A061C47375E005CEA25 /* MDHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHomeModel.h; sourceTree = "<group>"; };
@@ -217,6 +227,7 @@
 				B59A99881C449ED600A8A6FC /* Info.plist */,
 				B59A99781C449ED600A8A6FC /* main.m */,
 				B59A99B31C44A44600A8A6FC /* TureTopValuePurchase-Prefix.pch */,
+				B59B82431C4F393300BF9AB9 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,7 +308,6 @@
 		B59A99B01C44A29300A8A6FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B59E89FB1C472F44005CEA25 /* Data */,
 				B59A99831C449ED600A8A6FC /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -306,6 +316,8 @@
 		B59A99B11C44A29E00A8A6FC /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B59B82491C4F58F400BF9AB9 /* Global */,
+				B59B82451C4F3CEB00BF9AB9 /* Config */,
 				B5B67CA41C45E2EA00E7A902 /* MDEnum.h */,
 			);
 			path = Categories;
@@ -388,12 +400,25 @@
 			path = LDynamicLabel;
 			sourceTree = "<group>";
 		};
-		B59E89FB1C472F44005CEA25 /* Data */ = {
+		B59B82451C4F3CEB00BF9AB9 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				B59E89FC1C472F64005CEA25 /* data-home.json */,
+				B59B82461C4F3D1D00BF9AB9 /* AppConfig.h */,
 			);
-			path = Data;
+			path = Config;
+			sourceTree = "<group>";
+		};
+		B59B82491C4F58F400BF9AB9 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				B59B824A1C4F593B00BF9AB9 /* MDAPIConfig.h */,
+				B59B824B1C4F593B00BF9AB9 /* MDAPIConfig.m */,
+				B59B824D1C4F68F400BF9AB9 /* MDPageConfig.h */,
+				B59B824E1C4F68F400BF9AB9 /* MDPageConfig.m */,
+				B59B82501C4F7C7000BF9AB9 /* MDHttpManager.h */,
+				B59B82511C4F7C7000BF9AB9 /* MDHttpManager.m */,
+			);
+			path = Global;
 			sourceTree = "<group>";
 		};
 		B59E89FE1C472FE4005CEA25 /* LDUtils */ = {
@@ -580,8 +605,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B59A99871C449ED600A8A6FC /* LaunchScreen.storyboard in Resources */,
+				B59B82441C4F393300BF9AB9 /* Localizable.strings in Resources */,
 				B59A99841C449ED600A8A6FC /* Assets.xcassets in Resources */,
-				B59E89FD1C472F64005CEA25 /* data-home.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +694,7 @@
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
 				B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */,
 				B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */,
+				B59B824F1C4F68F400BF9AB9 /* MDPageConfig.m in Sources */,
 				B59A99791C449ED600A8A6FC /* main.m in Sources */,
 				B5FFCEC31C489B020096B438 /* MDHomeRedShopTableViewCell.m in Sources */,
 				086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */,
@@ -679,6 +705,8 @@
 				B59A99C61C44B0CC00A8A6FC /* MDWebViewController.m in Sources */,
 				B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */,
 				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,
+				B59B82521C4F7C7000BF9AB9 /* MDHttpManager.m in Sources */,
+				B59B824C1C4F593B00BF9AB9 /* MDAPIConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

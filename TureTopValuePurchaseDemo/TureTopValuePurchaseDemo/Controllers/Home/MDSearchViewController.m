@@ -18,20 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-    LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem hasLeftButton:NO];
-    [searchBar.layer setBorderColor:[UIColorFromRGBA(170, 170, 170, 1) CGColor]];
-    
-    [UIView animateWithDuration:1 animations:^{
-        self.navigationItem.leftBarButtonItem = nil;
-        [searchBar setFrame:CGRectMake(0, 0, SCREEN_WIDTH-30, 31)];
-    } completion:^(BOOL finished) {
-        if(finished)[searchBar.searchTextFiled becomeFirstResponder];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

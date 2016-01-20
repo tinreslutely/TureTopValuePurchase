@@ -13,23 +13,25 @@
 
 #pragma mark public methods
 -(void)requestDataWithType:(NSString*)type completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel*> *list))completion{
-    [LDUtils readDataWithResourceName:@"data-home" successBlock:^(NSDictionary *returnData) {
+    [MDHttpManager GET:APICONFIG.homeApiURLString parameters:@{@"type":type} sucessBlock:^(id  _Nullable responseObject) {
         MDHomeRenovateModel *renovateModel = [[MDHomeRenovateModel alloc] init];
-        renovateModel.stateCode = [returnData objectForKey:@"state"];
-        if(![renovateModel.stateCode isEqualToString:@"200"]){
-            renovateModel.state = NO;
-            renovateModel.message = [returnData objectForKey:@"result"];
-            completion(renovateModel.state,renovateModel.message,@[]);
+        NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if(dic == nil || ![[dic objectForKey:@"state"] isEqualToString:@"200"]){
+            completion(NO,[dic objectForKey:@"result"],nil);
             return;
         }
+        renovateModel.stateCode = [dic objectForKey:@"state"];
         renovateModel.state = YES;
-        renovateModel.list = [MDHomeRenovateChannelModel mj_objectArrayWithKeyValuesArray:[[returnData objectForKey:@"result"] objectForKey:@"list"]];
+        renovateModel.list = [MDHomeRenovateChannelModel mj_objectArrayWithKeyValuesArray:[[dic objectForKey:@"result"] objectForKey:@"list"]];
         for (MDHomeRenovateChannelModel *channelModel in renovateModel.list) {
             channelModel.channelColumnDetails = [MDHomeRenovateChannelDetailModel mj_objectArrayWithKeyValuesArray:channelModel.channelColumnDetails];
         }
+        [renovateModel.list sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            return [[NSNumber numberWithInt:[(MDHomeRenovateChannelModel*)obj1 columnType]] compare:[NSNumber numberWithInt:[(MDHomeRenovateChannelModel*)obj2 columnType]]];
+        }];
         completion(renovateModel.state,renovateModel.message,renovateModel.list);
-    } failureBlock:^(LDReadResourceStateType stateType, NSString *msg) {
-        completion(NO,msg,@[]);
+    } failureBlock:^(NSError * _Nonnull error) {
+        completion(NO,[NSString stringWithFormat:@"%@",error],nil);
     }];
 }
 
