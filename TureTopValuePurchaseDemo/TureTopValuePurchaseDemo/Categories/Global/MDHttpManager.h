@@ -10,7 +10,7 @@
 
 @interface MDHttpManager : NSObject
 
-+(void)GET:(NSString*)URLString parameters:(NSDictionary*)params sucessBlock:(void(^)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^)(NSError * _Nonnull error))failureBlock;
++(void)GET:(NSString * _Nullable)URLString parameters:(NSDictionary* _Nullable)params sucessBlock:(void(^ _Nullable)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^ _Nullable)(NSError * _Nonnull error))failureBlock;
 
-+(void)POST:(NSString*)URLString parameters:(NSDictionary*)params sucessBlock:(void(^)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^)(NSError * _Nonnull error))failureBlock;
++(void)POST:(NSString * _Nullable)URLString parameters:(NSDictionary* _Nullable)params sucessBlock:(void(^ _Nullable)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^ _Nullable)(NSError * _Nonnull error))failureBlock;
 @end

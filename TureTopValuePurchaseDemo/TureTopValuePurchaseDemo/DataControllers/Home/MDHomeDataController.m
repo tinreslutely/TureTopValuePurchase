@@ -1,7 +1,7 @@
 //
 //  MDHomeDataController.m
 //  TureTopValuePurchaseDemo
-//
+//  首页数据控制器
 //  Created by 李晓毅 on 16/1/14.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
@@ -34,5 +34,35 @@
         completion(NO,[NSString stringWithFormat:@"%@",error],nil);
     }];
 }
+
+-(void)requestDataWithType:(NSString*)type pageIndex:(int)pageIndex pageSize:(int)pageSize  completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeLikeProductModel*> *list))completion{
+    [MDHttpManager GET:APICONFIG.homeLikeProductApiURLString parameters:@{@"type":type,@"pageSize":[NSString stringWithFormat:@"%d",pageSize],@"pageIndex":[NSString stringWithFormat:@"%d",pageIndex]} sucessBlock:^(id  _Nullable responseObject) {
+        MDHomeLikeProductsModel *productsModel = [[MDHomeLikeProductsModel alloc] init];
+        NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        if(dic == nil || ![[dic objectForKey:@"state"] isEqualToString:@"200"]){
+            completion(NO,[dic objectForKey:@"result"],nil);
+            return;
+        }
+        productsModel.stateCode = [dic objectForKey:@"state"];
+        productsModel.state = YES;
+        productsModel.list = [[NSMutableArray alloc] init];
+        NSArray *array = [dic objectForKey:@"result"];
+        MDHomeLikeProductModel *model;
+        for (NSDictionary *item in array) {
+            model = [[MDHomeLikeProductModel alloc] init];
+            model.productId = [[item objectForKey:@"id"] intValue];
+            model.imageURL = [[[item objectForKey:@"mainPic"] objectForKey:@"shopPic"] objectForKey:@"picAddr"];
+            model.sellPirce = [[item objectForKey:@"salesPrice"] doubleValue];
+            model.shopId = [[item objectForKey:@"shopId"] intValue];
+            model.title = [item objectForKey:@"productName"];
+            [productsModel.list addObject:model];
+        }
+        completion(productsModel.state,nil,productsModel.list);
+        
+    } failureBlock:^(NSError * _Nonnull error) {
+        completion(NO,[NSString stringWithFormat:@"%@",error],nil);
+    }];
+}
+
 
 @end

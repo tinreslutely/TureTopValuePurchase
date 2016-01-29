@@ -25,3 +25,15 @@
 @synthesize state,stateCode,message,list;
 
 @end
+
+@implementation MDHomeLikeProductModel
+
+@synthesize imageURL,productId,sellPirce,shopId,title;
+
+@end
+
+@implementation MDHomeLikeProductsModel
+
+@synthesize state,stateCode,message,list;
+
+@end

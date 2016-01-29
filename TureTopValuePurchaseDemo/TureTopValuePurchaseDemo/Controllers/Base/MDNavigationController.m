@@ -14,7 +14,7 @@
 
 @implementation MDNavigationController{
     UIView *_alphaView;
-    UILabel *bottomBorder;//
+    UILabel *_bottomBorder;//
     BOOL _changing;
 }
 
@@ -38,8 +38,8 @@
         _alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height + 20)];
         _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
         
-        bottomBorder = [[UILabel alloc] initWithFrame:CGRectMake(0, _alphaView.frame.size.height-0.5, frame.size.width, 0.5)];
-        [_alphaView addSubview:bottomBorder];
+        _bottomBorder = [[UILabel alloc] initWithFrame:CGRectMake(0, _alphaView.frame.size.height-0.5, frame.size.width, 0.5)];
+        [_alphaView addSubview:_bottomBorder];
         
         [self.view insertSubview:_alphaView belowSubview:self.navigationBar];
         [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bigShadow"] forBarMetrics:UIBarMetricsCompact];
@@ -53,8 +53,21 @@
         self.interactivePopGestureRecognizer.enabled = NO;
     }
     viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
+    //子控制器是否等于1，那么就需要隐藏tabbar
+    if(self.viewControllers.count == 1){
+        [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:YES];
+    }
     [super pushViewController:viewController animated:animated];
 }
+
+- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated{
+    //子控制器是否等于2，那么就需要显示tabbar
+    if(self.viewControllers.count == 2){
+        [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    }
+    return [super popViewControllerAnimated:animated];
+}
+
 
 -(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
     if(operation == UINavigationControllerOperationPop){
@@ -73,13 +86,13 @@
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if([viewController isKindOfClass:NSClassFromString(@"MDHomeViewController")]){
         _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
-        [bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];
+        [_bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];
         if(navigationController.navigationBarHidden == YES){
             [navigationController setNavigationBarHidden:NO];
         }
     }else{
         _alphaView.backgroundColor = UIColorFromRGBA(255, 255, 255, 1);
-        [bottomBorder setBackgroundColor:UIColorFromRGBA(170, 170, 170, 1)];
+        [_bottomBorder setBackgroundColor:UIColorFromRGBA(170, 170, 170, 1)];
     }
 }
 
@@ -88,6 +101,17 @@
     if(alphaValue > 0){
         _alphaView.alpha = alphaValue;
     }
+}
+-(void)setAlphaBar{
+    _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
+    _alphaView.alpha = 0.001;
+    [_bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];
+}
+
+-(void)setNormalBar{
+    _alphaView.backgroundColor = UIColorFromRGBA(255, 255, 255, 1);
+    _alphaView.alpha = 1;
+    [_bottomBorder setBackgroundColor:UIColorFromRGBA(170, 170, 170, 1)];
 }
 
 -(void)setNavigationBarHidden:(BOOL)navigationBarHidden{

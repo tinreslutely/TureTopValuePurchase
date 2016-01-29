@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MDCartViewController : UIViewController
+@interface MDCartViewController : MDBaseViewController
+
+
 
 @end

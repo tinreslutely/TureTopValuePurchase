@@ -1,4 +1,5 @@
 PODS:
+  - AESCrypt (0.0.1)
   - AFNetworking (3.0.4):
     - AFNetworking/NSURLSession (= 3.0.4)
     - AFNetworking/Reachability (= 3.0.4)
@@ -14,6 +15,7 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - M13BadgeView (1.0.4)
   - Masonry (0.6.4)
   - MBProgressHUD (0.9.2)
   - MJExtension (3.0.9)
@@ -25,10 +27,13 @@ PODS:
     - SDWebImage/Core (= 3.7.4)
   - SDWebImage/Core (3.7.4)
   - SWTableViewCell (0.3.7)
+  - Toast (3.0)
   - TPKeyboardAvoiding (1.2.11)
 
 DEPENDENCIES:
+  - AESCrypt
   - AFNetworking (~> 3.0.4)
+  - M13BadgeView
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -37,10 +42,13 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.6)
   - SDWebImage
   - SWTableViewCell
+  - Toast
   - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
+  AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  M13BadgeView: 700dd0714fdc837c0cf1c8c004454963ec22441f
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: 116781b18cb25cee39619e16617f62bb7433ea4e
@@ -49,6 +57,7 @@ SPEC CHECKSUMS:
   SDCycleScrollView: 436ccec76258f9f280365af5c07b289a71382601
   SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  Toast: 32c59229abfcf41850162b83bb9259dc84372473
   TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
 
 COCOAPODS: 0.39.0

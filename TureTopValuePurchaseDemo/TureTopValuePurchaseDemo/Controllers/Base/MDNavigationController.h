@@ -10,6 +10,8 @@
 
 @interface MDNavigationController : UINavigationController
 
--(void)setAlpha:(float)alphaValue;
 
+-(void)setAlpha:(float)alphaValue;
+-(void)setAlphaBar;
+-(void)setNormalBar;
 @end

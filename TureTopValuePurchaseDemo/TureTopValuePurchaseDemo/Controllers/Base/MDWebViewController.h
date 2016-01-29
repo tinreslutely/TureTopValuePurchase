@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MDWebViewController : UIViewController
+@interface MDWebViewController : MDBaseViewController
+
+/*!
+ *  网页请求路径
+ */
+@property(strong,nonatomic) NSString *requestURL;
+
+/*!
+ *  导航显示标题
+ *  如果该标题为nil，则显示网页标题
+ */
+@property(strong,nonatomic) NSString *navigateTitle;
 
 @end

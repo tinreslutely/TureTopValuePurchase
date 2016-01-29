@@ -1,0 +1,51 @@
+//
+//  CheckBoxButton.m
+//  MicroValuePurchase
+//
+//  Created by 李晓毅 on 15/12/3.
+//  Copyright © 2015年 TureTop. All rights reserved.
+//
+
+#import "CheckBoxButton.h"
+
+@implementation CheckBoxButton
+
+//@synthesize checked;
+
+-(id)initWithChecked:(BOOL)checked{
+    if(self = [super init]){
+        self.checked = checked;
+        [self initView];
+    }
+    return self;
+}
+
+#pragma mark private methods
+-(void)initView{
+    [self setBackgroundColor:[UIColor whiteColor]];
+    [self.layer setBorderWidth:1];
+    [self.layer setBorderColor:[UIColorFromRGB(217, 217, 217) CGColor]];
+    [self.layer setMasksToBounds:YES];
+}
+
+
+#pragma mark getters and setters
+
+-(void)setRadius:(CGFloat)radius{
+    _radius = radius;
+    [self.layer setCornerRadius:_radius];
+}
+
+-(BOOL)getChecked{
+    return _checked;
+}
+
+-(void)setChecked:(BOOL)checked{
+    _checked = checked;
+    if(_checked){
+        [self.layer setContents:(id)[UIImage imageNamed:@"checked"].CGImage];
+    }else{
+        [self.layer setContents:nil];
+    }
+}
+@end

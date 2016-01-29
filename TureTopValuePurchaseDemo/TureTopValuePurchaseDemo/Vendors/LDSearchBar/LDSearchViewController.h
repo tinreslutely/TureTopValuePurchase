@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDProgressView.h"
 
 @interface LDSearchViewController : UIViewController
 
+@property(nonatomic,strong,nullable,readonly) LDProgressView *progressView;
+@property(nonatomic,strong) UIView *navigationView;
 @property(nonatomic,strong) UITextField *searchText;
 
 @end

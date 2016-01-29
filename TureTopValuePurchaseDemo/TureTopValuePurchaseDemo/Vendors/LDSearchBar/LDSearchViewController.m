@@ -17,14 +17,14 @@
     float _globalHeight;
 }
 
-@synthesize searchText;
+@synthesize navigationView,searchText,progressView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self initData];
-    [self initView];
+    [self setupLDSearchData];
+    [self setupLDSearchView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -32,8 +32,15 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+    [progressView removeFromSuperview];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    [progressView removeFromSuperview];
 }
 
 #pragma mark action and event methods
@@ -66,15 +73,19 @@
 /*!
  *  初始化数据
  */
--(void)initData{
+-(void)setupLDSearchData{
     _globalHeight = 30;
 }
 
 /*!
  *  初始化界面
  */
--(void)initView{
-    UIView *navigationView = [[UIView alloc] init];
+-(void)setupLDSearchView{
+    
+    progressView = [[LDProgressView alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:progressView];
+    
+    navigationView = [[UIView alloc] init];
     [navigationView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:navigationView];
     [navigationView mas_makeConstraints:^(MASConstraintMaker *make) {

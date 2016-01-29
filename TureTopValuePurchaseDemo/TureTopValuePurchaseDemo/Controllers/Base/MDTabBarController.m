@@ -11,7 +11,7 @@
 
 #import "MDPersonalCenterViewController.h"
 #import "MDClassesViewController.h"
-#import "MDShopManagementViewController.h"
+#import "MDShopViewController.h"
 #import "MDCartViewController.h"
 #import "MDHomeViewController.h"
 
@@ -45,7 +45,7 @@
     [self setViewControllers:@[
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDHomeViewController alloc] init]],
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDClassesViewController alloc] init]],
-                                  [[MDNavigationController alloc] initWithRootViewController:[[MDShopManagementViewController alloc] init]],
+                                  [[MDNavigationController alloc] initWithRootViewController:[[MDShopViewController alloc] init]],
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDCartViewController alloc] init]],
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDPersonalCenterViewController alloc] init]]
                               ]];

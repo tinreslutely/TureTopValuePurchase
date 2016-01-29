@@ -32,8 +32,14 @@
 #define INPUT_COLOR UIColorFromRGB(106.0,106.0,106.0)
 
 
+/***********************版本**********************/
 #define __IPHONE_SYSTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
 
 
+/***********************单例实例**********************/
 #define APICONFIG [MDAPIConfig sharedConfig]
+#define PAGECONFIG [MDPageConfig sharedConfig]
+#define APPDATA [MDAppData sharedData]
+#define FLUENTDB [MDFluentDB sharedDB]
+#define APPDELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #endif

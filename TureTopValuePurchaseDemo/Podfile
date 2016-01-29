@@ -9,7 +9,10 @@ pod "SWTableViewCell"
 pod "MJRefresh"
 pod "MJExtension"
 pod "RDVTabBarController"
-pod 'SDCycleScrollView','~> 1.6'
+pod "SDCycleScrollView","~> 1.6"
+pod "Toast"
+pod "AESCrypt"
+pod "M13BadgeView"
 
 target :TureTopValuePurchaseDemoTests, :exclusive => true do
   # pod 'Masonry'

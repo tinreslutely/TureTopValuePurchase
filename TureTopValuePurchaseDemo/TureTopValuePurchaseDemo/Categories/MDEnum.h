@@ -9,6 +9,19 @@
 #ifndef MDEnum_h
 #define MDEnum_h
 
+
+/*! @brief 定位服务block类型
+ *
+ */
+typedef void(^locationUpdatedBlock)();
+
+/*! @brief
+ *  定位失败block类型
+ */
+typedef void(^locationErrorBlock)();
+
+
+
 /*!
  *  app数据类型
  */
@@ -21,6 +34,20 @@ typedef NS_ENUM(NSInteger, MDPurchaseType) {
      *  快乐购
      */
     MDPurchaseTypeHapple
+};
+
+/*!
+ *  搜索类型
+ */
+typedef NS_ENUM(NSInteger,MDSearchType) {
+    /*!
+     *  商品
+     */
+    MDSearchTypeProduct = 1,
+    /*!
+     *  店铺
+     */
+    MDSearchTypeShop
 };
 
 /*!

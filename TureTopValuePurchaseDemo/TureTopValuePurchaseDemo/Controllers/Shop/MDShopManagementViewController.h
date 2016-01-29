@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MDShopManagementViewController : UIViewController
+@interface MDShopManagementViewController : MDBaseViewController
 
 @end

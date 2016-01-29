@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MDHomeLikeProductTableViewCell : UITableViewCell
+@interface MDLikeProductControl : UIControl
 
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UILabel *priceLabel;
+
+@end
+@interface MDHomeLikeProductTableViewCell : UITableViewCell
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier target:(_Nullable id)target action:(SEL)action;
 
 @end

@@ -1,7 +1,7 @@
 //
 //  MDHomeViewController.m
 //  TureTopValuePurchaseDemo
-//
+//  首页控制器
 //  Created by 李晓毅 on 16/1/12.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
@@ -17,6 +17,9 @@
 #import "MDHomeRedShopTableViewCell.h"
 #import "MDHomeLikeProductTipTableViewCell.h"
 
+
+#import "MDLoginViewController.h"
+
 #import "LDSearchBar.h"
 #import "LDSearchPopTransition.h"
 
@@ -29,10 +32,10 @@
     UITableView *_mainTableView;
     MDHomeDataController *_dataController;
     NSArray<MDHomeRenovateChannelModel*> *_channelList;
+    NSMutableArray<MDHomeLikeProductModel*> *_likeProductList;
     
     LDSearchPopTransition *_popAnimation;
     
-    NSString *_type;
     float _bannerHeight;//广告图的高度
     float _imageHeight;//推荐产品模块的广告图高度
     float _proImageHeight;//推荐产品模块的产品图高度
@@ -41,7 +44,7 @@
     int _pageIndex;//当前页
     int _pageSize;//每页显示条数
     int _pageTotal;//总页数
-    BOOL _isLast;//
+    BOOL _isLast;//你可能喜欢的模块数据最后一条
     BOOL _isDragging;//是否滑动（手指尚未离开屏幕）
 }
 
@@ -49,9 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
     [self.navigationController setDelegate:self];
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self initData];
     [self initView];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:YES];
@@ -61,6 +62,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
+    
     //[self refreshData];
 }
 
@@ -70,8 +72,14 @@
 
 #pragma mark UINavigationControllerDelegate
 -(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-    if(operation == UINavigationControllerOperationPop){
-        return self.popAnimation;
+    if([toVC isKindOfClass:[MDHomeViewController class]]){
+        [((MDNavigationController*)navigationController) setAlphaBar];
+        [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
+        if(operation == UINavigationControllerOperationPop && [fromVC isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
+            return self.popAnimation;
+        }
+    }else{
+        [((MDNavigationController*)navigationController) setNormalBar];
     }
     return nil;
 }
@@ -122,7 +130,13 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = _imageHeight + _proImageHeight + 45;
-    if(_channelList.count > 0){
+    if(indexPath.section == _channelList.count){
+        if(indexPath.row == 0){
+            height = 30;
+        }else{
+            height = _proImageHeight + 90;
+        }
+    } else {
         MDHomeRenovateChannelModel *model = _channelList[indexPath.section];
         switch (model.columnType) {
             case 0:
@@ -142,12 +156,14 @@
 #pragma mark UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger number = 1;
+    if(section == _channelList.count && _channelList.count > 0){
+        number = _likeProductList.count/2 + 1;
+    }
     return number;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _channelList.count;
-    //return _mainModules.count + (_mainModules.count > 0 ? 1 : 0);
+    return _channelList.count + (_channelList.count > 0 ? 1 : 0);
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -168,6 +184,17 @@
                 break;
         }
     }else{
+        if(indexPath.row == 0){
+            cell = [tableView dequeueReusableCellWithIdentifier:likeProductTitleCellIdentifier];
+            if(cell == nil){
+                cell = [[MDHomeLikeProductTipTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:likeProductTitleCellIdentifier];
+            }
+        }else{
+            cell = [tableView dequeueReusableCellWithIdentifier:likeProductCellIdentifier];
+            if(cell == nil){
+                cell = [[MDHomeLikeProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:likeProductCellIdentifier target:self action:nil];
+            }
+        }
     }
     
     return cell;
@@ -188,6 +215,20 @@
                 break;
         }
     }else{
+        if(indexPath.row > 0){
+            MDHomeLikeProductModel *model;
+            int index = ((int)indexPath.row - 1) * 2;
+            for(MDLikeProductControl *view in cell.contentView.subviews){
+                if(![view isKindOfClass:[UIControl class]]) continue;
+                if( index < _likeProductList.count){
+                    model = _likeProductList[index];
+                    [view.imageView  sd_setImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:model.imageURL width:300 height:300]]];
+                    [view.titleLabel setText:model.title];
+                    [view.priceLabel setText:[NSString stringWithFormat:@"￥%.2f",model.sellPirce]];
+                }
+                index ++;
+            }
+        }
     }
 }
 
@@ -210,7 +251,17 @@
  *  加载你可能喜欢模块的数据
  */
 -(void)loadData{
-    
+    if(_isLast) return;
+    _pageIndex ++;
+    [_dataController requestDataWithType:@"0" pageIndex:_pageIndex pageSize:_pageSize completion:^(BOOL state, NSString *msg, NSArray<MDHomeLikeProductModel *> *list) {
+        if(state){
+            [_likeProductList addObjectsFromArray: [list copy]];
+            [_mainTableView reloadData];
+        }else{
+            _isLast = YES;
+        }
+        [_mainTableView.mj_footer endRefreshing];
+    }];
 }
 
 /*!
@@ -219,7 +270,12 @@
  *  @param control 触发控件对象
  */
 -(void)functionTap:(UIControl*)control{
+    [self.navigationController pushViewController:[[MDLoginViewController alloc] init] animated:YES];
     
+}
+
+-(void)switchPurchaseTap{
+    APPDATA.appFunctionType = @"1";
 }
 
 #pragma mark private methods
@@ -229,7 +285,7 @@
 -(void)initData{
     _isDragging = NO;
     _channelList = [[NSArray alloc] init];
-    _type = 0; //0-超值购  1-快乐购
+    _likeProductList = [[NSMutableArray alloc] init];
     _bannerHeight = SCREEN_WIDTH*300/640;
     _imageHeight = SCREEN_WIDTH*200/640;
     _proImageHeight = (SCREEN_WIDTH*260)/(214*3);
@@ -243,9 +299,13 @@
  *  初始化界面
  */
 -(void)initView{
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
     [searchBar setDelegate: self];
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
+    [searchBar.leftButton addTarget:self action:@selector(switchPurchaseTap) forControlEvents:UIControlEventTouchDown];
     [searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
     
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -253,6 +313,7 @@
     [_mainTableView setDataSource:self];
     [_mainTableView setShowsVerticalScrollIndicator:NO];
     [_mainTableView setMj_header:[MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)]];
+    [_mainTableView setMj_footer:[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)]];
     [self.view addSubview:_mainTableView];
     [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
@@ -347,7 +408,7 @@
 -(void)entrustdBannerFunctionWithCell:(MDHomeBannerFoundationTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     NSMutableArray *imageURLStrings = [[NSMutableArray alloc] init];
     for (MDHomeRenovateChannelDetailModel *detailModel in model.channelColumnDetails) {
-        [imageURLStrings addObject:detailModel.picAddr];
+        [imageURLStrings addObject:[MDCommon imageURLStringForNetworkStatus:detailModel.picAddr width:SCREEN_WIDTH height:_bannerHeight]];
     }
     [cell.bannerView setImageURLStringsGroup:imageURLStrings];
 }
@@ -361,13 +422,13 @@
 -(void)entrustdProductRMCell:(MDHomeRedClassesTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     [cell.navTitleLabel setText:model.columnName];
     if(model.channelColumnDetails.count > 0){
-        [cell.bannerButtonView sd_setImageWithURL:[NSURL URLWithString:((MDHomeRenovateChannelDetailModel *)model.channelColumnDetails[0]).picAddr] forState:UIControlStateNormal];
+        [cell.bannerButtonView sd_setImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:((MDHomeRenovateChannelDetailModel *)model.channelColumnDetails[0]).picAddr width:SCREEN_WIDTH height:_imageHeight]] forState:UIControlStateNormal];
     }
     for(int i = 1;i< model.channelColumnDetails.count && i < cell.productsView.subviews.count + 1;i++){
         MDHomeRenovateChannelDetailModel *item = model.channelColumnDetails[i];
         UIButton *button = cell.productsView.subviews[i-1];
         if(button != nil){
-            [button sd_setImageWithURL:[NSURL URLWithString:item.picAddr] forState:UIControlStateNormal];
+            [button sd_setImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:item.picAddr width:_proImageHeight height:_proImageHeight]] forState:UIControlStateNormal];
         }
     }
 }

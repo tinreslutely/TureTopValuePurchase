@@ -36,6 +36,27 @@
 
 @end
 
+
+@interface MDHomeLikeProductModel : NSObject
+
+@property(nonatomic,strong) NSString *imageURL;
+@property(nonatomic,assign) int productId;
+@property(nonatomic,assign) int shopId;
+@property(nonatomic,strong) NSString *title;
+@property(nonatomic,assign) float sellPirce;
+
+@end
+
+
+@interface MDHomeLikeProductsModel : NSObject
+
+@property(nonatomic,assign) BOOL state;
+@property(nonatomic,strong) NSString *stateCode;
+@property(nonatomic,strong) NSString *message;
+@property(nonatomic,strong) NSMutableArray *list;
+
+@end
+
 @interface MDHomeModel : NSObject
 
 @end

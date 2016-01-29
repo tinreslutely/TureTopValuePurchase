@@ -5,3 +5,163 @@
   Created by 李晓毅 on 16/1/20.
   Copyright © 2016年 铭道超值购. All rights reserved.
 */
+
+/************************* title or button or name *************************/
+"TitleForHome" = "首页";
+
+"TitleForCart" = "购物车";
+
+"TitleForShop" = "店铺";
+
+"TitleForClass" = "类目";
+
+"TitleForPerson" = "个人中心";
+
+"TitleForBargainBuy" = "超值购";
+
+"TitleForRegister" = "注册";
+
+"PTitleForassword" = "密码";
+
+"TitleForLogin" = "登录";
+
+"TitleForConfirm" = "确定";
+
+"TitleForCancel" = "取消";
+
+"TitleForClose" = "关闭";
+
+"TitleForSetting" = "设置";
+
+"TitleForRememberPassword" = "记住密码";
+
+"TitleForForgetPassword" = "忘记密码?";
+
+"TitleForTips" = "温馨提示";
+
+"TitleForNowLogin" = "现在登录";
+
+"TitleForBusinessCenter" = "商家中心";
+
+"TitleForGetVerifyCode" = "获取验证码";
+
+"TitleForFaceToFacePayment" = "面对面支付";
+
+"TitleForModifyPassword" = "修改登陆密码";
+
+"TitleForAccountOrMobile" = "邻里账户/手机号";
+
+"TitleForMyOrder" = "我的订单";
+
+"TitleForMyCollection" = "我的收藏";
+
+"TitleForMyPurse" = "我的钱包";
+
+"TitleForMyCard" = "我的卡包";
+
+"TitleForMyPoint" = "我的积分";
+
+"TitleForMyCommercial Opportunity" = "我的商机卡";
+
+"TitleForMyConnection" = "我的人脉";
+
+"TitleForMyMessage" = "我的消息";
+
+
+"TitleForNoPay" = "待付款";
+
+"TitleForNoDispatch" = "待发货";
+
+"TitleForNoConsignee" = "待收货";
+
+"TitleForNoEvaluation" = "待评价";
+
+
+"TitleForBalance" = "可用余额";
+
+"TitleForFreezeDeposits" = "冻结余额";
+
+"TitleForConnectionCollect" = "人脉收藏";
+
+
+"TitleForCollectProduct" = "收藏的商品";
+
+"TitleForCollectShop" = "收藏的店铺";
+
+"TitleForAccumulatedIncome" = "累计收益";
+
+
+/************************* bar *************************/
+
+"BarForAccount" = "账户:";
+
+"BarForVerifyCode" = "验证码:";
+
+"BarForPassword" = "密码:";
+
+"BarForMobile" = "手机号码:";
+
+"BarForNewPassword" = "新密码:";
+
+"BarForConfirmPassword" = "确认密码:";
+
+
+/************************* tips *************************/
+
+//password
+"TipsForPasswordInput" = "请输入密码";
+
+"TipsForPasswordAssemble" = "密码由6-20位英文字母,数字或符号组成";
+
+"TipsForAgainPassword" = "请再一次输入密码，以便确认";
+
+"TipsForPasswordFormat" = "密码格式错误！";
+
+"TipsForAgainNewPassword" = "请在确认密码填写框，再一次输入新密码！";
+
+"TipsForOutOfPassword" = "新密码和确认密码不一致！";
+
+"TipsForNewPasswordInput" = "请输入新密码！";
+
+
+//mobile
+"TipsForMobileError" = "手机号码不正确，请重新填写！";
+
+"TipsForMobileInput" = "请输入您的手机号码";
+
+"TipsForMobileError" = "请输入正确的手机号码";
+
+
+//login
+"TipsForNoLgoin" = "您还没有登录哦！请先登录";
+
+"TipsForNoLgoinWithPerson" = "欢迎来到超值购,您还没有登录哦!";
+
+
+//vaild
+"TipsForVerifyCode" = "请输入验证码";
+
+"TipsForVerifyCodeSended" = "验证码短信已经发送,请注意查收";
+
+
+//user
+"TipsForAccountInput" = "请输入用户名";
+
+//network
+"TipsForNoFoundNetwork" = "网络异常，请检查网络";
+
+
+//other
+"TipsForNoValueBuyer" = "您还不是值购员!购买任一款超值购商品即可获得值购员身份";
+
+"TipsForNoShop" = "您还没有开店哦,请先去开店！";
+
+
+//condition
+"TipsWithConditionForResendTime" = "%@秒后可重发";
+
+"TipsWithConditionForTimeOver" = "还剩%.2d秒";
+
+"TipsWithConditionForLength" = "%@不能超过@d个数字哦！";
+
+"TipsWithConditionForMobileFormatError" = "%@格式有误，例如:13800138000";
