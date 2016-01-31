@@ -7,6 +7,7 @@
 //
 
 #import "LDSearchViewController.h"
+#import "LDCombobox.h"
 
 @interface LDSearchViewController ()
 
@@ -104,13 +105,20 @@
         make.bottom.equalTo(navigationView.mas_bottom).with.offset(0);
         make.height.mas_equalTo(0.5);
     }];
+    UIView *rightView = [[UIView alloc] init];
+    [navigationView addSubview:rightView];
+    [rightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.bottom.equalTo(bottomView.mas_top).with.offset(-6);
+        make.right.equalTo(navigationView.mas_right).with.offset(-8);
+    }];
     
     UIButton *cancelButton = [[UIButton alloc] init];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal ];
     [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
     [cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(backTap:) forControlEvents:UIControlEventTouchDown];
-    [navigationView addSubview:cancelButton];
+    [rightView addSubview:cancelButton];
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, _globalHeight));
         make.bottom.equalTo(bottomView.mas_top).with.offset(-6);
@@ -143,6 +151,11 @@
                 [searchBarView addSubview:clearButton];
                 [self animationScaleLayerWithView:clearButton duration:0.2 fromValue:0.1 toValue:1];
             }
+            if(finished) [searchText becomeFirstResponder];
+            [UIView animateWithDuration:1 animations:^{
+                [cancelButton setFrame:CGRectMake(0, 0, 30, 30)];
+                [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+            }];
         }];
     });
 }
@@ -160,7 +173,48 @@
     [searchBarView.layer setMasksToBounds:YES];
     [searchBarView setBackgroundColor:[UIColor whiteColor]];
     
-    UIControl *checkTypeControl = [[UIControl alloc] init];
+//    UIControl *checkTypeControl = [[UIControl alloc] init];
+//    [checkTypeControl setTag:1001];
+//    [searchBarView addSubview:checkTypeControl];
+//    [searchBarView sendSubviewToBack:checkTypeControl];
+//    [checkTypeControl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(60, _globalHeight));
+//        make.left.equalTo(searchBarView.mas_left).with.offset(0);
+//        make.top.equalTo(searchBarView.mas_top).with.offset(0);
+//    }];
+//    
+//    UILabel *typeLabel = [[UILabel alloc] init];
+//    [typeLabel setText:@"商品"];
+//    [typeLabel setTextColor:UIColorFromRGB(161, 161, 161)];
+//    [typeLabel setTextAlignment:NSTextAlignmentCenter];
+//    [typeLabel setFont:[UIFont systemFontOfSize:12]];
+//    [checkTypeControl addSubview:typeLabel];
+//    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(32, _globalHeight));
+//        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
+//        make.left.equalTo(checkTypeControl.mas_left).with.offset(8);
+//    }];
+//    
+//    UILabel *spaceLabel = [[UILabel alloc] init];
+//    [spaceLabel setBackgroundColor:UIColorFromRGB(161, 161, 161)];
+//    [checkTypeControl addSubview:spaceLabel];
+//    [spaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(0.5);
+//        make.right.equalTo(checkTypeControl.mas_right).with.offset(0);
+//        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
+//        make.bottom.equalTo(checkTypeControl.mas_bottom).with.offset(0);
+//        
+//    }];
+//    
+//    UIImageView *typeImageView = [[UIImageView alloc] init];
+//    [typeImageView setImage:[UIImage imageNamed:@"arrow_bottom_b"]];
+//    [checkTypeControl addSubview:typeImageView];
+//    [typeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(10, 5));
+//        make.right.equalTo(spaceLabel.mas_left).with.offset(-8);
+//        make.centerY.equalTo(checkTypeControl);
+//    }];
+    LDCombobox *checkTypeControl = [[LDCombobox alloc] initWithFrame:CGRectZero comboSuperView:self.view items:@[@{@"key":@"商品",@"value":@"0"},@{@"key":@"店铺",@"value":@"1"}]];
     [checkTypeControl setTag:1001];
     [searchBarView addSubview:checkTypeControl];
     [searchBarView sendSubviewToBack:checkTypeControl];
@@ -168,38 +222,6 @@
         make.size.mas_equalTo(CGSizeMake(60, _globalHeight));
         make.left.equalTo(searchBarView.mas_left).with.offset(0);
         make.top.equalTo(searchBarView.mas_top).with.offset(0);
-    }];
-    
-    UILabel *typeLabel = [[UILabel alloc] init];
-    [typeLabel setText:@"商品"];
-    [typeLabel setTextColor:UIColorFromRGB(161, 161, 161)];
-    [typeLabel setTextAlignment:NSTextAlignmentCenter];
-    [typeLabel setFont:[UIFont systemFontOfSize:12]];
-    [checkTypeControl addSubview:typeLabel];
-    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(32, _globalHeight));
-        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
-        make.left.equalTo(checkTypeControl.mas_left).with.offset(8);
-    }];
-    
-    UILabel *spaceLabel = [[UILabel alloc] init];
-    [spaceLabel setBackgroundColor:UIColorFromRGB(161, 161, 161)];
-    [checkTypeControl addSubview:spaceLabel];
-    [spaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(0.5);
-        make.right.equalTo(checkTypeControl.mas_right).with.offset(0);
-        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
-        make.bottom.equalTo(checkTypeControl.mas_bottom).with.offset(0);
-        
-    }];
-    
-    UIImageView *typeImageView = [[UIImageView alloc] init];
-    [typeImageView setImage:[UIImage imageNamed:@"arrow_bottom_b"]];
-    [checkTypeControl addSubview:typeImageView];
-    [typeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(10, 5));
-        make.right.equalTo(spaceLabel.mas_left).with.offset(-8);
-        make.centerY.equalTo(checkTypeControl);
     }];
     [self animationTranslationWithView:checkTypeControl animationKey:@"translation-layer-right" duration:0.2 fromValue:-60 toValue:0 stopTime:0];
     

@@ -10,19 +10,21 @@
 #import "LDSearchBar.h"
 #import "MDSearchNormalTableViewCell.h"
 #import "MDSearchDataController.h"
+#import "TPKeyboardAvoidingTableView.h"
 
 @interface MDSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 @end
 
 @implementation MDSearchViewController{
-    UITableView *_mainTableView;
+    TPKeyboardAvoidingTableView *_mainTableView;
     MDSearchDataController *_dataController;
     NSMutableArray *_mainSearchArray;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initData];
     [self initView];
     [self refreshData];
@@ -59,7 +61,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:titleCellIdentifier];
         if(!cell){
             cell = [[MDSearchNormalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:titleCellIdentifier];
-            [cell.iconButton setImage:[UIImage imageNamed:@"searchHistory"] forState:UIControlStateNormal];
+            [cell.iconButton setImage:[UIImage imageNamed:@"SearchHistory"] forState:UIControlStateNormal];
             [cell.textLabel setFont:[UIFont systemFontOfSize:14]];
             [cell.textLabel setText:@"历史记录"];
         }
@@ -74,7 +76,8 @@
             [cell.contentView addSubview:tipLabel];
             [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(120, 30));
-                make.center.equalTo(cell.contentView);
+                make.centerX.equalTo(cell.contentView.mas_centerX);
+                make.centerY.equalTo(cell.contentView.mas_centerY);
             }];
         }
     }else if(indexPath.row <= _mainSearchArray.count){
@@ -149,15 +152,6 @@
         [_mainSearchArray addObjectsFromArray: array];
         [self.progressView hide];
         [_mainTableView reloadData];
-        CGRect rect = self.navigationView.bounds;
-        rect = self.navigationView.frame;
-        rect = self.searchText.bounds;
-        rect = self.searchText.frame;
-        rect = [self.searchText superview].frame;
-        rect = [[self.searchText superview] superview].frame;
-        rect = [[self.searchText superview] superview].bounds;
-        NSLog(@"navigationView----x:%f,y:%f",self.navigationView.bounds.origin.x,self.navigationView.frame.origin.y);
-        NSLog(@"searchText----x:%f,y:%f",self.searchText.bounds.origin.x,self.searchText.bounds.origin.y);
     }];
 }
 
@@ -193,7 +187,7 @@
 -(void)initView{
     [self.searchText setDelegate:self];
     
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _mainTableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [_mainTableView setDelegate:self];
     [_mainTableView setDataSource:self];
     [self.view addSubview:_mainTableView];

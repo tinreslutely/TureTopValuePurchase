@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; };
 		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; };
+		08E0B8CC1C5C7289002CC7E8 /* LDCombobox.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */; settings = {ASSET_TAGS = (); }; };
+		08E0B8CF1C5DC103002CC7E8 /* LDCombobxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0B8CE1C5DC103002CC7E8 /* LDCombobxView.m */; settings = {ASSET_TAGS = (); }; };
 		1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */; };
 		B518D9CC1C5606ED00E15656 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518D9CB1C5606ED00E15656 /* Accelerate.framework */; };
 		B518D9D01C56099500E15656 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B518D9CF1C56099500E15656 /* UIImage+ImageEffects.m */; };
@@ -54,7 +56,6 @@
 		B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */; };
 		B5A0B2B21C4C909600C8DD6D /* LDSearchPopTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */; };
 		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
-		B5BE9E7D1C5B0B020067D924 /* LDCombobox.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE9E7C1C5B0B020067D924 /* LDCombobox.m */; };
 		B5C677841C51C5780020C71F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C677831C51C5780020C71F /* Reachability.m */; };
 		B5C677861C51C7860020C71F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C677851C51C7860020C71F /* CoreTelephony.framework */; };
 		B5C677881C51CBDB0020C71F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C677871C51CBDB0020C71F /* libsqlite3.0.tbd */; };
@@ -111,6 +112,10 @@
 		086CAAB51C49E5D000D23761 /* MDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchViewController.m; sourceTree = "<group>"; };
 		086CAAB71C49F28800D23761 /* LDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchViewController.h; sourceTree = "<group>"; };
 		086CAAB81C49F28800D23761 /* LDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchViewController.m; sourceTree = "<group>"; };
+		08E0B8CA1C5C7289002CC7E8 /* LDCombobox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCombobox.h; sourceTree = "<group>"; };
+		08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCombobox.m; sourceTree = "<group>"; };
+		08E0B8CD1C5DC103002CC7E8 /* LDCombobxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCombobxView.h; sourceTree = "<group>"; };
+		08E0B8CE1C5DC103002CC7E8 /* LDCombobxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCombobxView.m; sourceTree = "<group>"; };
 		77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B518D9CB1C5606ED00E15656 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -204,8 +209,6 @@
 		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
 		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
 		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
-		B5BE9E7B1C5B0B020067D924 /* LDCombobox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCombobox.h; sourceTree = "<group>"; };
-		B5BE9E7C1C5B0B020067D924 /* LDCombobox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCombobox.m; sourceTree = "<group>"; };
 		B5C677821C51C5780020C71F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B5C677831C51C5780020C71F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B5C677851C51C7860020C71F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -297,6 +300,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08E0B8C91C5C7259002CC7E8 /* LDCombobox */ = {
+			isa = PBXGroup;
+			children = (
+				08E0B8CA1C5C7289002CC7E8 /* LDCombobox.h */,
+				08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */,
+				08E0B8CD1C5DC103002CC7E8 /* LDCombobxView.h */,
+				08E0B8CE1C5DC103002CC7E8 /* LDCombobxView.m */,
+			);
+			path = LDCombobox;
+			sourceTree = "<group>";
+		};
 		21D5BDD9096F68415C707616 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +488,7 @@
 		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				08E0B8C91C5C7259002CC7E8 /* LDCombobox */,
 				B5FC38541C531F37003D74A2 /* MultilevelMenu */,
 				B5C6778C1C51DDE80020C71F /* LDAlertController */,
 				B5C677811C51C5780020C71F /* Reachability */,
@@ -489,7 +504,6 @@
 		B59A99AB1C44A25B00A8A6FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B5BE9E7A1C5B099B0067D924 /* Search */,
 				B5E0B58F1C5716960083D87C /* PersonCenter */,
 				B518D9E01C561A6D00E15656 /* Cart */,
 				B518D9D81C561A1300E15656 /* Buttons */,
@@ -737,15 +751,6 @@
 			path = LDSearchBar;
 			sourceTree = "<group>";
 		};
-		B5BE9E7A1C5B099B0067D924 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				B5BE9E7B1C5B0B020067D924 /* LDCombobox.h */,
-				B5BE9E7C1C5B0B020067D924 /* LDCombobox.m */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
 		B5C677811C51C5780020C71F /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,7 +961,7 @@
 				TargetAttributes = {
 					B59A99731C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7EWVM5QLAU;
+						DevelopmentTeam = S9997395XD;
 					};
 					B59A998C1C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -1083,7 +1088,6 @@
 				B59E8A041C47304C005CEA25 /* LDUtils.m in Sources */,
 				B5A0B2B21C4C909600C8DD6D /* LDSearchPopTransition.m in Sources */,
 				B5FC38671C531F37003D74A2 /* MultilevelMenu.m in Sources */,
-				B5BE9E7D1C5B0B020067D924 /* LDCombobox.m in Sources */,
 				B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */,
 				B5C6778B1C51D3680020C71F /* MDCommon.m in Sources */,
 				B59A99C91C44B13E00A8A6FC /* MDCartViewController.m in Sources */,
@@ -1101,6 +1105,8 @@
 				B54AF8A01C59E6820047FEB6 /* MDSearchNormalTableViewCell.m in Sources */,
 				B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */,
 				B5FC386F1C53258E003D74A2 /* MDClassesModel.m in Sources */,
+				08E0B8CC1C5C7289002CC7E8 /* LDCombobox.m in Sources */,
+				08E0B8CF1C5DC103002CC7E8 /* LDCombobxView.m in Sources */,
 				B5FFCEC11C489B020096B438 /* MDHomeLikeProductTableViewCell.m in Sources */,
 				B5C677961C52197F0020C71F /* NSString+Extension.m in Sources */,
 				B518D9DE1C561A1300E15656 /* CheckBoxButton.m in Sources */,
@@ -1280,6 +1286,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1297,6 +1304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

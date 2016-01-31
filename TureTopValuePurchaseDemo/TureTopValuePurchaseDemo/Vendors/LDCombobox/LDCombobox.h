@@ -10,6 +10,7 @@
 
 @interface LDCombobox : UIControl
 
-@property(nonatomic,strong,readonly) UITableView *comboboxView;
+@property(nonatomic,strong,readonly) UIView *comboboxView;
 
+-(instancetype)initWithFrame:(CGRect)frame comboSuperView:(UIView*)superView items:(NSArray*)items;
 @end

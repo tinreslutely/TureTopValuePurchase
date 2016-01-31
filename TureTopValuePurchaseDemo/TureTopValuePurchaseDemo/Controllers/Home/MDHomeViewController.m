@@ -238,10 +238,22 @@
  *  刷新数据
  */
 -(void)refreshData{
+    if(APPDATA.networkStatus == -1){
+        [self.view makeToast:@"网络正在开小差哦~" duration:1 position:CSToastPositionBottom];
+        [_mainTableView.mj_header endRefreshing];
+        return;
+    }
     [_dataController requestDataWithType:@"0" completion:^(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel *> *list) {
         if(state){
             _channelList = [list copy];
             [_mainTableView reloadData];
+        }else{
+            if([msg extensionWithContainsString:@"The request timed out"]){
+                [self.view makeToast:@"请求超时哦~" duration:1 position:CSToastPositionBottom];
+                
+            }else if(APPDATA.networkStatus == -1){
+                [self.view makeToast:@"网络正在开小差哦~" duration:1 position:CSToastPositionBottom];
+            }
         }
         [_mainTableView.mj_header endRefreshing];
     }];
@@ -251,14 +263,29 @@
  *  加载你可能喜欢模块的数据
  */
 -(void)loadData{
-    if(_isLast) return;
+    if(APPDATA.networkStatus == -1){
+        [self.view makeToast:@"网络正在开小差哦~" duration:1 position:CSToastPositionBottom];
+        [_mainTableView.mj_footer endRefreshing];
+        return;
+    }
+    if(_isLast) {
+        [_mainTableView.mj_footer endRefreshing];
+        return;
+    }
     _pageIndex ++;
     [_dataController requestDataWithType:@"0" pageIndex:_pageIndex pageSize:_pageSize completion:^(BOOL state, NSString *msg, NSArray<MDHomeLikeProductModel *> *list) {
         if(state){
             [_likeProductList addObjectsFromArray: [list copy]];
             [_mainTableView reloadData];
         }else{
-            _isLast = YES;
+            if([msg extensionWithContainsString:@"The request timed out"]){
+                [self.view makeToast:@"请求超时哦~" duration:1 position:CSToastPositionBottom];
+                
+            }else if(APPDATA.networkStatus == -1){
+                [self.view makeToast:@"网络正在开小差哦~" duration:1 position:CSToastPositionBottom];
+            }else{
+                _isLast = YES;
+            }
         }
         [_mainTableView.mj_footer endRefreshing];
     }];

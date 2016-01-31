@@ -12,7 +12,7 @@
 @interface LDSearchViewController : UIViewController
 
 @property(nonatomic,strong,nullable,readonly) LDProgressView *progressView;
-@property(nonatomic,strong) UIView *navigationView;
-@property(nonatomic,strong) UITextField *searchText;
+@property(nonatomic,strong,nullable,readonly) UIView *navigationView;
+@property(nonatomic,strong,nullable,readonly) UITextField *searchText;
 
 @end

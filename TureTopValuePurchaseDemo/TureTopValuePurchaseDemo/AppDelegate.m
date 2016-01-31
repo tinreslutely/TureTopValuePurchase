@@ -74,19 +74,35 @@
     NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
     NetworkStatus status = [curReach currentReachabilityStatus];
     switch (status) {
-        case NotReachable:
-            APPDATA.networkStatus = -1;
+        case NotReachable:{
+            if(APPDATA.networkStatus != -1){
+                [self.window.rootViewController.navigationController.view makeToast:@"网络正在开小差哦~" duration:1 position:CSToastPositionBottom];
+                APPDATA.networkStatus = -1;
+            }
+        }
             break;
         case ReachableViaWiFi:
-        case ReachableViaWWAN:
+        case ReachableViaWWAN:{
+            if(APPDATA.networkStatus == -1){
+                [self.window.rootViewController.navigationController.view makeToast:@"网络已经恢复啦~" duration:1 position:CSToastPositionBottom];
+            }
             APPDATA.networkStatus = 2;
+        }
             break;
         case ReachableVia2G:
-        case ReachableVia3G:
+        case ReachableVia3G:{
+            if(APPDATA.networkStatus == -1){
+                [self.window.rootViewController.navigationController.view makeToast:@"网络已经恢复啦~" duration:1 position:CSToastPositionBottom];
+            }
             APPDATA.networkStatus = 0;
+        }
             break;
-        case ReachableVia4G:
+        case ReachableVia4G:{
+            if(APPDATA.networkStatus == -1){
+                [self.window.rootViewController.navigationController.view makeToast:@"网络已经恢复啦~" duration:1 position:CSToastPositionBottom];
+            }
             APPDATA.networkStatus = 1;
+        }
             break;
     }
 }
