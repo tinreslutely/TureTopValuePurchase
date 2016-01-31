@@ -19,7 +19,6 @@
 }
 
 -(CGContextRef)drawRect:(CGRect)rect radius:(CGFloat)radius{
-    CGFloat halfWidth = rect.size.width/2;
     CGFloat pointX;
     CGFloat pointY;
     CGFloat tw = rect.size.width/5;
@@ -48,20 +47,52 @@
     
     //b1 - b2
     pointX += radius;
-    CGContextAddArcToPoint(ctx, pointX - radius, pointY, pointX + radius, pointY + radius, radius);
+    CGContextAddArcToPoint(ctx, pointX - radius, pointY, pointX, pointY + radius, radius);
     
     //c1
+    pointY += rect.size.height - radius;
     CGContextAddLineToPoint(ctx, pointX, pointY);
     
     
     //c1 - c2
+    pointY += radius;
+    pointX -= radius;
+    CGContextAddArcToPoint(ctx, pointX + radius, pointY - radius, pointX, pointY, radius);
     
     
     //d1
+    pointX -= rect.size.width - radius;
+    CGContextAddLineToPoint(ctx, pointX, pointY);
+    
+    
+    //d1 - d2
+    pointX = rect.origin.x;
+    CGContextAddArcToPoint(ctx, pointX - radius, pointY, pointX, pointY - radius, radius);
+    
+    
+    //a2
+    pointY -= rect.size.height - radius;
+    CGContextAddLineToPoint(ctx, pointX, pointY);
+    
+    //a2 - a1
+    CGContextAddArcToPoint(ctx, pointX, pointY, pointX + radius, pointY - radius, radius);
+    
+    
+    //o1
+    pointX = rect.origin.x + rect.size.width/2 - tw/2;
+    pointY = rect.origin.y + th;
+    CGContextAddLineToPoint(ctx, pointX, pointY);
+    
+    
+    //起始点
+    pointX += tw/2;
+    pointY -= th;
+    CGContextAddLineToPoint(ctx, pointX, pointY);
     
     
     
-    
+    //结束
+    CGContextStrokePath(ctx);
     return ctx;
 }
 
