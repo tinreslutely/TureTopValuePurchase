@@ -12,6 +12,8 @@
 #import "MDSearchDataController.h"
 #import "TPKeyboardAvoidingTableView.h"
 
+#import "MDGoodsViewController.h"
+
 @interface MDSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,LDComboboxDelegate>
 
 @end
@@ -44,7 +46,7 @@
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [_dataController updateRecordWithKeyword:self.searchText.text type:_searchType completion:^(BOOL state){
-        [self refreshData];
+        [self navigationToGoodsWithKeyword:self.searchText.text];
     }];
     return YES;
 }
@@ -141,7 +143,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if(indexPath.row == 0 || indexPath.row == _mainSearchArray.count + 1) return;
+    MDSearchModel *model = _mainSearchArray[indexPath.row - 1];
+    [self navigationToGoodsWithKeyword:model.keyword];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -208,6 +212,12 @@
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
     
+}
+
+-(void)navigationToGoodsWithKeyword:(NSString*)keyword{
+    MDGoodsViewController *controller = [[MDGoodsViewController alloc] init];
+    [controller setKeyword:keyword];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0868ED171C5F763C0080AFAC /* MDGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; };
 		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; };
 		08E0B8CC1C5C7289002CC7E8 /* LDCombobox.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */; };
@@ -108,6 +109,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0868ED151C5F763C0080AFAC /* MDGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDGoodsViewController.h; sourceTree = "<group>"; };
+		0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDGoodsViewController.m; sourceTree = "<group>"; };
 		086CAAB41C49E5D000D23761 /* MDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchViewController.h; sourceTree = "<group>"; };
 		086CAAB51C49E5D000D23761 /* MDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchViewController.m; sourceTree = "<group>"; };
 		086CAAB71C49F28800D23761 /* LDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchViewController.h; sourceTree = "<group>"; };
@@ -300,6 +303,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0868ED141C5F75E00080AFAC /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				0868ED151C5F763C0080AFAC /* MDGoodsViewController.h */,
+				0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
 		08E0B8C91C5C7259002CC7E8 /* LDCombobox */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +540,7 @@
 		B59A99AD1C44A26700A8A6FC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0868ED141C5F75E00080AFAC /* Goods */,
 				B5C6778D1C51E79E0020C71F /* Login */,
 				B59A99C31C44B03A00A8A6FC /* Personal Center */,
 				B59A99C21C44B00800A8A6FC /* Classes */,
@@ -961,7 +974,7 @@
 				TargetAttributes = {
 					B59A99731C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7EWVM5QLAU;
+						DevelopmentTeam = S9997395XD;
 					};
 					B59A998C1C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -1096,6 +1109,7 @@
 				B5C677A31C5230F50020C71F /* MDLoginDataController.m in Sources */,
 				B5995CBA1C508F4B006B5697 /* MMMaterialDesignSpinner.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
+				0868ED171C5F763C0080AFAC /* MDGoodsViewController.m in Sources */,
 				B5FC38651C531F37003D74A2 /* MultilevelTableViewCell.m in Sources */,
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
