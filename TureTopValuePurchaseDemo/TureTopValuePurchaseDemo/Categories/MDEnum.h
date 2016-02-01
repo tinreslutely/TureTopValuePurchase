@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger,MDSearchType) {
     /*!
      *  商品
      */
-    MDSearchTypeProduct = 1,
+    MDSearchTypeProduct = 0,
     /*!
      *  店铺
      */

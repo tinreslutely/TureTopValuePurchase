@@ -4,7 +4,7 @@ pod "Masonry"
 pod "AFNetworking","~> 3.0.4"
 pod "MBProgressHUD"
 pod "SDWebImage"
-pod "TPKeyboardAvoiding"
+pod 'TPKeyboardAvoiding', '1.2.4'
 pod "SWTableViewCell"
 pod "MJRefresh"
 pod "MJExtension"

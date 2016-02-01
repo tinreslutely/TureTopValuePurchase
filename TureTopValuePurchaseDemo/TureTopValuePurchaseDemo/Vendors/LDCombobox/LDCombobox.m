@@ -7,7 +7,6 @@
 //
 
 #import "LDCombobox.h"
-
 @interface LDCombobox()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -16,37 +15,49 @@
     UIView *_superView;
     UILabel *_typeLabel;
     UIImageView *_typeImageView;
+    UIImage *_dropStateImage;
     
     NSMutableArray *_comboItems;//key  value
     float _comboViewPointX;
     float _comboViewPointY;
+    float _comboViewHeight;
+    
     id _selectValue;
     int _selectIndex;
 }
 
-@synthesize comboboxView;
+@synthesize dropState,comboboxView;
 
 -(instancetype)initWithFrame:(CGRect)frame comboSuperView:(UIView*)superView items:(NSArray*)items{
     if(self = [super initWithFrame:frame]){
         _superView = superView;
+        dropState = NO;
         _selectIndex = 0;
         _selectValue = [[items firstObject] objectForKey:@"value"];
         _comboItems = [[NSMutableArray alloc] initWithArray:items];
-        [self addTarget:self action:@selector(dropDown) forControlEvents:UIControlEventTouchDown];
+        _dropStateImage = [UIImage imageNamed:@"arrow_bottom_b"];
+        [self addTarget:self action:@selector(drop) forControlEvents:UIControlEventTouchDown];
         [self initView];
     }
     return self;
 }
 
+-(void)drop{
+    dropState = !dropState;
+    if(dropState){
+        [self dropDown];
+    }else{
+        [self dropUpWithAnimation:YES];
+    }
+}
+
 -(void)dropDown{
     if(comboboxView == nil){
         _comboViewPointX = self.frame.origin.x;
-        _comboViewPointY = self.frame.size.height + self.frame.origin.y + 5;
+        _comboViewPointY = self.frame.size.height + self.frame.origin.y;
         UIView *view = [self superview];
         for (;;) {
-            if(view == nil || view == _superView){
-                break;
-            }
+            if(view == nil || view == _superView) break;
             _comboViewPointX += view.frame.origin.x;
             _comboViewPointY += view.frame.origin.y;
             view = [view superview];
@@ -55,14 +66,28 @@
         [_superView addSubview:comboboxView];
         [_superView bringSubviewToFront:comboboxView];
     }
+    
     UITableView *tableView = (UITableView*)[comboboxView viewWithTag:1001];
     [tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:_selectIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [comboboxView setHidden:NO];
+    
+    [_typeImageView setImage:[UIImage imageWithCGImage:_dropStateImage.CGImage scale:1 orientation:UIImageOrientationDown]];
+    [UIView animateWithDuration:0.2 animations:^{
+        [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, _comboViewHeight)];
+        [comboboxView.contentView setAlpha:1];
+    }];
 }
 
--(void)dropUp{
-    [comboboxView setHidden:YES];
-    
+-(void)dropUpWithAnimation:(BOOL)animation{
+    [_typeImageView setImage:[UIImage imageWithCGImage:_dropStateImage.CGImage scale:1 orientation:UIImageOrientationUp]];
+    if(animation){
+        [UIView animateWithDuration:0.2 animations:^{
+            [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, 0)];
+            [comboboxView.contentView setAlpha:0];
+        }];
+    }else{
+        [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, 0)];
+        [comboboxView.contentView setAlpha:0];
+    }
 }
 
 #pragma mark UITableViewDelegate
@@ -75,7 +100,11 @@
     _selectIndex = (int)indexPath.row;
     _selectValue = [dic objectForKey:@"value"];
     [_typeLabel setText:[dic objectForKey:@"key"]];
-    [comboboxView setHidden:YES];
+    [self dropUpWithAnimation:YES];
+    
+    if([self.delegate respondsToSelector:@selector(combobox:didSelectedRowValue:)]){
+        [self.delegate combobox:self didSelectedRowValue:dic];
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -145,7 +174,7 @@
     }];
     
     _typeImageView = [[UIImageView alloc] init];
-    [_typeImageView setImage:[UIImage imageNamed:@"arrow_bottom_b"]];
+    [_typeImageView setImage:_dropStateImage];
     [self addSubview:_typeImageView];
     [_typeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10, 5));
@@ -156,29 +185,14 @@
 }
 
 -(void)setupComboboxViewWithFrame:(CGRect)frame{
-    comboboxView = [[UIView alloc] initWithFrame:frame];
-    CALayer *layer = [CALayer layer];
-    [layer setShadowColor:[UIColor grayColor].CGColor];
-    [layer setShadowOffset:CGSizeMake(0, 0)];
-    [layer setShadowOpacity:1];
-    [layer setShadowRadius:2];
-    [layer setBackgroundColor:[UIColor whiteColor].CGColor];
-    [layer setFrame: CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    [comboboxView.layer addSublayer:layer];
+    comboboxView = [[LDCombobxView alloc] initWithFrame:frame];
     
-    UITableView *comboboxTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    UITableView *comboboxTableView = [[UITableView alloc] initWithFrame:comboboxView.contentView.bounds style:UITableViewStylePlain];
     [comboboxTableView setTag:1001];
     [comboboxTableView setDataSource:self];
     [comboboxTableView setDelegate:self];
-    [comboboxTableView.layer setBorderColor:[UIColor grayColor].CGColor];
-    [comboboxTableView.layer setBorderWidth:0.5];
-    [comboboxTableView.layer setCornerRadius:2];
-    [comboboxTableView.layer setMasksToBounds:YES];
-    [comboboxTableView setClipsToBounds:YES];
-    [comboboxView addSubview:comboboxTableView];
-    [comboboxTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(comboboxView).with.insets(UIEdgeInsetsZero);
-    }];
+    [comboboxTableView setShowsHorizontalScrollIndicator:NO];
+    [comboboxView.contentView addSubview:comboboxTableView];
     
     if(__IPHONE_SYSTEM_VERSION >=8){
         if([comboboxTableView respondsToSelector:@selector(setSeparatorInset:)]){
@@ -192,6 +206,10 @@
             [comboboxTableView setSeparatorInset:UIEdgeInsetsZero];
         }
     }
+    
+    _comboViewHeight = comboboxView.frame.size.height;
+    [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, 0)];
+    [comboboxView.contentView setAlpha:0];
 }
 
 @end

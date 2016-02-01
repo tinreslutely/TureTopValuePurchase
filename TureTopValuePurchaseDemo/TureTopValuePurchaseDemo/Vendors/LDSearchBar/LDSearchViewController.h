@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "LDProgressView.h"
+#import "LDCombobox.h"
 
 @interface LDSearchViewController : UIViewController
 
 @property(nonatomic,strong,nullable,readonly) LDProgressView *progressView;
+@property(nonatomic,strong,nullable,readonly) LDCombobox *checkTypeControl;
 @property(nonatomic,strong,nullable,readonly) UIView *navigationView;
 @property(nonatomic,strong,nullable,readonly) UITextField *searchText;
 

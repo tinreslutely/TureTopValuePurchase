@@ -12,7 +12,7 @@
 #import "MDSearchDataController.h"
 #import "TPKeyboardAvoidingTableView.h"
 
-@interface MDSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface MDSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,LDComboboxDelegate>
 
 @end
 
@@ -20,6 +20,7 @@
     TPKeyboardAvoidingTableView *_mainTableView;
     MDSearchDataController *_dataController;
     NSMutableArray *_mainSearchArray;
+    int _searchType;
 }
 
 - (void)viewDidLoad {
@@ -34,9 +35,15 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark LDComboboxDelegate
+-(void)combobox:(LDCombobox *)combobox didSelectedRowValue:(NSDictionary *)value{
+    _searchType = [[value objectForKey:@"value"] intValue];
+    [self refreshData];
+}
+
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [_dataController updateRecordWithKeyword:self.searchText.text type:MDSearchTypeProduct completion:^(BOOL state){
+    [_dataController updateRecordWithKeyword:self.searchText.text type:_searchType completion:^(BOOL state){
         [self refreshData];
     }];
     return YES;
@@ -102,7 +109,7 @@
             [clearButton.layer setBorderWidth:0.5];
             [clearButton.layer setCornerRadius:2];
             [clearButton.layer setMasksToBounds:YES];
-            [clearButton addTarget:self action:@selector(clearItemsTap:) forControlEvents:UIControlEventTouchDown];
+            [clearButton addTarget:self action:@selector(clearItemsTap:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:clearButton];
             [clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(120, 30));
@@ -147,7 +154,7 @@
 #pragma mark action and event methods
 -(void)refreshData{
     [self.progressView show];
-    [_dataController selectAllRecordWithType:MDSearchTypeProduct completion:^(NSArray *array) {
+    [_dataController selectAllRecordWithType:_searchType completion:^(NSArray *array) {
         [_mainSearchArray removeAllObjects];
         [_mainSearchArray addObjectsFromArray: array];
         [self.progressView hide];
@@ -160,7 +167,7 @@
     UITableViewCell *cell = (UITableViewCell*)(__IPHONE_SYSTEM_VERSION >= 8.0 ? [[button superview] superview] : [[[button superview] superview] superview]);
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
     MDSearchModel *model = _mainSearchArray[indexPath.row - 1];
-    [_dataController deleteRecordWithKeyword:model.keyword type:MDSearchTypeProduct completion:^(BOOL state){
+    [_dataController deleteRecordWithKeyword:model.keyword type:_searchType completion:^(BOOL state){
         [self.progressView hide];
         [_mainSearchArray removeObject:model];
         [_mainTableView reloadData];
@@ -169,7 +176,7 @@
 
 -(void)clearItemsTap:(UIButton*)button{
     [self.progressView show];
-    [_dataController deleteAllRecordWithType:MDSearchTypeProduct completion:^(BOOL state){
+    [_dataController deleteAllRecordWithType:_searchType completion:^(BOOL state){
         [_mainSearchArray removeAllObjects];
         [_mainTableView reloadData];
         [self.progressView hide];
@@ -182,14 +189,17 @@
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     _dataController = [[MDSearchDataController alloc] init];
     _mainSearchArray = [[NSMutableArray alloc] init];
+    _searchType = MDSearchTypeProduct;
 }
 
 -(void)initView{
     [self.searchText setDelegate:self];
+    [self.checkTypeControl setDelegate:self];
     
     _mainTableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [_mainTableView setDelegate:self];
     [_mainTableView setDataSource:self];
+    _mainTableView.tableHeaderView = [[UIView alloc] init];
     [self.view addSubview:_mainTableView];
     [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.navigationView.mas_bottom).with.offset(0);

@@ -1,9 +1,8 @@
 //
 //  TPKeyboardAvoidingCollectionView.m
-//  TPKeyboardAvoiding
 //
 //  Created by Michael Tyson on 30/09/2013.
-//  Copyright 2015 A Tasty Pixel & The CocoaBots. All rights reserved.
+//  Copyright 2013 A Tasty Pixel & The CocoaBots. All rights reserved.
 //
 
 #import "TPKeyboardAvoidingCollectionView.h"
@@ -16,12 +15,8 @@
 #pragma mark - Setup/Teardown
 
 - (void)setup {
-    if ( [self hasAutomaticKeyboardAvoidingBehaviour] ) return;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextViewTextDidBeginEditingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
 -(id)initWithFrame:(CGRect)frame {
@@ -45,18 +40,6 @@
 #if !__has_feature(objc_arc)
     [super dealloc];
 #endif
-}
-
-
--(BOOL)hasAutomaticKeyboardAvoidingBehaviour {
-    if ( [[[UIDevice currentDevice] systemVersion] integerValue] >= 9
-            && [self.delegate isKindOfClass:[UICollectionViewController class]] ) {
-        // Theory: It looks like iOS 9's collection views automatically avoid the keyboard. As usual
-        // Apple have totally failed to document this anywhere, so this is just a guess.
-        return YES;
-    }
-    
-    return NO;
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -101,6 +84,14 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self scrollToActiveTextField];
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self scrollToActiveTextField];
 }
 
 -(void)layoutSubviews {

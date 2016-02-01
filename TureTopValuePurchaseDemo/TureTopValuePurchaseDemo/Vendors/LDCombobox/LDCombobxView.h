@@ -10,4 +10,8 @@
 
 @interface LDCombobxView : UIView
 
+@property(nonatomic,strong)UIView *contentView;
+
+-(void)setBorderColor:(UIColor*)color;
+-(void)setHasShadow:(BOOL)show;
 @end

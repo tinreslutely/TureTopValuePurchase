@@ -7,7 +7,6 @@
 //
 
 #import "LDSearchViewController.h"
-#import "LDCombobox.h"
 
 @interface LDSearchViewController ()
 
@@ -18,7 +17,7 @@
     float _globalHeight;
 }
 
-@synthesize navigationView,searchText,progressView;
+@synthesize navigationView,searchText,progressView,checkTypeControl;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +50,7 @@
  *  @param button 触发事件的对象
  */
 -(void)backTap:(UIButton*)button{
+    if(checkTypeControl.dropState) [checkTypeControl dropUpWithAnimation:NO];
     [searchText resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     UIView *searchView = [searchText superview];
@@ -68,6 +68,10 @@
     }];
     [self animationTranslationWithView:searchView animationKey:@"translation-layer-left" duration:0.4 fromValue:0 toValue:-110 stopTime:0.2];
     [self animationTranslationWithView:checkTypeControl animationKey:@"translation-layer-left" duration:0.8 fromValue:0 toValue:-220 stopTime:0];
+}
+
+-(void)clearTextInputTap{
+    [searchText setText:@""];
 }
 
 #pragma mark private methods
@@ -147,6 +151,7 @@
                 float height = _globalHeight / 2;
                 UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(searchBarView.frame.size.width-height-5, height/2, height, height)];
                 [clearButton setImage:[UIImage imageNamed:@"search_close"] forState:UIControlStateNormal];
+                [clearButton addTarget:self action:@selector(clearTextInputTap) forControlEvents:UIControlEventTouchUpInside];
                 [clearButton setContentMode:UIViewContentModeScaleAspectFit];
                 [searchBarView addSubview:clearButton];
                 [self animationScaleLayerWithView:clearButton duration:0.2 fromValue:0.1 toValue:1];
@@ -173,48 +178,7 @@
     [searchBarView.layer setMasksToBounds:YES];
     [searchBarView setBackgroundColor:[UIColor whiteColor]];
     
-//    UIControl *checkTypeControl = [[UIControl alloc] init];
-//    [checkTypeControl setTag:1001];
-//    [searchBarView addSubview:checkTypeControl];
-//    [searchBarView sendSubviewToBack:checkTypeControl];
-//    [checkTypeControl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(60, _globalHeight));
-//        make.left.equalTo(searchBarView.mas_left).with.offset(0);
-//        make.top.equalTo(searchBarView.mas_top).with.offset(0);
-//    }];
-//    
-//    UILabel *typeLabel = [[UILabel alloc] init];
-//    [typeLabel setText:@"商品"];
-//    [typeLabel setTextColor:UIColorFromRGB(161, 161, 161)];
-//    [typeLabel setTextAlignment:NSTextAlignmentCenter];
-//    [typeLabel setFont:[UIFont systemFontOfSize:12]];
-//    [checkTypeControl addSubview:typeLabel];
-//    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(32, _globalHeight));
-//        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
-//        make.left.equalTo(checkTypeControl.mas_left).with.offset(8);
-//    }];
-//    
-//    UILabel *spaceLabel = [[UILabel alloc] init];
-//    [spaceLabel setBackgroundColor:UIColorFromRGB(161, 161, 161)];
-//    [checkTypeControl addSubview:spaceLabel];
-//    [spaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(0.5);
-//        make.right.equalTo(checkTypeControl.mas_right).with.offset(0);
-//        make.top.equalTo(checkTypeControl.mas_top).with.offset(0);
-//        make.bottom.equalTo(checkTypeControl.mas_bottom).with.offset(0);
-//        
-//    }];
-//    
-//    UIImageView *typeImageView = [[UIImageView alloc] init];
-//    [typeImageView setImage:[UIImage imageNamed:@"arrow_bottom_b"]];
-//    [checkTypeControl addSubview:typeImageView];
-//    [typeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(10, 5));
-//        make.right.equalTo(spaceLabel.mas_left).with.offset(-8);
-//        make.centerY.equalTo(checkTypeControl);
-//    }];
-    LDCombobox *checkTypeControl = [[LDCombobox alloc] initWithFrame:CGRectZero comboSuperView:self.view items:@[@{@"key":@"商品",@"value":@"0"},@{@"key":@"店铺",@"value":@"1"}]];
+    checkTypeControl = [[LDCombobox alloc] initWithFrame:CGRectZero comboSuperView:self.view items:@[@{@"key":@"商品",@"value":@"0"},@{@"key":@"店铺",@"value":@"1"}]];
     [checkTypeControl setTag:1001];
     [searchBarView addSubview:checkTypeControl];
     [searchBarView sendSubviewToBack:checkTypeControl];

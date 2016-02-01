@@ -28,7 +28,7 @@ PODS:
   - SDWebImage/Core (3.7.4)
   - SWTableViewCell (0.3.7)
   - Toast (3.0)
-  - TPKeyboardAvoiding (1.2.11)
+  - TPKeyboardAvoiding (1.2.4)
 
 DEPENDENCIES:
   - AESCrypt
@@ -43,7 +43,7 @@ DEPENDENCIES:
   - SDWebImage
   - SWTableViewCell
   - Toast
-  - TPKeyboardAvoiding
+  - TPKeyboardAvoiding (= 1.2.4)
 
 SPEC CHECKSUMS:
   AESCrypt: 1d89bf8b0789cf274ab2205ea461adbe9321d5f8
@@ -58,6 +58,6 @@ SPEC CHECKSUMS:
   SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   Toast: 32c59229abfcf41850162b83bb9259dc84372473
-  TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
+  TPKeyboardAvoiding: 0a40dfbb0af7c8bdae1dd457496dccfd217d85f6
 
 COCOAPODS: 0.39.0

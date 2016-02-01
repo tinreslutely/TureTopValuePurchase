@@ -1,9 +1,8 @@
 //
 //  TPKeyboardAvoidingTableView.m
-//  TPKeyboardAvoiding
 //
 //  Created by Michael Tyson on 30/09/2013.
-//  Copyright 2015 A Tasty Pixel. All rights reserved.
+//  Copyright 2013 A Tasty Pixel. All rights reserved.
 //
 
 #import "TPKeyboardAvoidingTableView.h"
@@ -16,12 +15,8 @@
 #pragma mark - Setup/Teardown
 
 - (void)setup {
-    if ( [self hasAutomaticKeyboardAvoidingBehaviour] ) return;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextViewTextDidBeginEditingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
 -(id)initWithFrame:(CGRect)frame {
@@ -47,33 +42,12 @@
 #endif
 }
 
--(BOOL)hasAutomaticKeyboardAvoidingBehaviour {
-    if ( [self.delegate isKindOfClass:[UITableViewController class]] ) {
-        // Theory: Apps built using the iOS 8.3 SDK (probably: older SDKs not tested) seem to handle keyboard
-        // avoiding automatically with UITableViewController. This doesn't seem to be documented anywhere
-        // by Apple, so results obtained only empirically.
-        return YES;
-    }
-
-    return NO;
-}
-
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    if ( [self hasAutomaticKeyboardAvoidingBehaviour] ) return;
     [self TPKeyboardAvoiding_updateContentInset];
 }
 
 -(void)setContentSize:(CGSize)contentSize {
-    if ( [self hasAutomaticKeyboardAvoidingBehaviour] ) {
-        [super setContentSize:contentSize];
-        return;
-    }
-	if (CGSizeEqualToSize(contentSize, self.contentSize)) {
-		// Prevent triggering contentSize when it's already the same
-		// this cause table view to scroll to top on contentInset changes
-		return;
-	}
     [super setContentSize:contentSize];
     [self TPKeyboardAvoiding_updateContentInset];
 }
@@ -105,6 +79,14 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self scrollToActiveTextField];
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self scrollToActiveTextField];
 }
 
 -(void)layoutSubviews {
