@@ -19,5 +19,6 @@
 @property(nonatomic,assign) BOOL hidesBottomBarWhenPushed;
 
 -(BOOL)validLogined;
+-(UIView*)setupCustomSearchNavigationWithPlaceholder:(NSString*)placeholder keyword:(NSString*)keyword;
 -(void)showAlertDialog:(NSString* __nullable)message;
 @end
