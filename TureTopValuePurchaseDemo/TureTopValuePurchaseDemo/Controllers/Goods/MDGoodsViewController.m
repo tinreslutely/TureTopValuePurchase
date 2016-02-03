@@ -7,6 +7,7 @@
 //
 
 #import "MDGoodsViewController.h"
+#import "MDSearchViewController.h"
 #import "MDGoodsDataController.h"
 
 #import "MDGoodsCollectionViewCell.h"
@@ -25,7 +26,6 @@
     int _pageIndex;//当前页数 默认1
     int _pageSize;//每页数量 默认10
     int _pageTotal;//总页数
-    int _categroyId;//商品类目编号 -1为不作为条件
     int _shopId;//店铺编号  -1为不作为条件
     int _sort;//排序  -1：不排序  0：销量，1：价格升序，2:上架时间， 3：价格降序
     NSMutableArray *_mainArray;
@@ -61,13 +61,23 @@
 
 #pragma mark UITextFieldDelegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    
+    //[textField resignFirstResponder];
+    //MDSearchViewController *controller = [[MDSearchViewController alloc] init];
+    //[self.navigationController pushViewController:controller animated:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    keyword = [textField text];
+    [self refreshData];
+    return YES;
 }
 
 #pragma mark UIScrollViewDelegate
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     _transStartY = scrollView.contentOffset.y;
     _isDroping = NO;
+    [_searchView resignFirstResponder];
 }
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
@@ -153,7 +163,7 @@
 -(void)refreshData{
     _pageIndex = 1;
     [self.progressView show];
-    [_dataController requestDataWithPageNo:_pageIndex pageSize:_pageSize keywords:keyword categoryId:_categroyId shopId:_shopId productType:APPDATA.appFunctionType sort:_sort completion:^(BOOL state, NSString *msg, NSArray<MDGoodsModel *> *list, int totalPage) {
+    [_dataController requestDataWithPageNo:_pageIndex pageSize:_pageSize keywords:keyword categoryId:categoryId shopId:_shopId productType:APPDATA.appFunctionType sort:_sort completion:^(BOOL state, NSString *msg, NSArray<MDGoodsModel *> *list, int totalPage) {
         if(state){
             _pageTotal = totalPage;
             [_mainArray removeAllObjects];
@@ -173,7 +183,7 @@
     }
     _pageIndex ++;
     [self.progressView show];
-    [_dataController requestDataWithPageNo:_pageIndex pageSize:_pageSize keywords:keyword categoryId:_categroyId shopId:_shopId productType:APPDATA.appFunctionType sort:_sort completion:^(BOOL state, NSString *msg, NSArray<MDGoodsModel *> *list, int totalPage) {
+    [_dataController requestDataWithPageNo:_pageIndex pageSize:_pageSize keywords:keyword categoryId:categoryId shopId:_shopId productType:APPDATA.appFunctionType sort:_sort completion:^(BOOL state, NSString *msg, NSArray<MDGoodsModel *> *list, int totalPage) {
         if(state){
             _pageTotal = totalPage;
             [_mainArray addObjectsFromArray:list];
@@ -236,6 +246,7 @@
         make.height.mas_equalTo(108);
     }];
     _searchView = (UITextField*)[[_navigationView viewWithTag:1001] viewWithTag:1003];
+    [_searchView setDelegate:self];
     [self.rightButton setImage:[UIImage imageNamed:@"fun_sortway"] forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(showWayTap) forControlEvents:UIControlEventTouchDown];
     [self.leftButton removeTarget:self action:@selector(backTap) forControlEvents:UIControlEventTouchDown];

@@ -10,6 +10,8 @@
 #import "MDClassesDataController.h"
 #import "MultilevelMenu.h"
 
+#import "MDGoodsViewController.h"
+
 @interface MDClassesViewController ()<MultilvevlMenuDelegate>
 
 @end
@@ -49,7 +51,9 @@
 //collectionview选择后触发
 -(void)multilvevlMenu:(id)menu collectionSelectedWithCollectionView:(UICollectionView*)collectionView rightMeun:(rightMeun*)rightMeun{
     _selectMeun = rightMeun;
-    
+    MDGoodsViewController *controller = [[MDGoodsViewController alloc] init];
+    controller.categoryId = [_selectMeun.ID intValue];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 //设置右边的数据源

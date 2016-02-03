@@ -11,6 +11,6 @@
 @interface MDGoodsViewController : MDBaseViewController
 
 @property(nonatomic,strong) NSString *keyword;
-@property(nonatomic,assign) int categoryId;
+@property(nonatomic,assign) int categoryId;//商品类目编号 -1为不作为条件
 
 @end

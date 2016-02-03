@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0868ED171C5F763C0080AFAC /* MDGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */; };
+		0868ED1A1C62421E0080AFAC /* MDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED191C62421E0080AFAC /* MDMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; };
 		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; };
 		08E0B8CC1C5C7289002CC7E8 /* LDCombobox.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */; };
@@ -115,6 +116,8 @@
 /* Begin PBXFileReference section */
 		0868ED151C5F763C0080AFAC /* MDGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDGoodsViewController.h; sourceTree = "<group>"; };
 		0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDGoodsViewController.m; sourceTree = "<group>"; };
+		0868ED181C62421E0080AFAC /* MDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMessageViewController.h; sourceTree = "<group>"; };
+		0868ED191C62421E0080AFAC /* MDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMessageViewController.m; sourceTree = "<group>"; };
 		086CAAB41C49E5D000D23761 /* MDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchViewController.h; sourceTree = "<group>"; };
 		086CAAB51C49E5D000D23761 /* MDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchViewController.m; sourceTree = "<group>"; };
 		086CAAB71C49F28800D23761 /* LDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchViewController.h; sourceTree = "<group>"; };
@@ -679,6 +682,8 @@
 				B59A99BE1C44AFD900A8A6FC /* MDHomeViewController.m */,
 				086CAAB41C49E5D000D23761 /* MDSearchViewController.h */,
 				086CAAB51C49E5D000D23761 /* MDSearchViewController.m */,
+				0868ED181C62421E0080AFAC /* MDMessageViewController.h */,
+				0868ED191C62421E0080AFAC /* MDMessageViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1178,6 +1183,7 @@
 				086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */,
 				B5E0B5921C57170A0083D87C /* MDPersonCenterNormalTableViewCell.m in Sources */,
 				B5995CBD1C50B045006B5697 /* MDBaseViewController.m in Sources */,
+				0868ED1A1C62421E0080AFAC /* MDMessageViewController.m in Sources */,
 				B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */,
 				B518D9D71C560DBC00E15656 /* MDShopModel.m in Sources */,
 				B518D9E31C561A6D00E15656 /* MDCartTableViewCell.m in Sources */,
