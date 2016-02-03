@@ -33,6 +33,9 @@
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
         }
     }
+    if(self.navigationController.navigationBarHidden){
+        [self.navigationController setNavigationBarHidden:NO];
+    }
     [self initView];
 }
 

@@ -49,6 +49,28 @@
     [navigationController pushViewController:baseWebViewController animated:YES];
 }
 
+/*!
+ *  解析指定的url，获取参数字典
+ *
+ *  @param url url
+ *
+ *  @return 参数字典
+ */
++(NSDictionary*)urlParameterConvertDictionaryWithURL:(NSString*)url{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSArray * array = [url componentsSeparatedByString:@"?"];
+    if(array.count != 2) return nil;
+    array = [array[1] componentsSeparatedByString:@"&"];
+    NSArray * tempArray;
+    for (NSString *item in array) {
+        tempArray = [item componentsSeparatedByString:@"="];
+        if(![tempArray[0] isEqualToString:@""] && tempArray.count == 2){
+            [dic setObject:tempArray[1] forKey:tempArray[0]];
+        }
+    }
+    return dic;
+}
+
 #pragma mark private methods
 
 /**

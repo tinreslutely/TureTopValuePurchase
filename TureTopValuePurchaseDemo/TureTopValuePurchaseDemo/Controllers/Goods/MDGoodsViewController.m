@@ -9,9 +9,10 @@
 #import "MDGoodsViewController.h"
 #import "MDGoodsDataController.h"
 
-#import "MDGoodsTableViewCell.h"
+#import "MDGoodsCollectionViewCell.h"
+#import "MDGoodsManyCollectionViewCell.h"
 
-@interface MDGoodsViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,SWTableViewCellDelegate>
+@interface MDGoodsViewController ()<UITextFieldDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -19,7 +20,7 @@
     MDGoodsDataController *_dataController;
     UIView *_navigationView;
     UITextField *_searchView;
-    UITableView *_mainTableView;
+    UICollectionView *_mainCollectionView;
     
     int _pageIndex;//当前页数 默认1
     int _pageSize;//每页数量 默认10
@@ -31,6 +32,8 @@
     float _transStartY;
     float _transEndY;
     int _currentTag;
+    BOOL _firstRow;
+    BOOL _isDroping;
 }
 
 @synthesize categoryId,keyword;
@@ -40,6 +43,13 @@
     
     [self initData];
     [self initView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(!self.navigationController.navigationBarHidden){
+        [self.navigationController setNavigationBarHidden:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,10 +67,11 @@
 #pragma mark UIScrollViewDelegate
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     _transStartY = scrollView.contentOffset.y;
+    _isDroping = NO;
 }
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    
+    _isDroping = YES;
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -68,66 +79,72 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!_isDroping) return;
     if(scrollView.contentOffset.y > _transStartY && _navigationView.transform.ty == 0){
         [_navigationView setTransform:CGAffineTransformMakeTranslation(0, -108)];
-        [_mainTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [_mainCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_top).with.offset(0);
         }];
     }else if(scrollView.contentOffset.y < _transStartY && _navigationView.transform.ty == -108){
         [_navigationView setTransform:CGAffineTransformMakeTranslation(0, 0)];
-        [_mainTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [_mainCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_top).with.offset(108);
         }];
     }
     
 }
 
-#pragma mark UITableViewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+#pragma mark UICollectionViewDelegateFlowLayout
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return _firstRow ? CGSizeMake(SCREEN_WIDTH, 100) : CGSizeMake(SCREEN_WIDTH/2-10, SCREEN_WIDTH/2 + 73);
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+#pragma mark UICollectionViewDelegate
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    [self setContentWithCell:cell indexPath:indexPath];
 }
 
-#pragma mark UITableViewDataSource
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _mainArray.count;
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MDGoodsModel *model = _mainArray[(_firstRow ? indexPath.section : (int)(2*indexPath.section+indexPath.row))];
+    [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeProductDetail title:@"商品详情" parameters:@{@"productId":model.productId} isNeedLogin:NO loginTipBlock:nil];
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+#pragma mark UICollectionViewDataSource
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return _firstRow ? 1 : 2;
 }
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"productCell";
-    MDGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(!cell){
-        cell = [[MDGoodsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        cell.delegate = self;
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return _firstRow ? _mainArray.count : _mainArray.count / 2;
+}
+
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell;
+    if(_firstRow){
+        static NSString *cellIdentifier = @"CollectionCell";
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        
+    }else{
+        static NSString *manyCellIdentifier = @"ManyCollectionCell";
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:manyCellIdentifier forIndexPath:indexPath];
+    }
+    if(__IPHONE_SYSTEM_VERSION < 8){
+        [self setContentWithCell:cell indexPath:indexPath];
     }
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    MDGoodsTableViewCell *goodsCell = (MDGoodsTableViewCell*)cell;
-    MDProductModel *model = _mainArray[indexPath.row];
-    [goodsCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.prodMainPicUrl]] placeholderImage:[UIImage imageNamed:@"loading"]];
-    [goodsCell.sellPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",model.salesPrice]];
-    [goodsCell.titleLabel setText:model.productName];
-    
-    if(indexPath.row%_pageSize==0){
-        [self.view makeToast:[NSString stringWithFormat:@"%d/%d",(int)(indexPath.row/_pageSize)+1,_pageTotal] duration:1 position:CSToastPositionBottom];
-    }
-}
 
 #pragma mark action event methods
+
+-(void)showWayTap{
+    _firstRow = !_firstRow;
+    [_mainCollectionView reloadData];
+}
+
 -(void)backTap{
-    NSArray *array = self.navigationController.viewControllers;
-    UIViewController *controller = self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2];
-    if([controller isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
+    if([self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
         [self.navigationController popToRootViewControllerAnimated:YES];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -141,8 +158,8 @@
             _pageTotal = totalPage;
             [_mainArray removeAllObjects];
             [_mainArray addObjectsFromArray:list];
-            [_mainTableView reloadData];
-            [_mainTableView.mj_header endRefreshing];
+            [_mainCollectionView reloadData];
+            [_mainCollectionView.mj_header endRefreshing];
         }
         [self.progressView hide];
     }];
@@ -151,7 +168,7 @@
 -(void)loadData{
     if(_pageIndex > _pageTotal){
         [self.view makeToast:@"已经是最后一页了" duration:0.3 position:CSToastPositionBottom];
-        [_mainTableView.mj_footer endRefreshing];
+        [_mainCollectionView.mj_footer endRefreshing];
         return;
     }
     _pageIndex ++;
@@ -160,8 +177,8 @@
         if(state){
             _pageTotal = totalPage;
             [_mainArray addObjectsFromArray:list];
-            [_mainTableView reloadData];
-            [_mainTableView.mj_footer endRefreshing];
+            [_mainCollectionView reloadData];
+            [_mainCollectionView.mj_footer endRefreshing];
         }
         [self.progressView hide];
     }];
@@ -210,6 +227,7 @@
     _pageSize = 10;
     _pageIndex = 1;
     _currentTag = 1000;
+    _firstRow = YES;
 }
 
 -(void)initView{
@@ -219,6 +237,7 @@
     }];
     _searchView = (UITextField*)[[_navigationView viewWithTag:1001] viewWithTag:1003];
     [self.rightButton setImage:[UIImage imageNamed:@"fun_sortway"] forState:UIControlStateNormal];
+    [self.rightButton addTarget:self action:@selector(showWayTap) forControlEvents:UIControlEventTouchDown];
     [self.leftButton removeTarget:self action:@selector(backTap) forControlEvents:UIControlEventTouchDown];
     [self.leftButton addTarget:self action:@selector(backTap) forControlEvents:UIControlEventTouchDown];
     
@@ -230,15 +249,21 @@
         make.right.equalTo(_navigationView.mas_right).with.offset(0);
         make.bottom.equalTo(_navigationView.mas_bottom).with.offset(-6);
     }];
-    
-    
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    [_mainTableView setDelegate:self];
-    [_mainTableView setDataSource:self];
-    [_mainTableView setMj_header:[MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)]];
-    [_mainTableView setMj_footer:[MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)]];
-    [self.view addSubview:_mainTableView];
-    [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //创建一个layout布局类
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    //设置布局方向为垂直流布局
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    [_mainCollectionView setShowsVerticalScrollIndicator:NO];
+    [_mainCollectionView setBackgroundColor:UIColorFromRGBA(250, 250, 250, 1)];
+    [_mainCollectionView setDelegate:self];
+    [_mainCollectionView setDataSource:self];
+    [_mainCollectionView setMj_header:[MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)]];
+    [_mainCollectionView setMj_footer:[MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)]];
+    [_mainCollectionView registerClass:[MDGoodsCollectionViewCell class] forCellWithReuseIdentifier:@"CollectionCell"];
+    [_mainCollectionView registerClass:[MDGoodsManyCollectionViewCell class] forCellWithReuseIdentifier:@"ManyCollectionCell"];
+    [self.view addSubview:_mainCollectionView];
+    [_mainCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(108);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
@@ -328,6 +353,29 @@
 }
 
 
+/*!
+ *  为指定的UICollectionViewCell对象内容赋值
+ *
+ *  @param cell      UICollectionViewCell对象
+ *  @param indexPath 位置
+ */
+-(void)setContentWithCell:(UICollectionViewCell*)cell indexPath:(NSIndexPath*)indexPath{
+    if(_firstRow){
+        MDGoodsCollectionViewCell *goodsCell = (MDGoodsCollectionViewCell*)cell;
+        MDProductModel *model = _mainArray[indexPath.section];
+        [goodsCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.prodMainPicUrl]] placeholderImage:[UIImage imageNamed:@"loading"]];
+        [goodsCell.sellPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",model.salesPrice]];
+        [goodsCell.titleLabel setText:model.productName];
+        
+    }else{
+        MDGoodsManyCollectionViewCell *goodsCell = (MDGoodsManyCollectionViewCell*)cell;
+        int index = (int)(2*indexPath.section+indexPath.row);
+        MDProductModel *model = _mainArray[index];
+        [goodsCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.prodMainPicUrl]] placeholderImage:[UIImage imageNamed:@"loading"]];
+        [goodsCell.sellPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",model.salesPrice]];
+        [goodsCell.titleLabel setText:model.productName];
+    }
+}
 
 
 @end

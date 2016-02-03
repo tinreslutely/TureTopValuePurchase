@@ -13,4 +13,5 @@
 @property(nonatomic,strong,nullable) UILabel *textLabel;
 @property(nonatomic,strong,nullable) UIButton *iconButton;
 
+-(void)setSpaceLabelHidden:(BOOL)hidden;
 @end

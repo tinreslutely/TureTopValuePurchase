@@ -63,9 +63,26 @@
 - (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated{
     //子控制器是否等于2，那么就需要显示tabbar
     if(self.viewControllers.count == 2){
+        if(self.navigationBarHidden) [self setNavigationBarHidden:NO];
         [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
     }
     return [super popViewControllerAnimated:animated];
+}
+
+- (nullable NSArray<__kindof UIViewController *> *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    //子控制器是否等于2，那么就需要显示tabbar
+    if(self.viewControllers.count == 2){
+        if(self.navigationBarHidden) [self setNavigationBarHidden:NO];
+        [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    }
+    return [super popToViewController:viewController animated:animated];
+    
+}
+
+- (nullable NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated{
+    [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    if(self.navigationBarHidden) [self setNavigationBarHidden:NO];
+    return [super popToRootViewControllerAnimated:animated];
 }
 
 

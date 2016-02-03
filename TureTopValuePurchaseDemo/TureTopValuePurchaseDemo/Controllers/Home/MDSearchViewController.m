@@ -78,6 +78,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:tipCellIdentifier];
         if(!cell){
             cell = [[MDSearchNormalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tipCellIdentifier];
+            [cell setSpaceLabelHidden:YES];
             UILabel *tipLabel = [[UILabel alloc] init];
             [tipLabel setText:@"暂无历史记录"];
             [tipLabel setFont:[UIFont systemFontOfSize:16]];
@@ -103,6 +104,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:buttonCellIdentifier];
         if(!cell){
             cell = [[MDSearchNormalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonCellIdentifier];
+            [cell setSpaceLabelHidden:YES];
             UIButton *clearButton = [[UIButton alloc] init];
             [clearButton setTitle:@"清空搜索记录" forState:UIControlStateNormal];
             [clearButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
@@ -204,6 +206,8 @@
     [_mainTableView setDelegate:self];
     [_mainTableView setDataSource:self];
     _mainTableView.tableHeaderView = [[UIView alloc] init];
+    _mainTableView.tableFooterView = [[UIView alloc] init];
+    _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_mainTableView];
     [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.navigationView.mas_bottom).with.offset(0);

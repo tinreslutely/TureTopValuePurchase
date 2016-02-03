@@ -19,6 +19,7 @@
 
 
 #import "MDLoginViewController.h"
+#import "MDGoodsViewController.h"
 
 #import "LDSearchBar.h"
 #import "LDSearchPopTransition.h"
@@ -62,7 +63,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
-    
     //[self refreshData];
 }
 
@@ -192,7 +192,7 @@
         }else{
             cell = [tableView dequeueReusableCellWithIdentifier:likeProductCellIdentifier];
             if(cell == nil){
-                cell = [[MDHomeLikeProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:likeProductCellIdentifier target:self action:nil];
+                cell = [[MDHomeLikeProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:likeProductCellIdentifier target:self action:@selector(likeProductDetailTap:)];
             }
         }
     }
@@ -305,6 +305,72 @@
     APPDATA.appFunctionType = @"1";
 }
 
+/**
+ *  推荐更多  事件
+ *
+ *  @param button 点击的按钮
+ */
+-(void)rmMoreTap:(UIButton*)button{
+    UITableViewCell * cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (UITableViewCell*)[button superview] : (UITableViewCell*)[[[button superview] superview] superview];
+    if(cell == nil) return;
+    NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+    MDHomeRenovateChannelModel *model = _channelList[indexPath.section];
+    [self navigatePageWithChannelModel:model];
+}
+
+/**
+ *  推荐模块图片  事件
+ *
+ *  @param button 点击的按钮
+ */
+-(void)rmImageDetailTap:(UIButton*)button{
+    UITableViewCell * cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (UITableViewCell*)[button superview] : (UITableViewCell*)[[button superview] superview];
+    if(cell == nil) return;
+    NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+    MDHomeRenovateChannelModel *model = _channelList[indexPath.section];
+    [self navigatePageWithChannelModel:model];
+}
+/**
+ *  推荐产品详情  事件
+ *
+ *  @param button 点击的按钮
+ */
+-(void)rmProductDetailTap:(UIButton*)button{
+    UIView *view = [button superview];
+    if(view == nil) return;
+    UITableViewCell * cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (UITableViewCell*)[view superview] : (UITableViewCell*)[[view superview] superview];
+    if(cell == nil) return;
+    NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+    int index = (int)[view.subviews indexOfObject:button];
+    MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_channelList[indexPath.section]).channelColumnDetails[index+1];
+//    MDPageCommon *common = [[MDPageCommon alloc] init];
+//    UIViewController *controller = [common controllerForPagePathWithURL:model.contentAddr currentController:self token:USER_GLOBAL.token];
+//    if(controller != nil){
+//        [controller setHidesBottomBarWhenPushed:YES];
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
+    
+}
+
+-(void)likeProductDetailTap:(UIControl*)control{
+    int arrayIndex = 0;
+    if(__IPHONE_SYSTEM_VERSION >= 8.0){
+        UITableViewCell * cell = (UITableViewCell*)[[control superview] superview];
+        if(cell == nil) return;
+        int index = (int)[[control superview].subviews indexOfObject:control];
+        NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+        arrayIndex = ((int)indexPath.row-1)*2 + index;
+    }else{
+        UITableViewCell * cell = (UITableViewCell*)[[[control superview] superview] superview];
+        if(cell == nil) return;
+        int index = (int)[[control superview].subviews indexOfObject:control];
+        NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+        arrayIndex = ((int)indexPath.row-1)*2 + index;
+    }
+    MDHomeLikeProductModel *model = _likeProductList[arrayIndex];
+    [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeProductDetail title:@"商品详情" parameters:@{@"productId":[NSString stringWithFormat:@"%d",model.productId]} isNeedLogin:NO loginTipBlock:nil];
+}
+
 #pragma mark private methods
 /**
  *  初始化数据
@@ -372,6 +438,36 @@
 }
 
 
+/**
+ *  一般用于跳转产品列表，或者是web界面
+ *
+ *  @param model MDHomeRenovateChannelModel模型数据
+ */
+-(void)navigatePageWithChannelModel:(MDHomeRenovateChannelModel *)model{
+    if([model.columnLink extensionWithContainsString:PAGECONFIG.productDetailPageURLString]){
+        NSDictionary *dic = [MDCommon urlParameterConvertDictionaryWithURL:model.columnLink];
+        MDGoodsViewController *productsController = [[MDGoodsViewController alloc] init];
+        if(dic != nil){
+            productsController.keyword = [dic objectForKey:@"keywords"];
+            if([dic objectForKey:@"typeId"] != nil){
+                productsController.categoryId = [[dic objectForKey:@"typeId"] intValue];
+            }
+            if([dic objectForKey:@"type"] != nil){
+                
+            }
+        }
+        [self.navigationController pushViewController:productsController animated:YES];
+    }else{
+//        MDPageCommon *common = [[MDPageCommon alloc] init];
+//        UIViewController *controller = [common controllerForPagePathWithURL:model.columnLink currentController:self token:USER_GLOBAL.token];
+//        [controller setHidesBottomBarWhenPushed:YES];
+//        if(controller != nil){
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }
+    }
+}
+
+
 #pragma mark bring cell methods
 /*!
  *  在重用池中获取指定的广告功能区的UITableViewCell对象，如果该对象不存在，则创建
@@ -400,7 +496,7 @@
     static NSString *productRMCellIdentifier = @"ProductRMCell";//productRM
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:productRMCellIdentifier];
     if(cell == nil){
-        cell = [[MDHomeRedClassesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:productRMCellIdentifier imageHeight:_imageHeight proImageHeight:_proImageHeight target:self rmMoreAction:nil rmImageAction:nil rmProductDetailAction:nil];
+        cell = [[MDHomeRedClassesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:productRMCellIdentifier imageHeight:_imageHeight proImageHeight:_proImageHeight target:self rmMoreAction:@selector(rmMoreTap:) rmImageAction:@selector(rmImageDetailTap:) rmProductDetailAction:@selector(rmProductDetailTap:)];
     }
     return cell;
 }

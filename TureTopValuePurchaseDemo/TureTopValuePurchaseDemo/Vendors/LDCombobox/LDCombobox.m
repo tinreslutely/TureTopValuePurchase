@@ -88,6 +88,7 @@
         [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, 0)];
         [comboboxView.contentView setAlpha:0];
     }
+    dropState = !dropState;
 }
 
 #pragma mark UITableViewDelegate

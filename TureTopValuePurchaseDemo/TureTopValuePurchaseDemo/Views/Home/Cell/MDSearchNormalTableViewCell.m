@@ -8,7 +8,9 @@
 
 #import "MDSearchNormalTableViewCell.h"
 
-@implementation MDSearchNormalTableViewCell
+@implementation MDSearchNormalTableViewCell{
+    UILabel *_spaceLabel;
+}
 
 @synthesize textLabel,iconButton;
 
@@ -22,6 +24,16 @@
 
 
 -(void)initView{
+    _spaceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_spaceLabel setBackgroundColor:UIColorFromRGBA(220, 220, 220, 1)];
+    [self.contentView addSubview:_spaceLabel];
+    [_spaceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.left.equalTo(self.contentView.mas_left).with.offset(8);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
+    }];
+    
     iconButton = [[UIButton alloc] init];
     [self.contentView addSubview:iconButton];
     [iconButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -37,5 +49,9 @@
         make.right.equalTo(iconButton.mas_left).with.offset(-8);
         make.centerY.equalTo(self.contentView);
     }];
+}
+
+-(void)setSpaceLabelHidden:(BOOL)hidden{
+    [_spaceLabel setHidden:hidden];
 }
 @end
