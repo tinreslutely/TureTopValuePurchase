@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0868ED171C5F763C0080AFAC /* MDGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED161C5F763C0080AFAC /* MDGoodsViewController.m */; };
-		0868ED1A1C62421E0080AFAC /* MDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED191C62421E0080AFAC /* MDMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0868ED1A1C62421E0080AFAC /* MDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868ED191C62421E0080AFAC /* MDMessageViewController.m */; };
 		086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB51C49E5D000D23761 /* MDSearchViewController.m */; };
 		086CAAB91C49F28800D23761 /* LDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 086CAAB81C49F28800D23761 /* LDSearchViewController.m */; };
 		08E0B8CC1C5C7289002CC7E8 /* LDCombobox.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0B8CB1C5C7289002CC7E8 /* LDCombobox.m */; };
@@ -28,6 +28,10 @@
 		B54AF8A61C5A069D0047FEB6 /* MDSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF8A51C5A069D0047FEB6 /* MDSearchModel.m */; };
 		B58BC0DB1C605B9B002F8C83 /* MDGoodsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58BC0DA1C605B9B002F8C83 /* MDGoodsDataController.m */; };
 		B58BC0DF1C605C97002F8C83 /* MDGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B58BC0DE1C605C97002F8C83 /* MDGoodsModel.m */; };
+		B59638121C630308001BC73F /* MDMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59638111C630308001BC73F /* MDMessageTableViewCell.m */; };
+		B59638151C631CBD001BC73F /* MDMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59638141C631CBD001BC73F /* MDMessageModel.m */; };
+		B59638181C631DB0001BC73F /* MDMessageDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59638171C631DB0001BC73F /* MDMessageDataController.m */; };
+		B596381B1C633792001BC73F /* MDMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B596381A1C633792001BC73F /* MDMessageDetailViewController.m */; };
 		B5995CB71C5072F1006B5697 /* LDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5995CB61C5072F1006B5697 /* LDProgressView.m */; };
 		B5995CBA1C508F4B006B5697 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B5995CB91C508F4B006B5697 /* MMMaterialDesignSpinner.m */; };
 		B5995CBD1C50B045006B5697 /* MDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5995CBC1C50B045006B5697 /* MDBaseViewController.m */; };
@@ -155,6 +159,14 @@
 		B58BC0DA1C605B9B002F8C83 /* MDGoodsDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDGoodsDataController.m; sourceTree = "<group>"; };
 		B58BC0DD1C605C97002F8C83 /* MDGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDGoodsModel.h; sourceTree = "<group>"; };
 		B58BC0DE1C605C97002F8C83 /* MDGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDGoodsModel.m; sourceTree = "<group>"; };
+		B59638101C630308001BC73F /* MDMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMessageTableViewCell.h; sourceTree = "<group>"; };
+		B59638111C630308001BC73F /* MDMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMessageTableViewCell.m; sourceTree = "<group>"; };
+		B59638131C631CBD001BC73F /* MDMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMessageModel.h; sourceTree = "<group>"; };
+		B59638141C631CBD001BC73F /* MDMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMessageModel.m; sourceTree = "<group>"; };
+		B59638161C631DB0001BC73F /* MDMessageDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMessageDataController.h; sourceTree = "<group>"; };
+		B59638171C631DB0001BC73F /* MDMessageDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMessageDataController.m; sourceTree = "<group>"; };
+		B59638191C633792001BC73F /* MDMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMessageDetailViewController.h; sourceTree = "<group>"; };
+		B596381A1C633792001BC73F /* MDMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMessageDetailViewController.m; sourceTree = "<group>"; };
 		B5995CB51C5072F1006B5697 /* LDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDProgressView.h; sourceTree = "<group>"; };
 		B5995CB61C5072F1006B5697 /* LDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDProgressView.m; sourceTree = "<group>"; };
 		B5995CB81C508F4B006B5697 /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMaterialDesignSpinner.h; sourceTree = "<group>"; };
@@ -684,6 +696,8 @@
 				086CAAB51C49E5D000D23761 /* MDSearchViewController.m */,
 				0868ED181C62421E0080AFAC /* MDMessageViewController.h */,
 				0868ED191C62421E0080AFAC /* MDMessageViewController.m */,
+				B59638191C633792001BC73F /* MDMessageDetailViewController.h */,
+				B596381A1C633792001BC73F /* MDMessageDetailViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -774,6 +788,8 @@
 				B59E8A071C47375E005CEA25 /* MDHomeModel.m */,
 				B54AF8A41C5A069D0047FEB6 /* MDSearchModel.h */,
 				B54AF8A51C5A069D0047FEB6 /* MDSearchModel.m */,
+				B59638131C631CBD001BC73F /* MDMessageModel.h */,
+				B59638141C631CBD001BC73F /* MDMessageModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -785,6 +801,8 @@
 				B59E8A111C4740C8005CEA25 /* MDHomeDataController.m */,
 				B54AF8A11C5A03A10047FEB6 /* MDSearchDataController.h */,
 				B54AF8A21C5A03A10047FEB6 /* MDSearchDataController.m */,
+				B59638161C631DB0001BC73F /* MDMessageDataController.h */,
+				B59638171C631DB0001BC73F /* MDMessageDataController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -949,6 +967,8 @@
 				B5FFCEC51C489B6B0096B438 /* MDHomeLikeProductTipTableViewCell.m */,
 				B54AF89E1C59E6820047FEB6 /* MDSearchNormalTableViewCell.h */,
 				B54AF89F1C59E6820047FEB6 /* MDSearchNormalTableViewCell.m */,
+				B59638101C630308001BC73F /* MDMessageTableViewCell.h */,
+				B59638111C630308001BC73F /* MDMessageTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1158,9 +1178,11 @@
 				B5C677A31C5230F50020C71F /* MDLoginDataController.m in Sources */,
 				B5995CBA1C508F4B006B5697 /* MMMaterialDesignSpinner.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
+				B59638121C630308001BC73F /* MDMessageTableViewCell.m in Sources */,
 				0868ED171C5F763C0080AFAC /* MDGoodsViewController.m in Sources */,
 				B5FC38651C531F37003D74A2 /* MultilevelTableViewCell.m in Sources */,
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
+				B596381B1C633792001BC73F /* MDMessageDetailViewController.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				B5C6779E1C522DFC0020C71F /* MDLocationManager.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
@@ -1189,6 +1211,7 @@
 				B518D9E31C561A6D00E15656 /* MDCartTableViewCell.m in Sources */,
 				B5C677841C51C5780020C71F /* Reachability.m in Sources */,
 				B518D9EB1C561B6300E15656 /* MDCartDataController.m in Sources */,
+				B59638181C631DB0001BC73F /* MDMessageDataController.m in Sources */,
 				B5E0B5981C5777DD0083D87C /* MDPersonCenterOrderTableViewCell.m in Sources */,
 				B5C6779D1C522DFC0020C71F /* MD5Hepler.m in Sources */,
 				B59A99D61C44F64800A8A6FC /* LDynamicLabel.m in Sources */,
@@ -1206,6 +1229,7 @@
 				B59A99B81C44ACBB00A8A6FC /* MDNavigationController.m in Sources */,
 				B5F697561C6192E4000A8610 /* MDGoodsCollectionViewCell.m in Sources */,
 				B58BC0DB1C605B9B002F8C83 /* MDGoodsDataController.m in Sources */,
+				B59638151C631CBD001BC73F /* MDMessageModel.m in Sources */,
 				B518D9D31C560D8D00E15656 /* MDShopDataController.m in Sources */,
 				B59B82521C4F7C7000BF9AB9 /* MDHttpManager.m in Sources */,
 				B5F697591C61A8BF000A8610 /* MDGoodsManyCollectionViewCell.m in Sources */,

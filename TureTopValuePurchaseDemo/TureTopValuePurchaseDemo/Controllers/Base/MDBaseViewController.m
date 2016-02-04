@@ -15,7 +15,7 @@
 
 @implementation MDBaseViewController
 
-@synthesize leftButton,rightButton,progressView,tabBarController,hidesBottomBarWhenPushed;
+@synthesize titleLabel,leftButton,rightButton,progressView,tabBarController,hidesBottomBarWhenPushed;
 
 -(instancetype)init{
     if(self = [super init]){
@@ -118,11 +118,71 @@
 }
 
 /*!
- *  配置导航栏
+ *  配置普通的导航栏
  *
  *  @param navigationItem navigationItem对象
  */
--(UIView*)setupCustomSearchNavigationWithPlaceholder:(NSString*)placeholder keyword:(NSString*)keyword{
+-(UIView* _Nullable)setupCustomNormalNavigationBar{
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    UIView *navigationView = [[UIView alloc] init];
+    [navigationView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:navigationView];
+    [navigationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        make.height.mas_equalTo(64);
+    }];
+    
+    UILabel *bottomView = [[UILabel alloc] init];
+    [bottomView setBackgroundColor:UIColorFromRGBA(170, 170, 170, 1)];
+    [navigationView addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(navigationView.mas_left).with.offset(0);
+        make.right.equalTo(navigationView.mas_right).with.offset(0);
+        make.bottom.equalTo(navigationView.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    leftButton = [[UIButton alloc] init];
+    [leftButton setImage:[UIImage imageNamed:@"arrow_back"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(backTapped) forControlEvents:UIControlEventTouchDown];
+    [navigationView addSubview:leftButton];
+    [leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.top.equalTo(navigationView.mas_top).with.offset(26);
+        make.left.equalTo(navigationView.mas_left).with.offset(3);
+    }];
+    
+    rightButton = [[UIButton alloc] init];
+    [navigationView addSubview:rightButton];
+    [rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.top.equalTo(navigationView.mas_top).with.offset(26);
+        make.right.equalTo(navigationView.mas_right).with.offset(-8);
+    }];
+    
+    
+    titleLabel = [[UILabel alloc] init];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [navigationView addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(30);
+        make.top.equalTo(navigationView.mas_top).with.offset(26);
+        make.right.equalTo(rightButton.mas_left).with.offset(-5);
+        make.left.equalTo(leftButton.mas_right).with.offset(3);
+    }];
+    
+    return navigationView;
+}
+
+/*!
+ *  配置自定义导航栏
+ *
+ *  @param navigationItem navigationItem对象
+ */
+-(UIView* _Nullable)setupCustomSearchNavigationWithPlaceholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword{
     [self.navigationController setNavigationBarHidden:YES];
     
     UIView *navigationView = [[UIView alloc] init];

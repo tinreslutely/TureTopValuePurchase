@@ -305,6 +305,14 @@
     APPDATA.appFunctionType = @"1";
 }
 
+-(void)messageTap{
+    if(!APPDATA.isLogin){
+        [self.navigationController pushViewController:[[NSClassFromString(@"MDLoginViewController") alloc] init] animated:YES];
+        return;
+    }
+    [self.navigationController pushViewController:[[NSClassFromString(@"MDMessageViewController") alloc] init] animated:YES];
+}
+
 /**
  *  推荐更多  事件
  *
@@ -400,6 +408,7 @@
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
     [searchBar.leftButton addTarget:self action:@selector(switchPurchaseTap) forControlEvents:UIControlEventTouchDown];
     [searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
+    [searchBar.rightButton addTarget:self action:@selector(messageTap) forControlEvents:UIControlEventTouchDown];
     
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [_mainTableView setDelegate:self];

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MDMessageViewController : UIViewController
+@interface MDMessageViewController : MDBaseViewController
 
 @end

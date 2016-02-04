@@ -12,6 +12,7 @@
 
 @interface MDBaseViewController : UIViewController
 
+@property(nonatomic,strong,nullable,readonly) UILabel *titleLabel;
 @property(nonatomic,strong,nullable,readonly) UIButton *leftButton;
 @property(nonatomic,strong,nullable,readonly) UIButton *rightButton;
 @property(nonatomic,strong,nullable,readonly) LDProgressView *progressView;
@@ -19,6 +20,7 @@
 @property(nonatomic,assign) BOOL hidesBottomBarWhenPushed;
 
 -(BOOL)validLogined;
--(UIView*)setupCustomSearchNavigationWithPlaceholder:(NSString*)placeholder keyword:(NSString*)keyword;
+-(UIView* _Nullable)setupCustomNormalNavigationBar;
+-( UIView* _Nullable)setupCustomSearchNavigationWithPlaceholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword;
 -(void)showAlertDialog:(NSString* __nullable)message;
 @end
