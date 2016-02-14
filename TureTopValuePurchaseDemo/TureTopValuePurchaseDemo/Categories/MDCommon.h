@@ -13,4 +13,5 @@
 +(NSString*)imageURLStringForNetworkStatus:(NSString*)imageURL width:(int)width height:(int)height;
 +(void)reshipWebURLWithNavigationController:(UINavigationController*)navigationController pageType:(MDWebPageURLType)pageType title:(NSString*)title parameters:(NSDictionary*)parameters isNeedLogin:(BOOL)isNeedLogin loginTipBlock:(void(^)())loginTipBlock;
 +(NSDictionary*)urlParameterConvertDictionaryWithURL:(NSString*)url;
++(NSString*)sexTextWithValue:(int)value;
 @end

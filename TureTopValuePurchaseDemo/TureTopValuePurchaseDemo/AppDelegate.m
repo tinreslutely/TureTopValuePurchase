@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MDTabBarController.h"
 #import "Reachability.h"
+#import "MDLocationManager.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,7 @@
     [self setupWindow];
     [self setupCheckNetwork];
     
+    [[MDLocationManager sharedManager] startUpdatingLocation];
     return YES;
 }
 

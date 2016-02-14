@@ -1,7 +1,7 @@
 //
 //  MDMessageDetailViewController.h
 //  TureTopValuePurchaseDemo
-//
+//  消息详情控制器
 //  Created by 李晓毅 on 16/2/4.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //

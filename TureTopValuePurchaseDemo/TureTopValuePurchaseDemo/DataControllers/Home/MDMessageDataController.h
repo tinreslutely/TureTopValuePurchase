@@ -13,7 +13,6 @@
 
 -(void)requestDataWithUserId:(NSString*)userId pageNo:(int)pageNo pageSize:(int)pageSize messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg, NSArray<MDMessageModel*> *list))completion;
 -(void)requestDetailDataWithMessageId:(NSString*)messageId messageType:(int)messageType  completion:(void(^)(BOOL state, NSString *msg, MDMessageModel *model))completion;
--(void)requestTotalDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int total))completion;
 -(void)requestUnreadDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum))completion;
 -(void)markReadStateDataWithMessageId:(NSString*)messageId messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion;
 -(void)removeDataWithUserId:(NSString*)userId Id:(NSString*)messageId  messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion;

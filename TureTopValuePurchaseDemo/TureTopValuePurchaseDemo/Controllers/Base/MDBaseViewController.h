@@ -21,6 +21,7 @@
 
 -(BOOL)validLogined;
 -(UIView* _Nullable)setupCustomNormalNavigationBar;
+-(void)setupSearchLoactionNavigationItem:(UINavigationItem* _Nullable)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword rightView:(UIView* _Nullable)rightView;
 -( UIView* _Nullable)setupCustomSearchNavigationWithPlaceholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword;
 -(void)showAlertDialog:(NSString* __nullable)message;
 @end

@@ -15,6 +15,8 @@
 #import "MDCartViewController.h"
 #import "MDHomeViewController.h"
 
+#import "MDMemberDataController.h"
+
 #import "RDVTabBarItem.h"
 
 @interface MDTabBarController ()
@@ -37,6 +39,7 @@
     
     [self setupTabBarController];
     [self setupTabBar];
+    [self initUserData];
 }
 
 #pragma mark private methods
@@ -74,6 +77,35 @@
     [item setSelectedTitleAttributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:10], NSForegroundColorAttributeName: TAB_SELECTED_COLOR}];
     [item setTitlePositionAdjustment:UIOffsetMake(0, 5)];
     [item setTitle:title];
+}
+
+/**
+ *  每次进入app都去请求一次用户信息，判断用户是否已经登录
+ */
+-(void)initUserData{
+    NSString* userId = [MDUserDefaultHelper readForKey:userIDKey];
+    APPDATA.locationCity = [MDUserDefaultHelper readForKey:locationCityKey];
+    APPDATA.locationLatitude = [MDUserDefaultHelper readForKey:locationLatitudeKey];
+    APPDATA.locationLongitude = [MDUserDefaultHelper readForKey:locationLongitudeKey];
+    if(userId == nil){
+        APPDATA.isLogin = NO;
+        return;
+    }
+    APPDATA.isLogin = YES;
+    APPDATA.token = [MDUserDefaultHelper readForKey:tokenKey];
+    APPDATA.userCode = [MDUserDefaultHelper readForKey:userCodeKey];
+    APPDATA.userId = userId;
+    [[[MDMemberDataController alloc] init] requestDataWithUserId:APPDATA.userId token:APPDATA.token completion:^(BOOL state, NSString *msg, MDMemberInfomationModel *model) {
+        if(state){
+            APPDATA.userName = model.nickName;
+            APPDATA.sex = [MDCommon sexTextWithValue:model.sex];
+            APPDATA.area = model.area;
+            APPDATA.headPortrait = model.headPortrait;
+            APPDATA.phone = model.phone;
+        }else{
+            APPDATA.isLogin = NO;
+        }
+    }];
 }
 
 @end

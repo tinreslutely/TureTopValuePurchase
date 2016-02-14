@@ -72,7 +72,7 @@
 
 #pragma mark UINavigationControllerDelegate
 -(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-    if([toVC isKindOfClass:[MDHomeViewController class]]){
+    if([toVC isKindOfClass:[MDHomeViewController class]] || [toVC isKindOfClass:NSClassFromString(@"MDHapplyPurchaseViewController")]){
         [((MDNavigationController*)navigationController) setAlphaBar];
         [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
         if(operation == UINavigationControllerOperationPop && [fromVC isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
@@ -297,8 +297,36 @@
  *  @param control 触发控件对象
  */
 -(void)functionTap:(UIControl*)control{
-    [self.navigationController pushViewController:[[MDLoginViewController alloc] init] animated:YES];
-    
+    UIView *view = [control superview];
+    int index = (int)[view.subviews indexOfObject:control];
+    switch (index) {
+        case 0://面对面支付
+        {
+            if(!APPDATA.isLogin){
+                [self.navigationController pushViewController:[[NSClassFromString(@"MDLoginViewController") alloc] init] animated:YES];
+                return;
+            }
+            [self.navigationController pushViewController:[[NSClassFromString(@"MDFacesShopViewController") alloc] init] animated:YES];
+        }
+            break;
+        case 1://快乐购
+        {
+            APPDATA.appFunctionType = [NSString stringWithFormat:@"%d",(int)MDPurchaseTypeHapple];
+            [self.navigationController pushViewController:[[NSClassFromString(@"MDHapplyPurchaseViewController") alloc] init] animated:YES];
+        }
+            break;
+        case 2://我要购卡
+            [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeBusinessCardNavg title:@"我要购卡" parameters:nil isNeedLogin:NO loginTipBlock:nil];
+            break;
+        case 3://开通资格
+            [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeOpenCertificate title:@"开通资格" parameters:nil isNeedLogin:YES loginTipBlock:nil];
+            break;
+        case 4://铭道学院
+            [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeMdcollege title:@"铭道学院" parameters:nil isNeedLogin:NO loginTipBlock:nil];
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)switchPurchaseTap{
@@ -406,7 +434,6 @@
     LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
     [searchBar setDelegate: self];
     [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
-    [searchBar.leftButton addTarget:self action:@selector(switchPurchaseTap) forControlEvents:UIControlEventTouchDown];
     [searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
     [searchBar.rightButton addTarget:self action:@selector(messageTap) forControlEvents:UIControlEventTouchDown];
     

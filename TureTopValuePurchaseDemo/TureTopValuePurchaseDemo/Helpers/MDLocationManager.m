@@ -40,6 +40,13 @@
     return instance;
 }
 
+-(instancetype)init{
+    if(self = [super init]){
+        [self initLocationManager];
+    }
+    return self;
+}
+
 #pragma mark CLLocationManagerDelegate
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
     switch (status) {
@@ -102,7 +109,9 @@
     if(_locationManager == nil){
         [self initLocationManager];
     }
-    [_locationManager startUpdatingLocation];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_locationManager startUpdatingLocation];
+    });
 }
 
 /*! @brief 开始定位
@@ -112,9 +121,11 @@
     if(_locationManager == nil){
         [self initLocationManager];
     }
-    [_locationManager startUpdatingLocation];
-    [_successBlockArray addObject:successBlock];
-    [_failureBlockArray addObject:failureBlock];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_locationManager startUpdatingLocation];
+    });
+    if(successBlock) [_successBlockArray addObject:successBlock];
+    if(failureBlock) [_failureBlockArray addObject:failureBlock];
 }
 
 /*! @brief 停止定位

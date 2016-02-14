@@ -71,6 +71,26 @@
     return dic;
 }
 
+/**
+ *  通过指定的整型数值转化性别中文字符
+ *
+ *  @param value 整型数值
+ *
+ *  @return 中文字符
+ */
++(NSString*)sexTextWithValue:(int)value{
+    NSString *text = @"保密";
+    switch(value){
+        case 0:
+            text = @"男";
+            break;
+        case 1:
+            text = @"女";
+            break;
+    }
+    return text;
+}
+
 #pragma mark private methods
 
 /**

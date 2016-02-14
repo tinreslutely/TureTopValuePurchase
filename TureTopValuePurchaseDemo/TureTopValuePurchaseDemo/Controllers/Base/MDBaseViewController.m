@@ -118,6 +118,24 @@
 }
 
 /*!
+ *  配置带搜索栏、左返回、右定位的导航栏
+ *
+ *  @param navigationItem navigationItem对象
+ */
+-(void)setupSearchLoactionNavigationItem:(UINavigationItem*)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString*)placeholder keyword:(NSString*)keyword rightView:(UIView*)rightView{
+    //右侧
+    if(__IPHONE_SYSTEM_VERSION > 7){
+        UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        negativeSpacer.width = -10;
+        navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:rightView]];
+    }
+    else{
+        [navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:rightView]];
+    }
+    navigationItem.titleView = [self bringSearchBarWithFrame:frame placeholder:placeholder keyword:keyword];
+}
+
+/*!
  *  配置普通的导航栏
  *
  *  @param navigationItem navigationItem对象
@@ -288,6 +306,56 @@
     return searchBarView;
 }
 
+/*!
+ *  创建搜索栏
+ *
+ *  @return 返回搜索栏对象
+ */
+-(UIView*)bringSearchBarWithFrame:(CGRect)frame placeholder:(NSString*)placeholder keyword:(NSString*)keyword{
+    UIView *searchBarView = [[UIView alloc] initWithFrame:frame];
+    [searchBarView.layer setBorderColor:[UIColorFromRGBA(170, 170, 170, 1) CGColor]];
+    [searchBarView.layer setBorderWidth:0.5];
+    [searchBarView.layer setCornerRadius:2];
+    [searchBarView.layer setMasksToBounds:YES];
+    [searchBarView setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView *searchView = [[UIView alloc] init];
+    [searchBarView addSubview:searchView];
+    [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchBarView.mas_top).with.offset(0);
+        make.bottom.equalTo(searchBarView.mas_bottom).with.offset(0);
+        make.left.equalTo(searchBarView.mas_left).with.offset(0);
+        make.right.equalTo(searchBarView.mas_right).with.offset(0);
+        
+    }];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [imageView setTag:1002];
+    [imageView setImage:[UIImage imageNamed:@"icon_question_search"]];
+    [searchView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(12, 12));
+        make.left.equalTo(searchView.mas_left).with.offset(8);
+        make.centerY.equalTo(searchView);
+    }];
+    
+    UITextField *searchText = [[UITextField alloc] initWithFrame:CGRectZero];
+    [searchText setTextAlignment:NSTextAlignmentLeft];
+    [searchText setTextColor:[UIColor grayColor]];
+    [searchText setFont:[UIFont systemFontOfSize:14]];
+    [searchText setPlaceholder:placeholder];
+    [searchText setTag:1003];
+    [searchText setText:keyword];
+    [searchView addSubview:searchText];
+    [searchText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchView.mas_top).with.offset(0);
+        make.bottom.equalTo(searchView.mas_bottom).with.offset(0);
+        make.left.equalTo(imageView.mas_right).with.offset(8);
+        make.right.equalTo(searchView.mas_right).with.offset(5);
+    }];
+    
+    return searchBarView;
+}
 -(void)setHidesBottomBarWhenPushed:(BOOL)hides{
     [tabBarController setTabBarHidden:hides];
 }

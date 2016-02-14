@@ -64,5 +64,23 @@
     }];
 }
 
-
+/*!
+ *  获取消息总条数
+ *
+ *  @param userId     用户id
+ *  @param completion 回调函数
+ */
+-(void)requestTotalDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int total))completion{
+    [MDHttpManager GET:APICONFIG.totalMessageApiURLString parameters:@{@"userId":userId} sucessBlock:^(id  _Nullable responseObject) {
+        NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSString *stateCode = [dic objectForKey:@"state"];
+        if(dic == nil || ![stateCode isEqualToString:@"200"]){
+            completion(NO,[dic objectForKey:@"result"],0);
+            return;
+        }
+        completion(YES,nil,[[[dic objectForKey:@"result"] objectForKey:@"total"] intValue]);
+    } failureBlock:^(NSError * _Nonnull error) {
+        completion(NO,[NSString stringWithFormat:@"%@",error],0);
+    }];
+}
 @end

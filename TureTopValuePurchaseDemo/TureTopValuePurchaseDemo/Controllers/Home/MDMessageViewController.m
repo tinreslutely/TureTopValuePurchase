@@ -1,7 +1,7 @@
 //
 //  MDMessageViewController.m
 //  TureTopValuePurchaseDemo
-//
+//  消息控制器
 //  Created by 李晓毅 on 16/2/3.
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
@@ -94,9 +94,6 @@
         case 2:
             model = _mainNotifyArray[indexPath.row];
             break;
-        case 3:
-            
-            break;
     }
     MDMessageDetailViewController *controller = [[MDMessageDetailViewController alloc] init];
     controller.messageType = _messageType;
@@ -122,62 +119,79 @@
             count = _mainTrendsArray.count;
             break;
     }
-    return count;
+    return count == 0 ? 1 : count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    long count = 0;
-    switch (_messageType) {
-        case 1:
-            count = _mainMessageArray.count;
-            break;
-        case 2:
-            count = _mainNotifyArray.count;
-            break;
-        case 3:
-            count = _mainTrendsArray.count;
-            break;
-    }
-    return count > 0 ? 1 : 0;
+    return 1;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"MessageCell";
-    MDMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil){
-        cell = [[MDMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:78.0f];
-        [cell setDelegate:self];
-        
+    BOOL hasData = YES;
+    MDMessageTableViewCell *cell;
+    if((_messageType == 1 && _mainMessageArray.count == 0) || (_messageType == 2 && _mainNotifyArray.count == 0) || (_messageType == 3 && _mainTrendsArray.count == 0)){
+        hasData = NO;
     }
+    if(hasData){
+        static NSString *cellIdentifier = @"MessageCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if(cell == nil){
+            cell = [[MDMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:78.0f];
+            [cell setDelegate:self];
+        }
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    }else{
+        static NSString *noDataCellIdentifier = @"NoMessageCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:noDataCellIdentifier];
+        if(cell == nil){
+            cell = [[MDMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noDataCellIdentifier];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            
+            UILabel *label = [[UILabel alloc] init];
+            [label setText:@"暂无数据"];
+            [label setFont:[UIFont systemFontOfSize:14]];
+            [label setTextAlignment:NSTextAlignmentCenter];
+            [cell.contentView addSubview:label];
+            [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(cell.contentView).with.insets(UIEdgeInsetsZero);
+            }];
+        }
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    BOOL hasData = YES;
     MDMessageModel *model;
     switch (_messageType) {
         case 1:
-            model = _mainMessageArray[indexPath.row];
+            hasData = _mainMessageArray.count > 0;
+            if(hasData) model = _mainMessageArray[indexPath.row];
             break;
         case 2:
-            model = _mainNotifyArray[indexPath.row];
+            hasData = _mainNotifyArray.count > 0;
+            if(hasData) model = _mainNotifyArray[indexPath.row];
             break;
         case 3:
-            model = _mainTrendsArray[indexPath.row];
-            break;
-        default:
+            hasData = _mainTrendsArray.count > 0;
+            if(hasData) model = _mainTrendsArray[indexPath.row];
             break;
     }
-    
+    if(!hasData) return;
     UIImageView *imageView = [cell viewWithTag:1001];
     [imageView setImage:[UIImage imageNamed:(model.isRead == 0 ? @"msg_noread" : @"msg_read")]];
-    
     UILabel *contentView = [cell viewWithTag:1002];
     [contentView setText:model.content];
-    return cell;
 }
 
 #pragma mark action and event methods
 
 -(void)refreshData{
     _pageNo = 1;
+    [self.progressView show];
     [_dataController requestUnreadDataWithUserId:APPDATA.userId completion:^(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum) {
         if(state){
             _messageNum = messageNum;
@@ -210,6 +224,7 @@
         }else{
             [self.view makeToast:msg duration:1 position:CSToastPositionBottom];
         }
+        [self.progressView hide];
         [_mainTableView.mj_header endRefreshing];
     }];
 }
@@ -241,22 +256,22 @@
 }
 
 
--(void)messageTap{
+-(void)messageTap:(UIButton*)button{
     _messageType = 1;
     [self refreshData];
-    [self updateMessageSelectStateWithMenuView];
+    [self updateMessageSelectStateWithButton:button];
 }
 
--(void)nofityTap{
+-(void)nofityTap:(UIButton*)button{
     _messageType = 2;
     [self refreshData];
-    [self updateMessageSelectStateWithMenuView];
+    [self updateMessageSelectStateWithButton:button];
 }
 
--(void)dynamicsTap{
+-(void)dynamicsTap:(UIButton*)button{
     _messageType = 3;
     [self refreshData];
-    [self updateMessageSelectStateWithMenuView];
+    [self updateMessageSelectStateWithButton:button];
     
 }
 /*!
@@ -388,9 +403,9 @@
     UIButton *salesButton = [[UIButton alloc] init];
     [[salesButton titleLabel] setFont:[UIFont systemFontOfSize:14]];
     [salesButton setTitle:@"消息" forState:UIControlStateNormal];
-    [salesButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [salesButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     salesButton.tag = 1001;
-    [salesButton addTarget:self action:@selector(messageTap) forControlEvents:UIControlEventTouchDown];
+    [salesButton addTarget:self action:@selector(messageTap:) forControlEvents:UIControlEventTouchDown];
     [view addSubview:salesButton];
     [salesButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(itemWidth);
@@ -418,7 +433,7 @@
     
     //价格
     UIButton *priceSortButton = [[UIButton alloc] init];
-    [priceSortButton addTarget:self action:@selector(nofityTap) forControlEvents:UIControlEventTouchDown];
+    [priceSortButton addTarget:self action:@selector(nofityTap:) forControlEvents:UIControlEventTouchDown];
     [priceSortButton setTag:1002];
     [[priceSortButton titleLabel] setFont:[UIFont systemFontOfSize:14]];
     [priceSortButton setTitle:@"通知" forState:UIControlStateNormal];
@@ -453,7 +468,7 @@
     [[newSortButton titleLabel] setFont:[UIFont systemFontOfSize:14]];
     [newSortButton setTitle:@"公告" forState:UIControlStateNormal];
     [newSortButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [newSortButton addTarget:self action:@selector(dynamicsTap) forControlEvents:UIControlEventTouchDown];
+    [newSortButton addTarget:self action:@selector(dynamicsTap:) forControlEvents:UIControlEventTouchDown];
     newSortButton.tag = 1003;
     [view addSubview:newSortButton];
     [newSortButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -498,13 +513,14 @@
 }
 
 
--(void)updateMessageSelectStateWithMenuView{
-//    UIButton *button;
-//    int tag = 1000;
-//    for (int i = 1; i <= 3; i++) {
-//        button = [_mainMenuView viewWithTag:(tag + i*10 + 1)];
-//        [button setTitleColor:(i == _messageType ? [UIColor redColor] : [UIColor grayColor]) forState:UIControlStateNormal];
-//    }
+-(void)updateMessageSelectStateWithButton:(UIButton*)button{
+    UIView *superView = [button superview];
+    int tag = 1000;
+    for (UIButton *view in [superView subviews]) {
+        if([view isKindOfClass:[UIButton class]]){
+            [view setTitleColor:(view == button ? [UIColor redColor] : [UIColor grayColor]) forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end

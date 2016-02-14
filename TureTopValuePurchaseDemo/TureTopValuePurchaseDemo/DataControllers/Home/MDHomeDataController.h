@@ -15,4 +15,5 @@
 
 -(void)requestDataWithType:(NSString*)type completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel*> *list))completion;
 -(void)requestDataWithType:(NSString*)type pageIndex:(int)pageIndex pageSize:(int)pageSize  completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeLikeProductModel*> *list))completion;
+-(void)requestTotalDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int total))completion;
 @end
