@@ -34,6 +34,8 @@
 
 /***********************版本**********************/
 #define __IPHONE_SYSTEM_VERSION [[UIDevice currentDevice].systemVersion floatValue]
+#define __APP_VERSION [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define APP_VERSION [__APP_VERSION floatValue]
 
 
 /***********************单例实例**********************/

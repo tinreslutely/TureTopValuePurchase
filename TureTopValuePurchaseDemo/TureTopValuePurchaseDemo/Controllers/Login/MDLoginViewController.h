@@ -10,4 +10,7 @@
 
 @interface MDLoginViewController : MDBaseViewController
 
+@property (assign, nonatomic) int topIndex;
+@property(strong,nonatomic) void(^loginAlterBlock)();
+
 @end

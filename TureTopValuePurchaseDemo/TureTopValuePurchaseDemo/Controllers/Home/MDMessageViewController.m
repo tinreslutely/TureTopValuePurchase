@@ -405,7 +405,7 @@
     [salesButton setTitle:@"消息" forState:UIControlStateNormal];
     [salesButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     salesButton.tag = 1001;
-    [salesButton addTarget:self action:@selector(messageTap:) forControlEvents:UIControlEventTouchDown];
+    [salesButton addTarget:self action:@selector(messageTap:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:salesButton];
     [salesButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(itemWidth);

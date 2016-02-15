@@ -26,6 +26,8 @@
     UITextField *_passwordTextField;
 }
 
+@synthesize topIndex,loginAlterBlock;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
@@ -103,7 +105,7 @@
     [_dataController submitDataWithUserName:_userTextField.text password:_passwordTextField.text rememberPW:_isSelected completion:^(BOOL state, NSString *msg) {
         if(state){
             [self.navigationController popViewControllerAnimated:YES];
-            //if(loginAlterBlock != nil) loginAlterBlock();
+            if(loginAlterBlock) loginAlterBlock();
         }else{
             [self showAlertDialog:msg];
         }

@@ -233,6 +233,7 @@
         [self.navigationController pushViewController:[[NSClassFromString(@"MDMessageController") alloc] init] animated:YES];
         return;
     }else if([cell.titleLabel.text isEqualToString:@"设置"]){
+        [self.navigationController pushViewController:[[NSClassFromString(@"MDSettingsViewController") alloc] init] animated:YES];
         return;
     }
     if(purchaseType == -1 || ![self validLogined]) return;

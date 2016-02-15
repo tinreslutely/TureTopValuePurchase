@@ -13,6 +13,7 @@
 @interface MDBaseViewController : UIViewController
 
 @property(nonatomic,strong,nullable,readonly) UILabel *titleLabel;
+@property(nonatomic,strong,nullable,readonly) UITextField *searchText;
 @property(nonatomic,strong,nullable,readonly) UIButton *leftButton;
 @property(nonatomic,strong,nullable,readonly) UIButton *rightButton;
 @property(nonatomic,strong,nullable,readonly) LDProgressView *progressView;
@@ -21,7 +22,7 @@
 
 -(BOOL)validLogined;
 -(UIView* _Nullable)setupCustomNormalNavigationBar;
--(void)setupSearchLoactionNavigationItem:(UINavigationItem* _Nullable)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword rightView:(UIView* _Nullable)rightView;
+-(void)setupSearchNavigationItem:(UINavigationItem* _Nullable)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword rightView:(UIView* _Nullable)rightView;
 -( UIView* _Nullable)setupCustomSearchNavigationWithPlaceholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword;
 -(void)showAlertDialog:(NSString* __nullable)message;
 @end

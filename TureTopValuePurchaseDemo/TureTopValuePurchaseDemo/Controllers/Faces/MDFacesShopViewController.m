@@ -9,6 +9,7 @@
 #import "MDFacesShopViewController.h"
 #import "MDFacesShopDataController.h"
 #import "MDFacesShopTableViewCell.h"
+#import "MDFacesShopSearchViewController.h"
 
 #import "SDCycleScrollView.h"
 #import "MDLocationManager.h"
@@ -25,21 +26,21 @@
     UIButton *_siteButton;
     UIView *_conditionView;
     
-    NSString *_shopName;
-    NSString *_city;
-    NSString *_distract;
-    NSString *_street;
-    NSString *_orderBy;
-    int _industry;
-    int _parentIndustry;
-    double _userLat;
-    double _userLng;
-    int _page;
-    int _pageSize;
-    int _totalCount;
-    float _bannerHeight;
-    NSMutableArray *_shopsArray;
-    int _selectTag;
+    NSString *_shopName;//店铺名称
+    NSString *_city;//城市
+    NSString *_distract;//县区
+    NSString *_street;//街道
+    NSString *_orderBy;//排序
+    int _industry;//
+    int _parentIndustry;//
+    double _userLat;//经纬度lat
+    double _userLng;//经纬度lng
+    int _page;//当前页
+    int _pageSize;//页数
+    int _totalCount;//总数量
+    float _bannerHeight;//banner图的高度
+    NSMutableArray *_shopsArray;//店铺列表
+    int _selectTag;//选择中条件的控件的tag
 }
 
 - (void)viewDidLoad {
@@ -124,6 +125,20 @@
         _street = menuItem.code;
         [self refreshData];
     }
+}
+
+#pragma mark UITextFieldDelegate
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+    __weak typeof(self) weakSelf = self;
+    MDFacesShopSearchViewController *controller = [[MDFacesShopSearchViewController alloc] init];
+    controller.searchBlock = ^(NSString *keyword){
+        [weakSelf.searchText setText:keyword];
+        _shopName = keyword;
+        [weakSelf refreshData];
+    };
+    controller.keyword = self.searchText.text;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark UITableViewDelegate
@@ -451,8 +466,8 @@
         make.right.equalTo(rightView.mas_right).with.offset(0);
         make.height.mas_equalTo(30);
     }];
-    [self setupSearchLoactionNavigationItem:self.navigationItem searchBarFrame:CGRectMake(0, 0, SCREEN_WIDTH - 110, 30) placeholder:@"搜索店铺" keyword:@"" rightView:rightView];
-    
+    [self setupSearchNavigationItem:self.navigationItem searchBarFrame:CGRectMake(0, 0, SCREEN_WIDTH - 110, 30) placeholder:@"搜索店铺" keyword:@"" rightView:rightView];
+    [self.searchText setDelegate:self];
     //定位
     [self locationTapped];
     
@@ -555,8 +570,6 @@
     return _conditionView;
 }
 
-
-
 /**
  *  点击条件区域中的按钮切换选中的状态
  *
@@ -570,36 +583,8 @@
     _selectTag = button.tag;
 }
 
-/**
- *  通过isShow参数决定是否显示一个button控件，遮挡tableview
- *
- *  @param parentView 主界面的对象
- *  @param isShow 是否显示button
- */
--(void)showNoDataTipsViewWithParentView:(UIView*)parentView isShow:(BOOL)isShow{
-//    UIButton *button = [parentView viewWithTag:_tagForNoDataTipsButton];
-//    //判断是否存在button
-//    if(button == nil && isShow){
-//        for (UIView *view in parentView.subviews) {
-//            if([view isKindOfClass:[UITableView class]]) continue;
-//            [view removeFromSuperview];
-//        }
-//        button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, parentView.frame.size.width, parentView.frame.size.height)];
-//        [button setTag:_tagForNoDataTipsButton];
-//        [button setImage:[UIImage imageNamed:@"no_data"] forState:UIControlStateNormal];
-//        [button setBackgroundColor:[UIColor whiteColor]];
-//        [button setContentMode:UIViewContentModeScaleAspectFit];
-//        [button addTarget:_weakself action:@selector(refreshView) forControlEvents:UIControlEventTouchDown];
-//        [parentView addSubview:button];
-//    }
-//    if(!isShow) [button removeFromSuperview];
-    NSLog(@"parentView的个数：%lu",(unsigned long)parentView.subviews.count);
-    
-}
-
-
 -(void)requestDataWithCompletion:(void(^)(BOOL state, NSString *msg, NSArray<MDFacesShopModel *> *list, int totalPage))completion{
-//    NSLog(@"请求面对面店铺列表数据shopName：%@，city：%@，street：%@，orderBy：%@，industry：%d，parentIndustry：%d，userLat：%f，userLng：%f，userId：%d，page：%d，pageSize：%d",_shopName,_city,_street,_orderBy,_industry,_parentIndustry,_userLat,_userLng,[APPDATA.userId intValue],_page,_pageSize);
+    NSLog(@"请求面对面店铺列表数据shopName：%@，city：%@，street：%@，orderBy：%@，industry：%d，parentIndustry：%d，userLat：%f，userLng：%f，userId：%d，page：%d，pageSize：%d",_shopName,_city,_street,_orderBy,_industry,_parentIndustry,_userLat,_userLng,[APPDATA.userId intValue],_page,_pageSize);
     [_dataController requestDataWithShopName:_shopName city:_city street:_street orderBy:_orderBy industry:_industry parentIndustry:_parentIndustry userLat:_userLat userLng:_userLng userId:[APPDATA.userId intValue] page:_page pageSize:_pageSize completion:^(BOOL state, NSString *msg, NSArray<MDFacesShopModel *> *list, int totalPage) {
         if(completion) completion(state,msg,list,totalPage);
     }];

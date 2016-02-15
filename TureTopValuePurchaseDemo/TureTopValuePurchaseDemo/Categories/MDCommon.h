@@ -8,10 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+@interface MDCommonDelegate : NSObject<UIAlertViewDelegate>
+
+@end
+
 @interface MDCommon : NSObject
 
-+(NSString*)imageURLStringForNetworkStatus:(NSString*)imageURL width:(int)width height:(int)height;
-+(void)reshipWebURLWithNavigationController:(UINavigationController*)navigationController pageType:(MDWebPageURLType)pageType title:(NSString*)title parameters:(NSDictionary*)parameters isNeedLogin:(BOOL)isNeedLogin loginTipBlock:(void(^)())loginTipBlock;
-+(NSDictionary*)urlParameterConvertDictionaryWithURL:(NSString*)url;
-+(NSString*)sexTextWithValue:(int)value;
++(NSString* _Nullable)imageURLStringForNetworkStatus:(NSString* _Nullable)imageURL width:(int)width height:(int)height;
+
++(void)reshipWebURLWithNavigationController:(UINavigationController* _Nullable)navigationController pageType:(MDWebPageURLType)pageType title:(NSString* _Nullable)title parameters:(NSDictionary* _Nullable)parameters isNeedLogin:(BOOL)isNeedLogin loginTipBlock:(void(^ _Nullable)())loginTipBlock;
+
++(void)reshipWebURLWithNavigationController:(UINavigationController* _Nullable)navigationController pageURL:(NSString* _Nullable)pageURL;
+
++(NSDictionary* _Nullable)urlParameterConvertDictionaryWithURL:(NSString* _Nullable)url;
+
++(NSString* _Nullable)sexTextWithValue:(int)value;
+
++(NSString* _Nullable)appendParameterForAppWithURL:(NSString* _Nullable)urlString;
+
++(void)checkedVersionForAppWithUpdateWithController:(UIViewController* _Nullable)controller isShowNewVersionMessage:(BOOL)isShowNewVersionMessage;
+
++(UIViewController* _Nullable)controllerForPagePathWithURL:(NSString* _Nullable)url currentController:(UIViewController* _Nullable)currentController token:(NSString* _Nullable)token;
 @end

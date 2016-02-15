@@ -49,18 +49,18 @@
     if(buttonIndex == 0){
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-//        MDLoginViewController *controller = [[MDLoginViewController alloc] init];
-//        controller.topIndex = 2;
-//        controller.loginAlterBlock = ^(){
-//            _requestURL = [MDCommon appendParameterForAppWithURL:_requestURL];
-//            if(APPDATA.isLogin){
-//                NSLog(@"登陆后的请求路径：%@",_requestURL);
-//                [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]]];
-//                _needLogin = NO;
-//            }
-//        };
-//        
-//        [self.navigationController pushViewController:controller animated:YES];
+        MDLoginViewController *controller = [[MDLoginViewController alloc] init];
+        controller.topIndex = 2;
+        controller.loginAlterBlock = ^(){
+            _requestURL = [MDCommon appendParameterForAppWithURL:_requestURL];
+            if(APPDATA.isLogin){
+                NSLog(@"登陆后的请求路径：%@",_requestURL);
+                [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]]];
+                _needLogin = NO;
+            }
+        };
+        
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 
@@ -98,31 +98,30 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     [self.progressView show];
-//    [[self progress] hide:YES];
-//    NSURL *url = [request URL];
-//    NSString *urlString = [self decodeFromPercentEscapeString:url.relativeString];
-//    NSLog(@"shouldStartLoadWithRequest:%@",urlString);
-//    if([urlString isEqualToString:requestURL] || [requestURL extensionWithContainsString:urlString] || [[urlString componentsSeparatedByString:@"?"][0] isEqualToString:[requestURL componentsSeparatedByString:@"?"][0]]) {
-//        return YES;
-//    }
-//    if([urlString extensionWithContainsString:homePageURLString]){
-//        [self.navigationController popViewControllerAnimated:NO];
-//    }
-//    
-//    NSString *token = nil;
-//    if(USER_GLOBAL.isLogin){
-//        token = USER_GLOBAL.token;
-//    }
-//    //根据url获取控制器
-//    MDPageCommon *common = [[MDPageCommon alloc] init];
-//    UIViewController *controller = [common controllerForPagePathWithURL:urlString currentController:self token:token];
-//    if(controller == nil) return NO;
-//    if([controller isKindOfClass:[MDLoginViewController class]]){
-//        _needLogin = YES;
-//        return NO;
-//    }
-//    [self.navigationController pushViewController:controller animated:YES];
-    return YES;
+    NSURL *url = [request URL];
+    NSString *urlString = url.relativeString;
+    NSLog(@"shouldStartLoadWithRequest:%@",urlString);
+    if([urlString isEqualToString:requestURL] || [requestURL extensionWithContainsString:urlString] || [[urlString componentsSeparatedByString:@"?"][0] isEqualToString:[requestURL componentsSeparatedByString:@"?"][0]]) {
+        return YES;
+    }
+    
+    if([urlString extensionWithContainsString:PAGECONFIG.homePageURLString]){
+        [self.navigationController popViewControllerAnimated:NO];
+        return YES;
+    }
+    
+    NSString *token = nil;
+    if(APPDATA.isLogin) token = APPDATA.token;
+    
+    //根据url获取控制器
+    UIViewController *controller = [MDCommon controllerForPagePathWithURL:urlString currentController:self token:token];
+    if(controller == nil) return NO;
+    if([controller isKindOfClass:[MDLoginViewController class]]){
+        _needLogin = YES;
+        return NO;
+    }
+    [self.navigationController pushViewController:controller animated:YES];
+    return NO;
 }
 
 #pragma mark action event methods

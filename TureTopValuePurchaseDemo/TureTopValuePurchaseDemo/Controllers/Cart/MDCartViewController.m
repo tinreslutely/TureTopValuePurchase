@@ -569,7 +569,7 @@
     
     //添加一个未登录提示视图
     _noneStateView = [[UIView alloc] init];
-    [_noneStateView setBackgroundColor:UIColorFromRGB(247, 247, 247)];
+    [_noneStateView setBackgroundColor:[UIColor whiteColor]];
     [_noneStateView setHidden:YES];
     [self.view addSubview:_noneStateView];
     [_noneStateView mas_makeConstraints:^(MASConstraintMaker *make) {

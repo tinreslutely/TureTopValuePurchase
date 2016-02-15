@@ -109,7 +109,7 @@
     if(_locationManager == nil){
         [self initLocationManager];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [_locationManager startUpdatingLocation];
     });
 }
@@ -121,7 +121,7 @@
     if(_locationManager == nil){
         [self initLocationManager];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [_locationManager startUpdatingLocation];
     });
     if(successBlock) [_successBlockArray addObject:successBlock];

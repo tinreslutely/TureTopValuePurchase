@@ -15,7 +15,7 @@
 
 @implementation MDBaseViewController
 
-@synthesize titleLabel,leftButton,rightButton,progressView,tabBarController,hidesBottomBarWhenPushed;
+@synthesize searchText,titleLabel,leftButton,rightButton,progressView,tabBarController,hidesBottomBarWhenPushed;
 
 -(instancetype)init{
     if(self = [super init]){
@@ -95,7 +95,7 @@
  *
  *  @param navigationItem navigationItem对象
  */
--(void)setupNavigationItem:(UINavigationItem*)navigationItem{
+-(void)setupNavigationItem:(UINavigationItem* _Nullable)navigationItem{
     leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [leftButton setContentMode:UIViewContentModeScaleToFill];
     if(__IPHONE_SYSTEM_VERSION > 7){
@@ -122,7 +122,7 @@
  *
  *  @param navigationItem navigationItem对象
  */
--(void)setupSearchLoactionNavigationItem:(UINavigationItem*)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString*)placeholder keyword:(NSString*)keyword rightView:(UIView*)rightView{
+-(void)setupSearchNavigationItem:(UINavigationItem* _Nullable)navigationItem searchBarFrame:(CGRect)frame placeholder:(NSString* _Nullable)placeholder keyword:(NSString* _Nullable)keyword rightView:(UIView* _Nullable)rightView{
     //右侧
     if(__IPHONE_SYSTEM_VERSION > 7){
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -288,7 +288,7 @@
         make.centerY.equalTo(searchView);
     }];
     
-    UITextField *searchText = [[UITextField alloc] initWithFrame:CGRectZero];
+    searchText = [[UITextField alloc] initWithFrame:CGRectZero];
     [searchText setTextAlignment:NSTextAlignmentLeft];
     [searchText setTextColor:[UIColor grayColor]];
     [searchText setFont:[UIFont systemFontOfSize:14]];
@@ -339,7 +339,7 @@
         make.centerY.equalTo(searchView);
     }];
     
-    UITextField *searchText = [[UITextField alloc] initWithFrame:CGRectZero];
+    searchText = [[UITextField alloc] initWithFrame:CGRectZero];
     [searchText setTextAlignment:NSTextAlignmentLeft];
     [searchText setTextColor:[UIColor grayColor]];
     [searchText setFont:[UIFont systemFontOfSize:14]];

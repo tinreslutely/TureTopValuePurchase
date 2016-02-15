@@ -47,7 +47,83 @@ typedef NS_ENUM(NSInteger,MDSearchType) {
     /*!
      *  店铺
      */
-    MDSearchTypeShop
+    MDSearchTypeShop,
+    /*!
+     *  面对面店铺
+     */
+    MDSearchTypeFacesShop
+};
+
+/*!
+ *  支付类型
+ */
+typedef NS_ENUM(NSInteger,MDPaymentType) {
+    /*!
+     *  支付
+     */
+    MDPaymentTypeWebChat = 0,
+    /*!
+     *  支付宝
+     */
+    MDPaymentTypeAlipay,
+    /*!
+     *  财付通
+     */
+    MDPaymentTypeTenpay,
+    /*!
+     *  电子钱包\卡包全额
+     */
+    MDPaymentTypeSystempay
+};
+
+/*!
+ *  充值类型
+ */
+typedef NS_ENUM(NSInteger,MDRechargeType) {
+    /*!
+     *  卡包充值
+     */
+    MDRechargeTypeCard = 1,
+    /*!
+     *  电子钱包充值
+     */
+    MDRechargeTypeWallet
+};
+
+/*!
+ *  账户类型
+ */
+typedef NS_ENUM(NSInteger,MDBalanceType) {
+    /*!
+     *  卡包
+     */
+    MDBalanceTypeCard = 1,
+    /*!
+     *  电子钱包
+     */
+    MDBalanceTypeWallet
+};
+
+/*!
+ *  订单类型
+ */
+typedef NS_ENUM(NSInteger, MDOrderType) {
+    /*!
+     *  商品订单
+     */
+    MDOrderTypeNormal = 0,
+    /*!
+     *  商机卡订单
+     */
+    MDOrderTypeBusinessCard,
+    /*!
+     *  面对面订单
+     */
+    MDOrderTypeFaces,
+    /*!
+     *  普通收费单(资格证等)
+     */
+    MDOrderTypeCharge
 };
 
 /*!
