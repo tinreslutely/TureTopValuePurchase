@@ -16,12 +16,12 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        [self initView];
+        [self initCell];
     }
     return self;
 }
 
--(void)initView{
+-(void)initCell{
     NSArray *titleArray = @[@"待付款",@"待发货",@"待收货",@"待评价"];
     NSArray *iconArray = @[@"myValue1",@"myValue2",@"myValue3",@"myValue4"];
     float itemWidth = 60;

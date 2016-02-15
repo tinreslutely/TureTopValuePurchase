@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "MDMemberInfomationModel.h"
+#import "MDUploadPicModel.h"
+
 @interface MDMemberDataController : NSObject
 -(void)requestDataWithUserId:(NSString*)userId token:(NSString*)token completion:(void(^)(BOOL state, NSString *msg,  MDMemberInfomationModel *model))completion;
 @end

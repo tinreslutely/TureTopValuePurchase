@@ -26,6 +26,15 @@
 		08FD95CE1C705B86003543B3 /* MDFacesShopStreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95CD1C705B86003543B3 /* MDFacesShopStreetModel.m */; };
 		08FD95D11C70AEBE003543B3 /* MDMemberInfomationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95D01C70AEBE003543B3 /* MDMemberInfomationModel.m */; };
 		08FD95D41C70AF30003543B3 /* MDMemberDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95D31C70AF30003543B3 /* MDMemberDataController.m */; };
+		08FD95D71C71EFB9003543B3 /* MDMemberInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95D61C71EFB9003543B3 /* MDMemberInformationViewController.m */; };
+		08FD95DF1C71F10F003543B3 /* PhotoTweaksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95DA1C71F10F003543B3 /* PhotoTweaksViewController.m */; };
+		08FD95E01C71F10F003543B3 /* PhotoTweakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95DC1C71F10F003543B3 /* PhotoTweakView.m */; };
+		08FD95E11C71F10F003543B3 /* UIColor+Tweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95DE1C71F10F003543B3 /* UIColor+Tweak.m */; };
+		08FD95E51C71F279003543B3 /* MDUploadPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95E41C71F279003543B3 /* MDUploadPicModel.m */; };
+		08FD95EA1C71F33E003543B3 /* chinaRegion.json in Resources */ = {isa = PBXBuildFile; fileRef = 08FD95E71C71F33E003543B3 /* chinaRegion.json */; };
+		08FD95EB1C71F33E003543B3 /* MDAreaPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95E91C71F33E003543B3 /* MDAreaPickerView.m */; };
+		08FD95EE1C71F719003543B3 /* MDMemberNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95ED1C71F719003543B3 /* MDMemberNormalTableViewCell.m */; };
+		08FD95F11C71F889003543B3 /* MDMemberAvatarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FD95F01C71F889003543B3 /* MDMemberAvatarTableViewCell.m */; };
 		1325416CDE6234BBE67566E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */; };
 		B518D9CC1C5606ED00E15656 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518D9CB1C5606ED00E15656 /* Accelerate.framework */; };
 		B518D9D01C56099500E15656 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B518D9CF1C56099500E15656 /* UIImage+ImageEffects.m */; };
@@ -181,6 +190,23 @@
 		08FD95D01C70AEBE003543B3 /* MDMemberInfomationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMemberInfomationModel.m; sourceTree = "<group>"; };
 		08FD95D21C70AF30003543B3 /* MDMemberDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMemberDataController.h; sourceTree = "<group>"; };
 		08FD95D31C70AF30003543B3 /* MDMemberDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMemberDataController.m; sourceTree = "<group>"; };
+		08FD95D51C71EFB9003543B3 /* MDMemberInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMemberInformationViewController.h; sourceTree = "<group>"; };
+		08FD95D61C71EFB9003543B3 /* MDMemberInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMemberInformationViewController.m; sourceTree = "<group>"; };
+		08FD95D91C71F10F003543B3 /* PhotoTweaksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweaksViewController.h; sourceTree = "<group>"; };
+		08FD95DA1C71F10F003543B3 /* PhotoTweaksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweaksViewController.m; sourceTree = "<group>"; };
+		08FD95DB1C71F10F003543B3 /* PhotoTweakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTweakView.h; sourceTree = "<group>"; };
+		08FD95DC1C71F10F003543B3 /* PhotoTweakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTweakView.m; sourceTree = "<group>"; };
+		08FD95DD1C71F10F003543B3 /* UIColor+Tweak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Tweak.h"; sourceTree = "<group>"; };
+		08FD95DE1C71F10F003543B3 /* UIColor+Tweak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Tweak.m"; sourceTree = "<group>"; };
+		08FD95E31C71F279003543B3 /* MDUploadPicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDUploadPicModel.h; sourceTree = "<group>"; };
+		08FD95E41C71F279003543B3 /* MDUploadPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDUploadPicModel.m; sourceTree = "<group>"; };
+		08FD95E71C71F33E003543B3 /* chinaRegion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chinaRegion.json; sourceTree = "<group>"; };
+		08FD95E81C71F33E003543B3 /* MDAreaPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAreaPickerView.h; sourceTree = "<group>"; };
+		08FD95E91C71F33E003543B3 /* MDAreaPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAreaPickerView.m; sourceTree = "<group>"; };
+		08FD95EC1C71F719003543B3 /* MDMemberNormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMemberNormalTableViewCell.h; sourceTree = "<group>"; };
+		08FD95ED1C71F719003543B3 /* MDMemberNormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMemberNormalTableViewCell.m; sourceTree = "<group>"; };
+		08FD95EF1C71F889003543B3 /* MDMemberAvatarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMemberAvatarTableViewCell.h; sourceTree = "<group>"; };
+		08FD95F01C71F889003543B3 /* MDMemberAvatarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMemberAvatarTableViewCell.m; sourceTree = "<group>"; };
 		77AD9FCC4ED070F09FB03E4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A0EC0F8E0A8F5C1A82A5EE53 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B518D9CB1C5606ED00E15656 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -483,6 +509,38 @@
 			path = Faces;
 			sourceTree = "<group>";
 		};
+		08FD95D81C71F10F003543B3 /* PhotoTweaks */ = {
+			isa = PBXGroup;
+			children = (
+				08FD95D91C71F10F003543B3 /* PhotoTweaksViewController.h */,
+				08FD95DA1C71F10F003543B3 /* PhotoTweaksViewController.m */,
+				08FD95DB1C71F10F003543B3 /* PhotoTweakView.h */,
+				08FD95DC1C71F10F003543B3 /* PhotoTweakView.m */,
+				08FD95DD1C71F10F003543B3 /* UIColor+Tweak.h */,
+				08FD95DE1C71F10F003543B3 /* UIColor+Tweak.m */,
+			);
+			path = PhotoTweaks;
+			sourceTree = "<group>";
+		};
+		08FD95E21C71F25B003543B3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				08FD95E31C71F279003543B3 /* MDUploadPicModel.h */,
+				08FD95E41C71F279003543B3 /* MDUploadPicModel.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		08FD95E61C71F33E003543B3 /* MDAreaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				08FD95E71C71F33E003543B3 /* chinaRegion.json */,
+				08FD95E81C71F33E003543B3 /* MDAreaPickerView.h */,
+				08FD95E91C71F33E003543B3 /* MDAreaPickerView.m */,
+			);
+			path = MDAreaPicker;
+			sourceTree = "<group>";
+		};
 		21D5BDD9096F68415C707616 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +749,8 @@
 		B59A99AA1C44A24F00A8A6FC /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				08FD95E61C71F33E003543B3 /* MDAreaPicker */,
+				08FD95D81C71F10F003543B3 /* PhotoTweaks */,
 				B5D692D61C71706A00B62A48 /* SDKExport */,
 				08CA7BBF1C6858F50097E14F /* MDDropDown */,
 				08E0B8C91C5C7259002CC7E8 /* LDCombobox */,
@@ -723,6 +783,7 @@
 		B59A99AC1C44A26100A8A6FC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				08FD95E21C71F25B003543B3 /* Base */,
 				B5D692C81C716E5800B62A48 /* Payment */,
 				08CA7BB81C68320F0097E14F /* Faces */,
 				B58BC0DC1C605C7E002F8C83 /* Goods */,
@@ -884,6 +945,8 @@
 				B59A99D11C44B1BB00A8A6FC /* MDPersonalCenterViewController.m */,
 				B5D692E11C71BEE400B62A48 /* MDSettingsViewController.h */,
 				B5D692E21C71BEE400B62A48 /* MDSettingsViewController.m */,
+				08FD95D51C71EFB9003543B3 /* MDMemberInformationViewController.h */,
+				08FD95D61C71EFB9003543B3 /* MDMemberInformationViewController.m */,
 			);
 			path = "Personal Center";
 			sourceTree = "<group>";
@@ -1092,6 +1155,10 @@
 				B5E0B5971C5777DD0083D87C /* MDPersonCenterOrderTableViewCell.m */,
 				B5E0B5991C57782F0083D87C /* MDPersonCenterAccountTableViewCell.h */,
 				B5E0B59A1C57782F0083D87C /* MDPersonCenterAccountTableViewCell.m */,
+				08FD95EC1C71F719003543B3 /* MDMemberNormalTableViewCell.h */,
+				08FD95ED1C71F719003543B3 /* MDMemberNormalTableViewCell.m */,
+				08FD95EF1C71F889003543B3 /* MDMemberAvatarTableViewCell.h */,
+				08FD95F01C71F889003543B3 /* MDMemberAvatarTableViewCell.m */,
 			);
 			path = PersonCenter;
 			sourceTree = "<group>";
@@ -1283,6 +1350,7 @@
 				B5FC38641C531F37003D74A2 /* MultilevelCollectionViewCell.xib in Resources */,
 				B59A99841C449ED600A8A6FC /* Assets.xcassets in Resources */,
 				B5D692DC1C71706A00B62A48 /* read_me.txt in Resources */,
+				08FD95EA1C71F33E003543B3 /* chinaRegion.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,12 +1423,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FD95EB1C71F33E003543B3 /* MDAreaPickerView.m in Sources */,
 				B5C677901C51E7E70020C71F /* MDLoginViewController.m in Sources */,
 				08FD95D11C70AEBE003543B3 /* MDMemberInfomationModel.m in Sources */,
 				B5E0B58A1C5708300083D87C /* MDPersonCenterModel.m in Sources */,
 				B5D692C71C716C8800B62A48 /* MDRechargeViewController.m in Sources */,
 				B5FC38721C536551003D74A2 /* MDShopViewController.m in Sources */,
 				B5FC386B1C53229F003D74A2 /* MDClassesDataController.m in Sources */,
+				08FD95E11C71F10F003543B3 /* UIColor+Tweak.m in Sources */,
 				B5FFCEC21C489B020096B438 /* MDHomeRedClassesTableViewCell.m in Sources */,
 				08CA7BC21C6858F50097E14F /* MDDropDown.m in Sources */,
 				08CA7BC71C68594A0097E14F /* MDDropdownMenu.m in Sources */,
@@ -1377,6 +1447,7 @@
 				B5995CB71C5072F1006B5697 /* LDProgressView.m in Sources */,
 				08FD95CE1C705B86003543B3 /* MDFacesShopStreetModel.m in Sources */,
 				086CAAB61C49E5D000D23761 /* MDSearchViewController.m in Sources */,
+				08FD95DF1C71F10F003543B3 /* PhotoTweaksViewController.m in Sources */,
 				B5C677A31C5230F50020C71F /* MDLoginDataController.m in Sources */,
 				B5995CBA1C508F4B006B5697 /* MMMaterialDesignSpinner.m in Sources */,
 				B59A99BF1C44AFD900A8A6FC /* MDHomeViewController.m in Sources */,
@@ -1388,8 +1459,10 @@
 				B5D692D51C716FA000B62A48 /* MDPaymentDataController.m in Sources */,
 				B596381B1C633792001BC73F /* MDMessageDetailViewController.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
+				08FD95E51C71F279003543B3 /* MDUploadPicModel.m in Sources */,
 				B5C6779E1C522DFC0020C71F /* MDLocationManager.m in Sources */,
 				B59A99CC1C44B18C00A8A6FC /* MDShopManagementViewController.m in Sources */,
+				08FD95F11C71F889003543B3 /* MDMemberAvatarTableViewCell.m in Sources */,
 				B54AF8A61C5A069D0047FEB6 /* MDSearchModel.m in Sources */,
 				B54AF8A01C59E6820047FEB6 /* MDSearchNormalTableViewCell.m in Sources */,
 				B59E8A121C4740C8005CEA25 /* MDHomeDataController.m in Sources */,
@@ -1447,14 +1520,17 @@
 				B5F697561C6192E4000A8610 /* MDGoodsCollectionViewCell.m in Sources */,
 				B58BC0DB1C605B9B002F8C83 /* MDGoodsDataController.m in Sources */,
 				B59638151C631CBD001BC73F /* MDMessageModel.m in Sources */,
+				08FD95E01C71F10F003543B3 /* PhotoTweakView.m in Sources */,
 				B518D9D31C560D8D00E15656 /* MDShopDataController.m in Sources */,
 				B59B82521C4F7C7000BF9AB9 /* MDHttpManager.m in Sources */,
 				B5D692E31C71BEE400B62A48 /* MDSettingsViewController.m in Sources */,
 				B5F697591C61A8BF000A8610 /* MDGoodsManyCollectionViewCell.m in Sources */,
 				B59B824C1C4F593B00BF9AB9 /* MDAPIConfig.m in Sources */,
 				B5C677931C51E90B0020C71F /* LDAlertController.m in Sources */,
+				08FD95D71C71EFB9003543B3 /* MDMemberInformationViewController.m in Sources */,
 				B5995CC31C50CF50006B5697 /* MDDataCache.m in Sources */,
 				B518D9D01C56099500E15656 /* UIImage+ImageEffects.m in Sources */,
+				08FD95EE1C71F719003543B3 /* MDMemberNormalTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,23 @@
 @implementation MDCommon
 
 #pragma mark public methods
+/**
+ *  读取指定的json文件
+ *
+ *  @param path 文件名
+ *
+ *  @return json文件的内容数据
+ */
++(id _Nullable)readDataForJsonFileWithPath:(NSString* _Nullable)path{
+    NSError *error;
+    
+    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    id obj=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    NSLog(@"%@",error);
+    return obj;
+}
+
 /*!
  *  根据网络的不同来获取不同尺寸的网络图片
  *  2G/3G网络下根据size参数来缩小图片

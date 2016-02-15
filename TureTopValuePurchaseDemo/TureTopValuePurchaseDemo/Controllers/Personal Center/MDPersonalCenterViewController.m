@@ -273,7 +273,7 @@
  *  用户信息事件
  */
 -(void)userTap{
-    
+    [self.navigationController pushViewController:[[NSClassFromString(@"MDMemberInformationViewController") alloc] init] animated:YES];
 }
 /*!
  *  订单状态查询订单列表事件

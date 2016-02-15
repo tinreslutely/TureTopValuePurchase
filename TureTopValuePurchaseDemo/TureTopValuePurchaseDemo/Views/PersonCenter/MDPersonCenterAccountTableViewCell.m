@@ -9,16 +9,18 @@
 #import "MDPersonCenterAccountTableViewCell.h"
 
 @implementation MDPersonCenterAccountTableViewCell
+
 @synthesize noneFreezeMoneyLabel,freezeMoneyLabel;
+
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [self initView];
+        [self initCell];
     }
     return self;
 }
 
--(void)initView{
+-(void)initCell{
     float itemHeight = 60;
     float itemWidth = SCREEN_WIDTH/3;
     

@@ -13,6 +13,7 @@
 @end
 
 @interface MDCommon : NSObject
++(id _Nullable)readDataForJsonFileWithPath:(NSString* _Nullable)path;
 
 +(NSString* _Nullable)imageURLStringForNetworkStatus:(NSString* _Nullable)imageURL width:(int)width height:(int)height;
 

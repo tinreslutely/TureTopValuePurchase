@@ -18,7 +18,7 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         _iconSizeWidth = 18;
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [self initView];
+        [self initCell];
     }
     return self;
 }
@@ -28,7 +28,7 @@
     
 }
 
--(void)initView{
+-(void)initCell{
     iconImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:iconImageView];
     [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {

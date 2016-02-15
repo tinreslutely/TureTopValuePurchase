@@ -15,12 +15,12 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [self initView];
+        [self initCell];
     }
     return self;
 }
 
--(void)initView{
+-(void)initCell{
     int headWidth = 60;
     [self.contentView.layer setContents:(id)[UIImage imageNamed:@"head_info_bg"].CGImage];
     
