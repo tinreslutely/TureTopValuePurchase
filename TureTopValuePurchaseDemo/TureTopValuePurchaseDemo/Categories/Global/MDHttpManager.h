@@ -13,4 +13,6 @@
 +(void)GET:(NSString * _Nullable)URLString parameters:(NSDictionary* _Nullable)params sucessBlock:(void(^ _Nullable)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^ _Nullable)(NSError * _Nonnull error))failureBlock;
 
 +(void)POST:(NSString * _Nullable)URLString parameters:(NSDictionary* _Nullable)params sucessBlock:(void(^ _Nullable)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^ _Nullable)(NSError * _Nonnull error))failureBlock;
+
++(void)POST:(NSString* _Nullable)URLString parameters:(NSDictionary* _Nullable)params image:(UIImage* _Nullable)image sucessBlock:(void(^ _Nullable)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^ _Nullable)(NSError * _Nonnull error))failureBlock;
 @end

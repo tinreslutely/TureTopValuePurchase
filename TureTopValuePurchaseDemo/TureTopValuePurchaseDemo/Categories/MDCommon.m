@@ -9,6 +9,7 @@
 #import "MDCommon.h"
 #import "MDPaymentViewController.h"
 #import "MDRechargeViewController.h"
+#import "MDGoodsViewController.h"
 
 @implementation MDCommonDelegate
 
@@ -181,6 +182,28 @@
     return [NSString stringWithFormat:@"%@?%@",resultURL,paramString];
 }
 
+/**
+ *  将指定的UIImage的图片按照指定的大小改变
+ *
+ *  @param img  UIImage图片
+ *  @param size 大小
+ *
+ *  @return 新的UIImage
+ */
++ (UIImage* _Nullable)scaleToSize:(UIImage* _Nullable)img size:(CGSize)size{
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0,0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage =UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    //返回新的改变大小后的图片
+    return scaledImage;
+}
+
 /*!
  *  检查版本
  */
@@ -229,6 +252,11 @@
         title = @"找回密码";
     }else if([url extensionWithContainsString:PAGECONFIG.categoryPageURLString]){//类目
         return [[NSClassFromString(@"MDClassesViewController") alloc] init];
+    }else if([url extensionWithContainsString:PAGECONFIG.productsPageURLString]){
+        NSDictionary *dic = [MDCommon urlParameterForJsonWithURL:url];
+        MDGoodsViewController *controller = [[MDGoodsViewController alloc] init];
+        controller.categoryId = [[dic objectForKey:@"typeId"] intValue];
+        return controller;
     }else if([url extensionWithContainsString:PAGECONFIG.cartPageURLString]){
         title = @"购物车";
         return [[NSClassFromString(@"MDCartViewController") alloc] init];

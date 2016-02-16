@@ -29,7 +29,7 @@
     [detailLabel setTextAlignment:NSTextAlignmentRight];
     [self.contentView addSubview:detailLabel];
     [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(120, 30));
+        make.size.mas_equalTo(CGSizeMake(220, 30));
         make.right.equalTo(self.contentView.mas_right).with.offset(0);
         make.centerY.equalTo(self.contentView);
     }];

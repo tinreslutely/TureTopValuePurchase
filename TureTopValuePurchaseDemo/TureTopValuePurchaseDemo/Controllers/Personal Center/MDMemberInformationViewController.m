@@ -57,20 +57,20 @@
 
 #pragma mark UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    NSString* buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-//    if([buttonTitle isEqualToString:@"男"]){
-//        [self submitDataWtihName:@"sex" value:@"0" success:^{
-//            self.sexLabel.text = @"男";
-//        }];
-//    }else if([buttonTitle isEqualToString:@"女"]){
-//        [self submitDataWtihName:@"sex" value:@"1" success:^{
-//            self.sexLabel.text = @"女";
-//        }];
-//    }else if([buttonTitle isEqualToString:@"从相机拍摄"]){
-//        [self alertPickerMessageWithSourceType:UIImagePickerControllerSourceTypeCamera];
-//    }else if([buttonTitle isEqualToString:@"从相册选择"]){
-//        [self alertPickerMessageWithSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-//    }
+    NSString* buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if([buttonTitle isEqualToString:@"男"]){
+        [self submitDataWtihName:@"sex" value:@"0" success:^{
+            _memberInformationModel.sex = 0;
+        }];
+    }else if([buttonTitle isEqualToString:@"女"]){
+        [self submitDataWtihName:@"sex" value:@"1" success:^{
+            _memberInformationModel.sex = 1;
+        }];
+    }else if([buttonTitle isEqualToString:@"从相机拍摄"]){
+        [self alertPickerMessageWithSourceType:UIImagePickerControllerSourceTypeCamera];
+    }else if([buttonTitle isEqualToString:@"从相册选择"]){
+        [self alertPickerMessageWithSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    }
 }
 
 #pragma mark UITableViewDelegate
@@ -212,27 +212,25 @@
     [self presentViewController:photoTweaksViewController animated:YES completion:nil];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+
 #pragma mark PhotoTweaksViewControllerDelegate
 -(void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage{
     [controller dismissViewControllerAnimated:YES completion:nil];
-    MDUploadPicModel *model = [[MDUploadPicModel alloc] init];
-//    [HttpManager post:[MDURLConfig uploadPicApiURL] params:@{} images:@[[MDCommon scaleToSize:croppedImage size:CGSizeMake(200, 200)]] fileKey:@"" progress:^(float progress) {
-//        
-//    } success:^(id responseObject) {
-//        [[self progress] hide: YES];
-//        [model convertWithData:responseObject];
-//        if(model.state == 0){
-//            NSLog(@"%@",model.relativeUrl);
-//            [self submitDataWtihName:@"headPic" value:model.relativeUrl success:^{
-//                [self.avatarImageView setImage:croppedImage];
-//            }];
-//        }else{
-//            ALERT(@"上传失败",self);
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",error);
-//        [[self progress] hide: YES];
-//    }];
+    __weak typeof(self) weakSelf = self;
+    [_dataController uploadImageWithImage:[MDCommon scaleToSize:croppedImage size:CGSizeMake(200, 200)] userId:APPDATA.userId token:APPDATA.token name:@"headPic" completion:^(BOOL state, NSString * _Nullable msg, MDUploadPicModel * _Nullable model) {
+        if(state){
+            [weakSelf showAlertDialog:@"修改成功"];
+            _memberInformationModel.headPortrait = model.relativeUrl;
+            [_mainTableView reloadData];
+        }else{
+            [weakSelf showAlertDialog:@"修改失败"];
+        }
+    }];
 }
 -(void)photoTweaksControllerDidCancel:(PhotoTweaksViewController *)controller{
     [controller dismissViewControllerAnimated:YES completion:nil];
@@ -327,64 +325,59 @@
  *  @param row 行数
  */
 -(void)expandInformationSelectedEventWithRow:(NSInteger)row{
-//    if(row == 0){//性别
-//        [self showAlertActionMessageForSex];
-//    }else if(row == 1){//地区
-//        _alertType = 7;
-//        _alertTitle = @"编辑地区";
-//        _alertContent = @"";
-//        NSArray *array = [_districtLabel.text componentsSeparatedByString:@" "];
-//        NSString *p = array.count >= 1 ? array[0] : @"";
-//        NSString *c = array.count >= 2 ? array[1] : @"";
-//        NSString *d = array.count >= 3 ? array[2] : @"";
-//        _areaPickerView = [[MDAreaPickerView alloc] initWithProvince:p city:c district:d confirmBlock:^(NSString* province,NSString* city,NSString* district){
-//            NSString *area = [NSString stringWithFormat:@"%@ %@ %@",province,city,district];
-//            NSLog(@"%@",area);
-//            if(alterMessageModel == nil) alterMessageModel = [[MDAlterMessageModel alloc] init];
-//            [HttpManager post:[MDURLConfig alterMemerInfoApiURL] params:[alterMessageModel dictionaryForRequestMemeberWithUserId:USER_GLOBAL.userId token:USER_GLOBAL.token province:province city:city district:district] progress:^{
-//                
-//            } success:^(id responseObject) {
-//                [alterMessageModel convertWithData:responseObject];
-//                if(alterMessageModel.state)
-//                    _districtLabel.text = area;
-//                else
-//                    ALERT(alterMessageModel.message,self);
-//            } failure:^(NSError *error) {
-//                NSLog(@"%@",error);
-//            } completion:^(BOOL finished){
-//                
-//            }];
-//            _areaPickerView = nil;
-//        } cancelBlock:^{
-//            _areaPickerView = nil;
-//        }];
-//        [_areaPickerView showInView:self.view];
-//    }
+    if(row == 0){//性别
+        [self showAlertActionMessageForSex];
+    }else if(row == 1){//地区
+        _alertType = 7;
+        _alertTitle = @"编辑地区";
+        _alertContent = @"";
+        NSArray *array = [_memberInformationModel.area componentsSeparatedByString:@" "];
+        NSString *p = array.count >= 1 ? array[0] : @"";
+        NSString *c = array.count >= 2 ? array[1] : @"";
+        NSString *d = array.count >= 3 ? array[2] : @"";
+        __weak typeof(self) weakSelf = self;
+        _areaPickerView = [[MDAreaPickerView alloc] initWithProvince:p city:c district:d confirmBlock:^(NSString* province,NSString* city,NSString* district){
+            NSString *area = [NSString stringWithFormat:@"%@ %@ %@",province,city,district];
+            [_dataController submitMemberAreaDataWithUserId:APPDATA.userId token:APPDATA.token province:province city:city district:district completion:^(BOOL state, NSString * _Nullable msg) {
+                if(state){
+                    [weakSelf showAlertDialog:@"修改成功"];
+                    _memberInformationModel.area = area;
+                    [_mainTableView reloadData];
+                }else{
+                    [weakSelf showAlertDialog:@"修改失败"];
+                }
+            }];
+            _areaPickerView = nil;
+        } cancelBlock:^{
+            _areaPickerView = nil;
+        }];
+        [_areaPickerView showInView:self.view];
+    }
     
 }
 /**
  *  弹出文本输入框类型的消息框
  */
 -(void)alertTextInputMessage{
-//    NSString* defaultValue = @"";
-//    switch (_alertType) {
-//        case 2:
-//            defaultValue = self.nickNameLabel.text;
-//            break;
-//        case 3:
-//            defaultValue = self.realNameLabel.text;
-//            break;
-//        case 4:
-//            defaultValue = self.emailLabel.text;
-//            break;
-//        case 5:
-//            defaultValue = self.telephoneLabel.text;
-//            break;
-//    }
-//    [self showAlertTextMessageWithTitle:alertTitle message:alertContent textFieldWithConfigurationHandler:^(UITextField * __nonnull textField) {
-//        textField.text = defaultValue;
-//        textField.placeholder = _alertTextPlaceholder;
-//    }];
+    NSString* defaultValue = @"";
+    switch (_alertType) {
+        case 2:
+            defaultValue = _memberInformationModel.nickName;
+            break;
+        case 3:
+            defaultValue = _memberInformationModel.realname;
+            break;
+        case 4:
+            defaultValue = _memberInformationModel.email;
+            break;
+        case 5:
+            defaultValue = _memberInformationModel.tel;
+            break;
+    }
+    [self showAlertTextMessageWithTitle:_alertTitle message:_alertContent textFieldWithConfigurationHandler:^(UITextField * __nonnull textField) {
+        textField.text = defaultValue;
+        textField.placeholder = _alertTextPlaceholder;
+    }];
 }
 
 /**
@@ -401,37 +394,38 @@
 }
 
 -(void)alterInformationWithTextField:(UITextField*)textField{
-//    NSString *name = @"";
-//    switch (_alertType) {
-//        case 2:
-//            name = @"nickName";
-//            break;
-//        case 3:
-//            name = @"realName";
-//            break;
-//        case 4:
-//            name = @"email";
-//            break;
-//        case 5:
-//            name = @"tel";
-//            break;
-//    }
-//    [self submitDataWtihName:name value:textField.text success:^{
-//        switch (_alertType) {
-//            case 2:
-//                [self.nickNameLabel setText:textField.text];
-//                break;
-//            case 3:
-//                [self.realNameLabel setText:textField.text];
-//                break;
-//            case 4:
-//                [self.emailLabel setText:textField.text];
-//                break;
-//            case 5:
-//                [self.telephoneLabel setText:textField.text];
-//                break;
-//        }
-//    }];
+    NSString *name = @"";
+    switch (_alertType) {
+        case 2:
+            name = @"nickName";
+            break;
+        case 3:
+            name = @"realName";
+            break;
+        case 4:
+            name = @"email";
+            break;
+        case 5:
+            name = @"tel";
+            break;
+    }
+    [self submitDataWtihName:name value:textField.text success:^{
+        switch (_alertType) {
+            case 2:
+                _memberInformationModel.nickName = textField.text;
+                break;
+            case 3:
+                _memberInformationModel.realname = textField.text;
+                break;
+            case 4:
+                _memberInformationModel.email = textField.text;
+                break;
+            case 5:
+                _memberInformationModel.tel = textField.text;
+                break;
+        }
+        [_mainTableView reloadData];
+    }];
 }
 
 /**
@@ -442,39 +436,34 @@
  *  @param success 成功回调函数
  */
 -(void)submitDataWtihName:(NSString*)name value:(NSString*)value success:(void(^)())success{
-//    [[self progress] show:YES];
-//    if(alterMessageModel == nil) alterMessageModel = [[MDAlterMessageModel alloc] init];
-//    [HttpManager post:[MDURLConfig alterMemerInfoApiURL] params:[alterMessageModel dictionaryForRequestMemeberWithUserId:USER_GLOBAL.userId token:USER_GLOBAL.token name:name value:value] success:^(id responseObject) {
-//        [[self progress] hide:YES];
-//        [alterMessageModel convertWithData:responseObject];
-//        if(alterMessageModel.state)
-//            success();
-//        else
-//            ALERT(alterMessageModel.message,self);
-//    } failure:^(NSError *error) {
-//        [[self progress] hide:YES];
-//        NSLog(@"%@",error);
-//        ALERT(@"网络异常",self);
-//    }];
+    __weak typeof(self) weakSelf = self;
+    [_dataController submitMemberInformationDataWithUserId:APPDATA.userId token:APPDATA.token name:name value:value completion:^(BOOL state, NSString * _Nullable msg) {
+        if(state){
+            if(success) success();
+            [weakSelf showAlertDialog:@"修改成功"];
+        }else{
+            [weakSelf showAlertDialog:@"修改失败"];
+        }
+    }];
 }
 
 -(void)showAlertTextMessageWithTitle:(NSString*)title message:(NSString*)message textFieldWithConfigurationHandler:(void(^)(UITextField * __nonnull textField))textFieldWithConfigurationHandler{
-//    if(__IPHONE_SYSTEM_VERSION >= 8.0){
-//        _alertTextController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-//        [_alertTextController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
-//        [_alertTextController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * __nonnull action) {
-//            UITextField *textField = _alertTextController.textFields.firstObject;
-//            [weakSelf alterInformationWithTextField:textField];
-//        }]];
-//        [_alertTextController addTextFieldWithConfigurationHandler:textFieldWithConfigurationHandler];
-//        [self presentViewController:_alertTextController animated:YES completion:nil];
-//    }else{
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//        [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-//        UITextField *textField = [alertView textFieldAtIndex:0];
-//        textFieldWithConfigurationHandler(textField);
-//        [alertView show];
-//    }
+    if(__IPHONE_SYSTEM_VERSION >= 8.0){
+        _alertTextController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [_alertTextController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+        [_alertTextController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * __nonnull action) {
+            UITextField *textField = _alertTextController.textFields.firstObject;
+            [self alterInformationWithTextField:textField];
+        }]];
+        [_alertTextController addTextFieldWithConfigurationHandler:textFieldWithConfigurationHandler];
+        [self presentViewController:_alertTextController animated:YES completion:nil];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        textFieldWithConfigurationHandler(textField);
+        [alertView show];
+    }
 }
 
 -(void)showAlertActionMessageForSex{
@@ -482,12 +471,14 @@
         _alertActionController = [UIAlertController alertControllerWithTitle:@"编辑性别" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
         [_alertActionController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * __nonnull action) {
             [self submitDataWtihName:@"sex" value:@"0" success:^{
-                //self.sexLabel.text = @"男";
+                _memberInformationModel.sex = 0;
+                [_mainTableView reloadData];
             }];
         }]];
         [_alertActionController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * __nonnull action) {
             [self submitDataWtihName:@"sex" value:@"1" success:^{
-                //self.sexLabel.text = @"女";
+                _memberInformationModel.sex = 1;
+                [_mainTableView reloadData];
             }];
         }]];
         [_alertActionController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * __nonnull action) {

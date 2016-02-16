@@ -27,6 +27,8 @@
 
 +(NSString* _Nullable)appendParameterForAppWithURL:(NSString* _Nullable)urlString;
 
++ (UIImage* _Nullable)scaleToSize:(UIImage* _Nullable)img size:(CGSize)size;
+
 +(void)checkedVersionForAppWithUpdateWithController:(UIViewController* _Nullable)controller isShowNewVersionMessage:(BOOL)isShowNewVersionMessage;
 
 +(UIViewController* _Nullable)controllerForPagePathWithURL:(NSString* _Nullable)url currentController:(UIViewController* _Nullable)currentController token:(NSString* _Nullable)token;

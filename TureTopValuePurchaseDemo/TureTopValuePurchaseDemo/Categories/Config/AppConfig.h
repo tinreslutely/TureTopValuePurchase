@@ -16,9 +16,6 @@
 
 
 /*********************   GLOBAL  START  *************************/
-static NSString* const AppID = @"";                 //AppStoreID
-static NSString* const WeChat_AppID = @"";  //微信AppID
-static NSString* const AESCryptKey = @"";             //密文
 /*********************   GLOBAL  END    *************************/
 
 /*********************   TABITEM  START *************************/

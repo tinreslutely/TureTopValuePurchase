@@ -302,10 +302,6 @@
     switch (index) {
         case 0://面对面支付
         {
-            if(!APPDATA.isLogin){
-                [self.navigationController pushViewController:[[NSClassFromString(@"MDLoginViewController") alloc] init] animated:YES];
-                return;
-            }
             [self.navigationController pushViewController:[[NSClassFromString(@"MDFacesShopViewController") alloc] init] animated:YES];
         }
             break;
@@ -379,12 +375,11 @@
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
     int index = (int)[view.subviews indexOfObject:button];
     MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_channelList[indexPath.section]).channelColumnDetails[index+1];
-//    MDPageCommon *common = [[MDPageCommon alloc] init];
-//    UIViewController *controller = [common controllerForPagePathWithURL:model.contentAddr currentController:self token:USER_GLOBAL.token];
-//    if(controller != nil){
-//        [controller setHidesBottomBarWhenPushed:YES];
-//        [self.navigationController pushViewController:controller animated:YES];
-//    }
+    UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.contentAddr currentController:self token:APPDATA.token];
+    if(controller != nil){
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
     
 }
 
@@ -494,12 +489,11 @@
         }
         [self.navigationController pushViewController:productsController animated:YES];
     }else{
-//        MDPageCommon *common = [[MDPageCommon alloc] init];
-//        UIViewController *controller = [common controllerForPagePathWithURL:model.columnLink currentController:self token:USER_GLOBAL.token];
-//        [controller setHidesBottomBarWhenPushed:YES];
-//        if(controller != nil){
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
+        UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.columnLink currentController:self token:APPDATA.token];
+        [controller setHidesBottomBarWhenPushed:YES];
+        if(controller != nil){
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 

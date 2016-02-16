@@ -273,6 +273,9 @@
  *  用户信息事件
  */
 -(void)userTap{
+    if(![self validLogined]){
+        return;
+    }
     [self.navigationController pushViewController:[[NSClassFromString(@"MDMemberInformationViewController") alloc] init] animated:YES];
 }
 /*!
@@ -291,6 +294,9 @@
  *  @param control 触发对象
  */
 -(void)collectProductTap:(UIControl*)control{
+    if(![self validLogined]){
+        return;
+    }
     [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeCollection title:@"我的收藏" parameters:@{@"tab":@"0"} isNeedLogin:YES loginTipBlock:nil];
 }
 
@@ -300,6 +306,9 @@
  *  @param control 触发对象
  */
 -(void)collectShopTap:(UIControl*)control{
+    if(![self validLogined]){
+        return;
+    }
     [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeCollection title:@"我的收藏" parameters:@{@"tab":@"1"} isNeedLogin:YES loginTipBlock:nil];
 }
 
