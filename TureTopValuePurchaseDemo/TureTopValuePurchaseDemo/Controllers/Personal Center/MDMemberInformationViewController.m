@@ -32,7 +32,6 @@
     NSString *_alertContent;
     NSString *_alertTextPlaceholder;
     int _userId;
-    
 }
 
 #pragma mark life cycle
@@ -43,8 +42,9 @@
     [self initView];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    
 }
 
 #pragma mark UIAlertViewDelegate
@@ -204,17 +204,18 @@
 
 #pragma mark UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString*,id>*)info{
-    [picker dismissViewControllerAnimated:NO completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [picker dismissViewControllerAnimated:NO completion:^{
+        UIImage *image = (UIImage*)info[UIImagePickerControllerOriginalImage];
+        PhotoTweaksViewController *photoTweaksViewController = [[PhotoTweaksViewController alloc] initWithImage:image touches:NO cropSize:CGSizeMake(200, 200)];
+        photoTweaksViewController.delegate = self;
+        [weakSelf presentViewController:photoTweaksViewController animated:YES completion:nil];
+    }];
     
-    UIImage *image = (UIImage*)info[UIImagePickerControllerOriginalImage];
-    PhotoTweaksViewController *photoTweaksViewController = [[PhotoTweaksViewController alloc] initWithImage:image touches:NO cropSize:CGSizeMake(200, 200)];
-    photoTweaksViewController.delegate = self;
-    [self presentViewController:photoTweaksViewController animated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
-    [picker dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -390,6 +391,7 @@
     imagePickerController.delegate = self;
     imagePickerController.allowsEditing = YES;
     imagePickerController.sourceType = sourceType;
+    NSArray *array = self.navigationController.viewControllers;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 

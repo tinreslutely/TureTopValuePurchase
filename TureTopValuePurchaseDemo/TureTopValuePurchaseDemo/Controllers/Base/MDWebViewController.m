@@ -159,6 +159,7 @@
     }];
 }
 
+
 -(void)showAlertdialog{
     if(__IPHONE_SYSTEM_VERSION >= 8){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未登录，请登录" preferredStyle:UIAlertControllerStyleAlert];

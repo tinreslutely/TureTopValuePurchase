@@ -84,6 +84,7 @@
         dic = @{@"id":[NSString stringWithFormat:@"%d",_mainShopModel.shopId]};
         purchaseType = MDWebPageURLTypeFaceDetail;
     }else if([label.text isEqualToString:@"店铺编辑"]){
+        [self.navigationController pushViewController:[[NSClassFromString(@"MDShopManageViewController") alloc] init] animated:YES];
         return;
     }else if([label.text isEqualToString:@"面对面订单"]){
         purchaseType = MDWebPageURLTypeFaceOrder;
@@ -98,6 +99,7 @@
     }else if([label.text isEqualToString:@"店铺订单"]){
         purchaseType = MDWebPageURLTypeFaceOrder;
     }else if([label.text isEqualToString:@"店铺管理"]){
+        [self.navigationController pushViewController:[[NSClassFromString(@"MDShopManageViewController") alloc] init] animated:YES];
         return;
     }else if([label.text isEqualToString:@"商机卡"]){
         purchaseType = MDWebPageURLTypeBusinessCardNavg;

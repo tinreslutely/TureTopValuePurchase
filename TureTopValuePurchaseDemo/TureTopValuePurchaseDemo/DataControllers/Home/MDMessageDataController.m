@@ -19,18 +19,18 @@
  *  @param messageType 信息类型(1-消息，2-通知  3-公告)
  *  @param completion  回调函数
  */
--(void)requestDataWithUserId:(NSString*)userId pageNo:(int)pageNo pageSize:(int)pageSize messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg, NSArray<MDMessageModel*> *list))completion{
+-(void)requestDataWithUserId:(NSString*)userId pageNo:(int)pageNo pageSize:(int)pageSize messageType:(MDMessageType)messageType completion:(void(^)(BOOL state, NSString *msg, NSArray<MDMessageModel*> *list))completion{
     NSString *url = @"";
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:@{@"userId":userId,@"pageNo":[NSString stringWithFormat:@"%d",pageNo],@"pageSize":[NSString stringWithFormat:@"%d",pageSize]} ];
     switch (messageType) {
-        case 1:
+        case MDMessageTypeMessage:
             url = APICONFIG.normalMessageApiURLString;
             break;
-        case 2:
+        case MDMessageTypeNotify:
             url = APICONFIG.normalNotifyApiURLString;
             [dic setObject:@"0" forKey:@"type"];
             break;
-        case 3:
+        case MDMessageTypeTrends:
             url = APICONFIG.normalNotifyApiURLString;
             [dic setObject:@"1" forKey:@"type"];
             break;
@@ -57,8 +57,8 @@
  *  @param messageType 信息类型(1-消息，2-通知  3-公告)
  *  @param completion  回调函数
  */
--(void)requestDetailDataWithMessageId:(NSString*)messageId messageType:(int)messageType  completion:(void(^)(BOOL state, NSString *msg, MDMessageModel *model))completion{
-    [MDHttpManager GET:(messageType == 1 ? APICONFIG.normalMessageDetailApiURLString : APICONFIG.normalNotifyDetailApiURLString) parameters:@{@"id":messageId} sucessBlock:^(id  _Nullable responseObject) {
+-(void)requestDetailDataWithMessageId:(NSString* _Nullable)messageId messageType:(MDMessageType)messageType  completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, MDMessageModel*  _Nullable model))completion{
+    [MDHttpManager GET:(messageType == MDMessageTypeMessage ? APICONFIG.normalMessageDetailApiURLString : APICONFIG.normalNotifyDetailApiURLString) parameters:@{@"id":messageId} sucessBlock:^(id  _Nullable responseObject) {
         NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSString *stateCode = [dic objectForKey:@"state"];
         if(dic == nil || ![stateCode isEqualToString:@"200"]){
@@ -81,7 +81,7 @@
  *  @param userId     用户id
  *  @param completion 回调函数 messageNum-消息数量  noticeNum-通知数量  dtNum-动态数量
  */
--(void)requestUnreadDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum))completion{
+-(void)requestUnreadDataWithUserId:(NSString* _Nullable)userId completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, int messageNum, int noticeNum, int dtNum))completion{
     [MDHttpManager GET:APICONFIG.noReadNumberMessageApiURLString parameters:@{@"userId":userId} sucessBlock:^(id  _Nullable responseObject) {
         NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSString *stateCode = [dic objectForKey:@"state"];
@@ -105,8 +105,8 @@
  *  @param messageId      消息id
  *  @param completion  回调函数
  */
--(void)markReadStateDataWithMessageId:(NSString*)messageId messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion{
-    [MDHttpManager POST:(messageType == 1 ? APICONFIG.markReadMessageApiURLString : APICONFIG.markReadNotifyApiURLString) parameters:@{@"ids":messageId} sucessBlock:^(id  _Nullable responseObject) {
+-(void)markReadStateDataWithUserId:(NSString* _Nullable)userId messageId:(NSString* _Nullable)messageId messageType:(MDMessageType)messageType completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg))completion{
+    [MDHttpManager POST:(messageType == MDMessageTypeMessage ? APICONFIG.markReadMessageApiURLString : APICONFIG.markReadNotifyApiURLString) parameters:@{@"userId":userId, @"ids":messageId} sucessBlock:^(id  _Nullable responseObject) {
         NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSString *stateCode = [dic objectForKey:@"state"];
         if(dic == nil || ![stateCode isEqualToString:@"200"]){
@@ -126,8 +126,8 @@
  *  @param messageId      消息id
  *  @param completion  回调函数
  */
--(void)removeDataWithUserId:(NSString*)userId Id:(NSString*)messageId  messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion{
-    [MDHttpManager POST:(messageType == 1 ? APICONFIG.removeMessageDetailApiURLString : APICONFIG.removeNotifyDetailApiURLString) parameters:@{@"ids":messageId} sucessBlock:^(id  _Nullable responseObject) {
+-(void)removeDataWithUserId:(NSString* _Nullable)userId Id:(NSString* _Nullable)messageId  messageType:(MDMessageType)messageType completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg))completion{
+    [MDHttpManager POST:(messageType == MDMessageTypeMessage ? APICONFIG.removeMessageDetailApiURLString : APICONFIG.removeNotifyDetailApiURLString) parameters:@{@"userId":userId, @"ids":messageId} sucessBlock:^(id  _Nullable responseObject) {
         NSDictionary *dic = [responseObject isKindOfClass:[NSDictionary class]] ? responseObject : [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSString *stateCode = [dic objectForKey:@"state"];
         if(dic == nil || ![stateCode isEqualToString:@"200"]){

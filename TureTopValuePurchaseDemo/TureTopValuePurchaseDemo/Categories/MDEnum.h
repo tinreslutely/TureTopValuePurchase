@@ -127,6 +127,24 @@ typedef NS_ENUM(NSInteger, MDOrderType) {
 };
 
 /*!
+ *  消息类型
+ */
+typedef NS_ENUM(NSInteger,MDMessageType) {
+    /*!
+     *  消息
+     */
+    MDMessageTypeMessage = 1,
+    /*!
+     *  通知
+     */
+    MDMessageTypeNotify,
+    /*!
+     *  公告
+     */
+    MDMessageTypeTrends
+};
+
+/*!
  *  读取资源文件信息
  */
 typedef NS_ENUM(NSInteger,LDReadResourceStateType) {

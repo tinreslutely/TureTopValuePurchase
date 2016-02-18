@@ -88,7 +88,7 @@
         [comboboxView setFrame:CGRectMake(comboboxView.frame.origin.x, comboboxView.frame.origin.y, comboboxView.frame.size.width, 0)];
         [comboboxView.contentView setAlpha:0];
     }
-    dropState = !dropState;
+    //dropState = !dropState;
 }
 
 #pragma mark UITableViewDelegate
@@ -102,7 +102,7 @@
     _selectValue = [dic objectForKey:@"value"];
     [_typeLabel setText:[dic objectForKey:@"key"]];
     [self dropUpWithAnimation:YES];
-    
+    dropState = !dropState;
     if([self.delegate respondsToSelector:@selector(combobox:didSelectedRowValue:)]){
         [self.delegate combobox:self didSelectedRowValue:dic];
     }

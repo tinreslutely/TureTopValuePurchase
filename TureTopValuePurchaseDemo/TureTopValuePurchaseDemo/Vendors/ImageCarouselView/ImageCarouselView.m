@@ -259,6 +259,7 @@ NSString * const CELL_ID = @"cycleCell";
     ImageCarouselViewCell *cell = (ImageCarouselViewCell*)[control superview];
     NSIndexPath *indexPath = [_mainView indexPathForCell:cell];
     if ([self.delegate respondsToSelector:@selector(imageCarouselView:didSelectItemAtIndex:)]) {
+        
         [self.delegate imageCarouselView:self didSelectItemAtIndex:indexPath.item % self.imagesGroup.count];
     }
 }
@@ -400,22 +401,12 @@ NSString * const CELL_ID = @"cycleCell";
     NSArray *array = self.imagesGroup[itemIndex];
     NSArray *titleArray = self.imageTitlesGroup[itemIndex];
     int index = 0;
-    for(UIControl *control in cell.subviews){
-        if([control isKindOfClass: [UIControl class]]){
-            if(index == array.count) break;
-            NSString *imageURL = array[index];
-            UIImageView *imageView = [control viewWithTag:1001];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
-            if(index != titleArray.count){
-                UILabel *label = [control viewWithTag:1002];
-                [label setText:titleArray[index]];
-            }
-            [control addTarget:self action:@selector(itemTap:) forControlEvents:UIControlEventTouchUpInside];
-            index ++;
-        }
-        
+    NSString *imageURL = array[index];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
+    if(index != titleArray.count){
+        [cell.titleLabel setText:titleArray[index]];
     }
-    
+    [cell.imageCarouseControl addTarget:self action:@selector(itemTap:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 

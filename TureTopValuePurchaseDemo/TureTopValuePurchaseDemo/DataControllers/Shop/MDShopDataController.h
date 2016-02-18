@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MDShopModel.h"
-
+#import "MDShopInformationModel.h"
 @interface MDShopDataController : NSObject
 
 -(void)requestDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, MDShopModel *model))completion;

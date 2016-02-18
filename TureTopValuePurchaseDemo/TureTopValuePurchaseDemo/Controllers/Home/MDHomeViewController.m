@@ -8,6 +8,7 @@
 
 #import "MDHomeViewController.h"
 #import "MDHomeDataController.h"
+#import "MDMessageDataController.h"
 #import "MDNavigationController.h"
 #import "MDSearchViewController.h"
 
@@ -32,10 +33,12 @@
     
     UITableView *_mainTableView;
     MDHomeDataController *_dataController;
+    MDMessageDataController *_messageDataController;
     NSArray<MDHomeRenovateChannelModel*> *_channelList;
     NSMutableArray<MDHomeLikeProductModel*> *_likeProductList;
     
     LDSearchPopTransition *_popAnimation;
+    LDSearchBar *_searchBar;
     
     float _bannerHeight;//广告图的高度
     float _imageHeight;//推荐产品模块的广告图高度
@@ -60,6 +63,18 @@
     [self refreshData];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if(APPDATA.isLogin){
+        [self makeNoReadState];
+    }
+    
+    if(((RDVTabBarController*)APPDELEGATE.window.rootViewController).tabBarHidden){
+        [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
@@ -68,6 +83,24 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark SDCycleScrollViewDelegate
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_channelList[0]).channelColumnDetails[index];
+    if([model.contentAddr extensionWithContainsString:@"http://"]){
+        UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.contentAddr currentController:self token:APPDATA.token];
+        [controller setHidesBottomBarWhenPushed:YES];
+        if(controller != nil){
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+}
+
+#pragma mark ImageCarouselViewDelegate
+-(void)imageCarouselView:(ImageCarouselView *)imageCarouselView didSelectItemAtIndex:(NSInteger)index{
+    MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_channelList[_channelList.count - 1]).channelColumnDetails[index];
+    [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeShopList title:model.content parameters:@{@"shopId":[NSString stringWithFormat:@"%d",model.contentId]} isNeedLogin:YES loginTipBlock:nil];
 }
 
 #pragma mark UINavigationControllerDelegate
@@ -257,6 +290,9 @@
         }
         [_mainTableView.mj_header endRefreshing];
     }];
+    if(APPDATA.isLogin){
+        [self makeNoReadState];
+    }
 }
 
 /*!
@@ -418,7 +454,9 @@
     _pageSize = 10;
     _isLast = NO;
     _dataController = [[MDHomeDataController alloc] init];
+    _messageDataController = [[MDMessageDataController alloc] init];
 }
+
 /*!
  *  初始化界面
  */
@@ -426,11 +464,11 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
-    LDSearchBar *searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
-    [searchBar setDelegate: self];
-    [searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
-    [searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
-    [searchBar.rightButton addTarget:self action:@selector(messageTap) forControlEvents:UIControlEventTouchDown];
+    _searchBar = [[LDSearchBar alloc] initWithNavigationItem:self.navigationItem];
+    [_searchBar setDelegate: self];
+    [_searchBar.leftButton setImage: [UIImage imageNamed:@"valuepurchase-logo"] forState:UIControlStateNormal];
+    [_searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
+    [_searchBar.rightButton addTarget:self action:@selector(messageTap) forControlEvents:UIControlEventTouchDown];
     
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [_mainTableView setDelegate:self];
@@ -441,6 +479,16 @@
     [self.view addSubview:_mainTableView];
     [_mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
+    }];
+}
+
+-(void)makeNoReadState{
+    [_messageDataController requestUnreadDataWithUserId:APPDATA.userId completion:^(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum) {
+        if(messageNum + noticeNum + dtNum > 0){
+            [_searchBar.rightButton setImage:[UIImage imageNamed:@"msg-unread"] forState:UIControlStateNormal];
+        }else{
+            [_searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
+        }
     }];
 }
 
@@ -596,9 +644,11 @@
     NSArray * array = model.channelColumnDetails;
     NSMutableArray *imageURLArray = [[NSMutableArray alloc] init];
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+    NSMutableArray *contentValueArray = [[NSMutableArray alloc] init];
     for (MDHomeRenovateChannelDetailModel *item in array) {
         [imageURLArray addObject:item.picAddr];
         [titleArray addObject:item.content];
+        [contentValueArray addObject:[NSString stringWithFormat:@"%d",item.contentId]];
     }
     [cell.titleLabel setText:model.columnName];
     [cell.imageScrollView setImageURLStringsGroup:imageURLArray];

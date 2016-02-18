@@ -13,9 +13,3 @@
 @synthesize hasShop,shopId,salesNum,shopLogo,shopName;
 
 @end
-
-@implementation MDShopInformationModel
-
-@synthesize shopNavigationPic,shopName,shopLogo,address,street,serviceQq,serviceTel,businessHours,provinceName,cityName,countyName;
-
-@end

@@ -9,9 +9,8 @@
 #import "ImageCarouselViewCell.h"
 
 @implementation ImageCarouselViewCell
-{
-    __weak UILabel *_titleLabel;
-}
+
+@synthesize imageCarouseControl,imageView,titleLabel,imageCarouseId;
 
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -35,21 +34,19 @@
 
 -(void) brindSubViewForControlWithPointX:(float)pointX width:(float)width{
     
-    UIControl *control = [[UIControl alloc] initWithFrame:CGRectMake(pointX, 0, width, self.frame.size.height)];
-    [self addSubview:control];
+    imageCarouseControl = [[UIControl alloc] initWithFrame:CGRectMake(pointX, 0, width, self.frame.size.height)];
+    [self addSubview:imageCarouseControl];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
-    [imageView setTag:1001];
-    [control addSubview:imageView];
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
+    [imageCarouseControl addSubview:imageView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 30, width, 30)];
-    [label setTag:1002];
-    [label setBackgroundColor:UIColorFromRGBA(154,154, 154, 0.5)];
-    [label setTextColor:[UIColor whiteColor]];
-    [label setFont:[UIFont systemFontOfSize:12]];
-    [label setTextAlignment:NSTextAlignmentCenter];
-    [control addSubview:label];
-    [control bringSubviewToFront:label];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 30, width, 30)];
+    [titleLabel setBackgroundColor:UIColorFromRGBA(154,154, 154, 0.5)];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [imageCarouseControl addSubview:titleLabel];
+    [imageCarouseControl bringSubviewToFront:titleLabel];
 }
 
 @end

@@ -10,13 +10,9 @@
 
 @interface ImageCarouselViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) UIImageView *imageView;
-@property (copy, nonatomic) NSString *title;
+@property (strong, nonatomic) UIControl *imageCarouseControl;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) NSString *imageCarouseId;
 
-@property (nonatomic, strong) UIColor *titleLabelTextColor;
-@property (nonatomic, strong) UIFont *titleLabelTextFont;
-@property (nonatomic, strong) UIColor *titleLabelBackgroundColor;
-@property (nonatomic, assign) CGFloat titleLabelHeight;
-
-@property (nonatomic, assign) BOOL hasConfigured;
 @end

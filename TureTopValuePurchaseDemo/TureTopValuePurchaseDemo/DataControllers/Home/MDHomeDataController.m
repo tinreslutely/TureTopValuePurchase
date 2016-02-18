@@ -12,6 +12,12 @@
 @implementation MDHomeDataController
 
 #pragma mark public methods
+/*!
+ *  获取首页初始模块布局数据
+ *
+ *  @param type       类型
+ *  @param completion 完成回调
+ */
 -(void)requestDataWithType:(NSString*)type completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeRenovateChannelModel*> *list))completion{
     [MDHttpManager GET:APICONFIG.homeApiURLString parameters:@{@"type":type} sucessBlock:^(id  _Nullable responseObject) {
         MDHomeRenovateModel *renovateModel = [[MDHomeRenovateModel alloc] init];
@@ -35,6 +41,14 @@
     }];
 }
 
+/*!
+ *  获取首页你喜欢商品数据
+ *
+ *  @param type       类型（超值购/快乐购）
+ *  @param pageIndex  当前页
+ *  @param pageSize   每页页数
+ *  @param completion 完成回调
+ */
 -(void)requestDataWithType:(NSString*)type pageIndex:(int)pageIndex pageSize:(int)pageSize  completion:(void(^)(BOOL state, NSString *msg, NSArray<MDHomeLikeProductModel*> *list))completion{
     [MDHttpManager GET:APICONFIG.homeLikeProductApiURLString parameters:@{@"type":type,@"pageSize":[NSString stringWithFormat:@"%d",pageSize],@"pageIndex":[NSString stringWithFormat:@"%d",pageIndex]} sucessBlock:^(id  _Nullable responseObject) {
         MDHomeLikeProductsModel *productsModel = [[MDHomeLikeProductsModel alloc] init];
@@ -81,6 +95,14 @@
         completion(YES,nil,[[[dic objectForKey:@"result"] objectForKey:@"total"] intValue]);
     } failureBlock:^(NSError * _Nonnull error) {
         completion(NO,[NSString stringWithFormat:@"%@",error],0);
+    }];
+}
+
+-(void)requestNoReadDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int total))completion{
+    [MDHttpManager GET:APICONFIG.noReadNumberMessageApiURLString parameters:@{@"userId":userId} sucessBlock:^(id  _Nullable responseObject) {
+        
+    } failureBlock:^(NSError * _Nonnull error) {
+        
     }];
 }
 @end

@@ -11,9 +11,9 @@
 
 @interface MDMessageDataController : NSObject
 
--(void)requestDataWithUserId:(NSString*)userId pageNo:(int)pageNo pageSize:(int)pageSize messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg, NSArray<MDMessageModel*> *list))completion;
--(void)requestDetailDataWithMessageId:(NSString*)messageId messageType:(int)messageType  completion:(void(^)(BOOL state, NSString *msg, MDMessageModel *model))completion;
--(void)requestUnreadDataWithUserId:(NSString*)userId completion:(void(^)(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum))completion;
--(void)markReadStateDataWithMessageId:(NSString*)messageId messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion;
--(void)removeDataWithUserId:(NSString*)userId Id:(NSString*)messageId  messageType:(int)messageType completion:(void(^)(BOOL state, NSString *msg))completion;
+-(void)requestDataWithUserId:(NSString* _Nullable)userId pageNo:(int)pageNo pageSize:(int)pageSize messageType:(MDMessageType)messageType completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, NSArray<MDMessageModel*>* _Nullable list))completion;
+-(void)requestDetailDataWithMessageId:(NSString* _Nullable)messageId messageType:(MDMessageType)messageType  completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, MDMessageModel*  _Nullable model))completion;
+-(void)requestUnreadDataWithUserId:(NSString* _Nullable)userId completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, int messageNum, int noticeNum, int dtNum))completion;
+-(void)markReadStateDataWithUserId:(NSString* _Nullable)userId messageId:(NSString* _Nullable)messageId messageType:(MDMessageType)messageType completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg))completion;
+-(void)removeDataWithUserId:(NSString* _Nullable)userId Id:(NSString* _Nullable)messageId  messageType:(MDMessageType)messageType completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg))completion;
 @end

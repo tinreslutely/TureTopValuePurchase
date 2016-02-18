@@ -13,6 +13,7 @@
 #import "TPKeyboardAvoidingTableView.h"
 
 #import "MDGoodsViewController.h"
+#import "MDShopSearchViewController.h"
 
 @interface MDSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,LDComboboxDelegate>
 
@@ -46,7 +47,11 @@
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [_dataController updateRecordWithKeyword:self.searchText.text type:_searchType completion:^(BOOL state){
-        [self navigationToGoodsWithKeyword:self.searchText.text];
+        if(_searchType == MDSearchTypeProduct){
+            [self navigationToGoodsWithKeyword:self.searchText.text];
+        }else if(_searchType == MDSearchTypeShop){
+            [self navigationToShopWithKeyword:self.searchText.text];
+        }
     }];
     return YES;
 }
@@ -147,7 +152,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0 || indexPath.row == _mainSearchArray.count + 1) return;
     MDSearchModel *model = _mainSearchArray[indexPath.row - 1];
-    [self navigationToGoodsWithKeyword:model.keyword];
+    if(_searchType == MDSearchTypeProduct){
+        [self navigationToGoodsWithKeyword:model.keyword];
+    }else if(_searchType == MDSearchTypeShop){
+        [self navigationToShopWithKeyword:model.keyword];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -220,6 +229,12 @@
 
 -(void)navigationToGoodsWithKeyword:(NSString*)keyword{
     MDGoodsViewController *controller = [[MDGoodsViewController alloc] init];
+    [controller setKeyword:keyword];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)navigationToShopWithKeyword:(NSString*)keyword{
+    MDShopSearchViewController *controller = [[MDShopSearchViewController alloc] init];
     [controller setKeyword:keyword];
     [self.navigationController pushViewController:controller animated:YES];
 }

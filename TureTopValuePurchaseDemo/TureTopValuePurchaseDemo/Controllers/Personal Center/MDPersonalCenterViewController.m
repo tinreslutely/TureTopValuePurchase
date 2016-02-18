@@ -45,6 +45,8 @@
     [super viewDidAppear:animated];
     if(APPDATA.isLogin){
         [self refreshData];
+    }else{
+        [_mainTableView reloadData];
     }
 }
 
@@ -185,15 +187,13 @@
             [normalCell.iconImageView setImage:[UIImage imageNamed:[dic objectForKey:@"image"]]];
             [normalCell.titleLabel setText:[dic objectForKey:@"title"]];
         }
-        if(APPDATA.isLogin){
-            switch (indexPath.section) {
-                case 2:
-                    [normalCell.subLabel setText:[NSString stringWithFormat:@"%.2f",_mainPersonCenterModel.cardBalance]];
-                    break;
-                case 3:
-                    [normalCell.subLabel setText:[NSString stringWithFormat:@"%.2f",_mainPersonCenterModel.pointBalance]];
-                    break;
-            }
+        switch (indexPath.section) {
+            case 2:
+                [normalCell.subLabel setText:[NSString stringWithFormat:@"%.2f",(APPDATA.isLogin ? _mainPersonCenterModel.cardBalance : 0)]];
+                break;
+            case 3:
+                [normalCell.subLabel setText:[NSString stringWithFormat:@"%.2f",(APPDATA.isLogin ? _mainPersonCenterModel.pointBalance : 0)]];
+                break;
         }
     }
 }

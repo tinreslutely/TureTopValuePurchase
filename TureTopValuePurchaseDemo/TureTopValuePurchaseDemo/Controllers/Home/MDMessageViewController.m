@@ -33,7 +33,7 @@
     int _messageNum;//消息新条数
     int _noticeNum;//通知新条数
     int _dtNum;//动态新条数
-    int _messageType;//类型   1-消息  2-通知  3-动态
+    MDMessageType _messageType;//类型   1-消息  2-通知  3-动态
 }
 
 - (void)viewDidLoad {
@@ -61,19 +61,19 @@
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
     MDMessageModel *model;
     switch (_messageType) {
-        case 1:
+        case MDMessageTypeMessage:
             model = _mainMessageArray[indexPath.row];
             break;
-        case 2:
+        case MDMessageTypeNotify:
             model = _mainNotifyArray[indexPath.row];
             break;
-        case 3:
+        case MDMessageTypeTrends:
             model = _mainTrendsArray[indexPath.row];
             break;
     }
-    if(index == 0){//删除
+    if(index == 0){
         [self markReadStateWithUserId:APPDATA.userId messageModel:model];
-    }else if(index == 1){
+    }else if(index == 1){//删除
         [self deleteMessageWithUserId:APPDATA.userId messageModel:model];
     }
 }
@@ -88,11 +88,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MDMessageModel *model;
     switch (_messageType) {
-        case 1:
+        case MDMessageTypeMessage:
             model = _mainMessageArray[indexPath.row];
             break;
-        case 2:
+        case MDMessageTypeNotify:
             model = _mainNotifyArray[indexPath.row];
+            break;
+        case MDMessageTypeTrends:
+            model = _mainTrendsArray[indexPath.row];
             break;
     }
     MDMessageDetailViewController *controller = [[MDMessageDetailViewController alloc] init];
@@ -109,13 +112,13 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     long count = 0;
     switch (_messageType) {
-        case 1:
+        case MDMessageTypeMessage:
             count = _mainMessageArray.count;
             break;
-        case 2:
+        case MDMessageTypeNotify:
             count = _mainNotifyArray.count;
             break;
-        case 3:
+        case MDMessageTypeTrends:
             count = _mainTrendsArray.count;
             break;
     }
@@ -129,7 +132,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BOOL hasData = YES;
     MDMessageTableViewCell *cell;
-    if((_messageType == 1 && _mainMessageArray.count == 0) || (_messageType == 2 && _mainNotifyArray.count == 0) || (_messageType == 3 && _mainTrendsArray.count == 0)){
+    if((_messageType == MDMessageTypeMessage && _mainMessageArray.count == 0) || (_messageType == MDMessageTypeNotify && _mainNotifyArray.count == 0) || (_messageType == MDMessageTypeTrends && _mainTrendsArray.count == 0)){
         hasData = NO;
     }
     if(hasData){
@@ -204,15 +207,15 @@
     [_dataController requestDataWithUserId:APPDATA.userId pageNo:_pageNo pageSize:_pageSize messageType:_messageType  completion:^(BOOL state, NSString *msg, NSArray<MDMessageModel *> *list) {
         if(state){
             switch (_messageType) {
-                case 1:
+                case MDMessageTypeMessage:
                     [_mainMessageArray removeAllObjects];
                     [_mainMessageArray addObjectsFromArray:list];
                     break;
-                case 2:
+                case MDMessageTypeNotify:
                     [_mainNotifyArray removeAllObjects];
                     [_mainNotifyArray addObjectsFromArray:list];
                     break;
-                case 3:
+                case MDMessageTypeTrends:
                     [_mainTrendsArray removeAllObjects];
                     [_mainTrendsArray addObjectsFromArray:list];
                     break;
@@ -234,13 +237,13 @@
     [_dataController requestDataWithUserId:APPDATA.userId pageNo:_pageNo pageSize:_pageSize messageType:_messageType completion:^(BOOL state, NSString *msg, NSArray<MDMessageModel *> *list) {
         if(state){
             switch (_messageType) {
-                case 1:
+                case MDMessageTypeMessage:
                     [_mainMessageArray addObjectsFromArray:list];
                     break;
-                case 2:
+                case MDMessageTypeNotify:
                     [_mainNotifyArray addObjectsFromArray:list];
                     break;
-                case 3:
+                case MDMessageTypeTrends:
                     [_mainTrendsArray addObjectsFromArray:list];
                     break;
                     
@@ -284,13 +287,13 @@
     [_dataController removeDataWithUserId:userId Id:[NSString stringWithFormat:@"%d",model.id] messageType:_messageType completion:^(BOOL state, NSString *msg) {
         if(state){
             switch (_messageType) {
-                case 1:
+                case MDMessageTypeMessage:
                     [_mainMessageArray removeObject:model];
                     break;
-                case 2:
+                case MDMessageTypeNotify:
                     [_mainNotifyArray removeObject:model];
                     break;
-                case 3:
+                case MDMessageTypeTrends:
                     [_mainTrendsArray removeObject:model];
                     break;
             }
@@ -308,20 +311,10 @@
  *  @param model  消息模型
  */
 -(void)markReadStateWithUserId:(NSString*)userId messageModel:(MDMessageModel*)model{
-    [_dataController markReadStateDataWithMessageId:userId messageType:[NSString stringWithFormat:@"%d",model.id] completion:^(BOOL state, NSString *msg) {
+    [_dataController markReadStateDataWithUserId:userId messageId:[NSString stringWithFormat:@"%d",model.id] messageType:_messageType completion:^(BOOL state, NSString *msg) {
         if(state){
-            switch (_messageType) {
-                case 1:
-                    [_mainMessageArray removeObject:model];
-                    break;
-                case 2:
-                    [_mainNotifyArray removeObject:model];
-                    break;
-                case 3:
-                    [_mainTrendsArray removeObject:model];
-                    break;
-            }
             [self refreshData];
+            [self.view makeToast:@"设置成功" duration:1 position:CSToastPositionBottom];
         }else{
             [self.view makeToast:msg duration:1 position:CSToastPositionBottom];
         }
@@ -332,7 +325,7 @@
 #pragma mark private methods
 -(void)initData{
     _dataController = [[MDMessageDataController alloc] init];
-    _messageType = 1;
+    _messageType = MDMessageTypeMessage;
     _pageNo = 1;
     _pageSize = 20;
     _mainMessageArray = [[NSMutableArray alloc] init];
@@ -515,7 +508,6 @@
 
 -(void)updateMessageSelectStateWithButton:(UIButton*)button{
     UIView *superView = [button superview];
-    int tag = 1000;
     for (UIButton *view in [superView subviews]) {
         if([view isKindOfClass:[UIButton class]]){
             [view setTitleColor:(view == button ? [UIColor redColor] : [UIColor grayColor]) forState:UIControlStateNormal];

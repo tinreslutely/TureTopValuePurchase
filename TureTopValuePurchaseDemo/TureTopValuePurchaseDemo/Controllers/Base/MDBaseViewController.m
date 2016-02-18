@@ -20,7 +20,6 @@
 -(instancetype)init{
     if(self = [super init]){
         tabBarController = (RDVTabBarController*)APPDELEGATE.window.rootViewController;
-
     }
     return self;
 }
@@ -38,10 +37,6 @@
     [self setupNavigationItem:self.navigationItem];
     [self.leftButton setImage:[UIImage imageNamed:@"arrow_back"] forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(backTapped) forControlEvents:UIControlEventTouchDown];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

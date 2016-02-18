@@ -11,8 +11,8 @@
 
 @interface MDHomeBannerFoundationTableViewCell : UITableViewCell
 
-@property(nonatomic,strong) SDCycleScrollView *bannerView;
+@property(nonatomic,strong) SDCycleScrollView* _Nullable bannerView;
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier bannerHeight:(float)bannerHeight delegate:(id<SDCycleScrollViewDelegate>)delegate target:(_Nullable id)target action:(SEL)action;
+-(instancetype _Nullable)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString* _Nullable)reuseIdentifier bannerHeight:(float)bannerHeight delegate:(id<SDCycleScrollViewDelegate> _Nullable)delegate target:(id _Nullable)target action:(SEL _Nullable)action;
 
 @end
