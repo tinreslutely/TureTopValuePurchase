@@ -21,7 +21,6 @@
 
 @implementation MDShopManageViewController{
     MDShopManageDataController *_dataController;
-    __weak MDShopManageViewController *weakSelf;
     MDAreaPickerView *areaPickerView;
     UIAlertController *_alertActionController;
     
@@ -64,15 +63,21 @@
 #pragma mark PhotoTweaksViewControllerDelegate
 -(void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage{
     [controller dismissViewControllerAnimated:YES completion:nil];
+    [self.progressView show];
+    __weak typeof(self) weakSelf = self;
     [_dataController uploadImageWithImage:[MDCommon scaleToSize:croppedImage size:CGSizeMake(640, 200)] userId:APPDATA.userId token:APPDATA.token completion:^(BOOL state, NSString * _Nullable msg, MDUploadPicModel * _Nullable model) {
+        [weakSelf.progressView hide];
         if(state){
-            UIButton *button = [self.view viewWithTag:_uploadTag];
+            UIButton *button = [weakSelf.view viewWithTag:_uploadTag];
             [button sd_setImageWithURL:[NSURL URLWithString:model.absoluteUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"camera"]];
             if(_uploadTag == 1000){
                 _mainModel.shopNavigationPic = model.relativeUrl;
             }else if(_uploadTag == 1002){
                 _mainModel.shopLogo = model.relativeUrl;
             }
+            [weakSelf showAlertDialog:@"上传成功"];
+        }else{
+            [weakSelf showAlertDialog:@"上传失败"];
         }
     }];
 }
@@ -107,15 +112,15 @@
     NSString *p = array.count >= 1 ? array[0] : @"";
     NSString *c = array.count >= 2 ? array[1] : @"";
     NSString *d = array.count >= 3 ? array[2] : @"";
+    __weak typeof(self) weakSelf = self;
     areaPickerView = [[MDAreaPickerView alloc] initWithProvince:p city:c district:d confirmBlock:^(NSString* province,NSString* city,NSString* district){
         NSString *area = [NSString stringWithFormat:@"%@ %@ %@",province,city,district];
         [_dataController submitMemberAreaDataWithUserId:APPDATA.userId token:APPDATA.token province:province city:city district:district completion:^(BOOL state, NSString * _Nullable msg) {
             if(state){
-                //[weakSelf showAlertDialog:@"修改成功"];
-                //_memberInformationModel.area = area;
-                //[_mainTableView reloadData];
+                [weakSelf showAlertDialog:@"修改成功"];
+                [_districtLabel setTitle:area forState:UIControlStateNormal];
             }else{
-                //[weakSelf showAlertDialog:@"修改失败"];
+                [weakSelf showAlertDialog:@"修改失败"];
             }
         }];
         areaPickerView = nil;

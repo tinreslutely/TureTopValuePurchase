@@ -36,9 +36,6 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    [self setupTabBarController];
-    [self setupTabBar];
     [self initUserData];
 }
 
@@ -51,7 +48,8 @@
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDShopViewController alloc] init]],
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDCartViewController alloc] init]],
                                   [[MDNavigationController alloc] initWithRootViewController:[[MDPersonalCenterViewController alloc] init]]
-                              ]];
+                                  ]];
+    [self setupTabBar];
 }
 
 -(void)setupTabBar{

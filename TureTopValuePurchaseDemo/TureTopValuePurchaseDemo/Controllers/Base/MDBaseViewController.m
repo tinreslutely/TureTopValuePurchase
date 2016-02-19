@@ -41,7 +41,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [progressView removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {

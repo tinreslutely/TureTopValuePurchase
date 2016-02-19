@@ -55,7 +55,9 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     keyword = [textField text];
-    [self refreshData];
+    [_dataController updateRecordWithKeyword:keyword type:MDSearchTypeShop completion:^(BOOL state) {
+        [self refreshData];
+    }];
     return YES;
 }
 
@@ -87,7 +89,7 @@
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return _firstRow ? _mainArray.count : _mainArray.count / 2;
+    return _firstRow ? _mainArray.count : (_mainArray.count == 1 ? 1 : _mainArray.count / 2);
 }
 
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -218,14 +220,17 @@
     }];
     
     _mainNoDataButton = [[UIButton alloc] init];
-    [_mainNoDataButton setImage:[UIImage imageNamed:@"none_record"] forState:UIControlStateNormal];
+    [_mainNoDataButton setBackgroundColor:[UIColor whiteColor]];
+    [_mainNoDataButton setTitle:@"暂无店铺数据" forState:UIControlStateNormal];
+    [_mainNoDataButton setTitleColor:UIColorFromRGBA(220, 220, 220, 1) forState:UIControlStateNormal];
+    //[_mainNoDataButton setImage:[UIImage imageNamed:@"none_record"] forState:UIControlStateNormal];
     [_mainNoDataButton setContentMode:UIViewContentModeScaleAspectFit];
     [_mainNoDataButton setHidden:YES];
     [self.view addSubview:_mainNoDataButton];
     [_mainNoDataButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
-        
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(64, 0, 0, 0));
     }];
+    
     //初始化请求数据
     [self refreshData];
 }
@@ -247,6 +252,7 @@
     }else{
         MDShopSearchManyCollectionViewCell *shopCell = (MDShopSearchManyCollectionViewCell*)cell;
         int index = (int)(2*indexPath.section+indexPath.row);
+        if(_mainArray.count - 1 < index) return;
         MDShopSearchModel *model = _mainArray[index];
         [shopCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.shopLogo]] placeholderImage:[UIImage imageNamed:@"loading"]];
         [shopCell.areaLabel setText:model.cityName];

@@ -223,10 +223,12 @@
 -(void)photoTweaksController:(PhotoTweaksViewController *)controller didFinishWithCroppedImage:(UIImage *)croppedImage{
     [controller dismissViewControllerAnimated:YES completion:nil];
     __weak typeof(self) weakSelf = self;
+    [self.progressView show];
     [_dataController uploadImageWithImage:[MDCommon scaleToSize:croppedImage size:CGSizeMake(200, 200)] userId:APPDATA.userId token:APPDATA.token name:@"headPic" completion:^(BOOL state, NSString * _Nullable msg, MDUploadPicModel * _Nullable model) {
+        [weakSelf.progressView hide];
         if(state){
             [weakSelf showAlertDialog:@"修改成功"];
-            _memberInformationModel.headPortrait = model.relativeUrl;
+            _memberInformationModel.headPortrait = model.absoluteUrl;
             [_mainTableView reloadData];
         }else{
             [weakSelf showAlertDialog:@"修改失败"];

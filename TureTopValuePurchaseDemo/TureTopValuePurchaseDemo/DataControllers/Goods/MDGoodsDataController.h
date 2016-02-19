@@ -12,5 +12,5 @@
 @interface MDGoodsDataController : NSObject
 
 -(void)requestDataWithPageNo:(int)pageno pageSize:(int)pagesize keywords:(NSString*)keywords categoryId:(int)categoryId shopId:(int)shopId productType:(NSString*)productType sort:(int)sort completion:(void(^)(BOOL state, NSString *msg, NSArray<MDGoodsModel*> *list,int totalPage))completion;
-
+-(void)updateRecordWithKeyword:(NSString*)keyword type:(MDSearchType)type completion:(void(^)(BOOL state))completion;
 @end

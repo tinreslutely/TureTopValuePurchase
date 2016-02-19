@@ -54,7 +54,7 @@
     }
     viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     //子控制器是否等于1，那么就需要隐藏tabbar
-    if(self.viewControllers.count == 1 && ![viewController isKindOfClass:NSClassFromString(@"MDHapplyPurchaseViewController")]){
+    if((self.viewControllers.count == 1 && ![viewController isKindOfClass:NSClassFromString(@"MDHapplyPurchaseViewController")]) || (self.viewControllers.count == 2 && !((RDVTabBarController*)APPDELEGATE.window.rootViewController).tabBarHidden)){
         [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:YES];
     }
     [super pushViewController:viewController animated:animated];
@@ -120,6 +120,7 @@
     }
 }
 -(void)setAlphaBar{
+    NSLog(@"_alphaViewHidden:%d",_alphaView.hidden);
     _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
     _alphaView.alpha = 0.001;
     [_bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];

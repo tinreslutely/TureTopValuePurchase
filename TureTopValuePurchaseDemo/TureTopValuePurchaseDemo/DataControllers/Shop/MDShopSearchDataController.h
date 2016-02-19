@@ -12,4 +12,5 @@
 
 -(void)requestDataWithKeyword:(NSString* _Nullable)keyword shopId:(int)shopId pageNo:(int)pageno pageSize:(int)pagesize completion:(void(^ _Nullable)(BOOL state, NSString* _Nullable msg, NSArray<MDShopSearchModel*>* _Nullable list, int totalCount))completion;
 
+-(void)updateRecordWithKeyword:(NSString*)keyword type:(MDSearchType)type completion:(void(^)(BOOL state))completion;
 @end

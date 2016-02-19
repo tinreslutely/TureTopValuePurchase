@@ -60,16 +60,14 @@
 #pragma mark SWTableViewCellDelegate
 
 #pragma mark UITextFieldDelegate
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    //[textField resignFirstResponder];
-    //MDSearchViewController *controller = [[MDSearchViewController alloc] init];
-    //[self.navigationController pushViewController:controller animated:YES];
-}
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     keyword = [textField text];
-    [self refreshData];
+    [_dataController updateRecordWithKeyword:keyword type:MDSearchTypeProduct completion:^(BOOL state) {
+        if(state){
+            [self refreshData];
+        }
+    }];
     return YES;
 }
 
@@ -126,7 +124,7 @@
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return _firstRow ? _mainArray.count : _mainArray.count / 2;
+    return _firstRow ? _mainArray.count : (_mainArray.count == 1 ? 1 : _mainArray.count / 2);
 }
 
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -155,7 +153,12 @@
 
 -(void)backTap{
     if([self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        UIViewController *viewController = self.navigationController.viewControllers[1];
+        if([self.navigationController.viewControllers[1] isKindOfClass:NSClassFromString(@"MDHapplyPurchaseViewController")]){
+            [self.navigationController popToViewController:viewController animated:YES];
+        }else{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -381,6 +384,7 @@
     }else{
         MDGoodsManyCollectionViewCell *goodsCell = (MDGoodsManyCollectionViewCell*)cell;
         int index = (int)(2*indexPath.section+indexPath.row);
+        if(_mainArray.count - 1 < index) return;
         MDProductModel *model = _mainArray[index];
         [goodsCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.prodMainPicUrl]] placeholderImage:[UIImage imageNamed:@"loading"]];
         [goodsCell.sellPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",model.salesPrice]];

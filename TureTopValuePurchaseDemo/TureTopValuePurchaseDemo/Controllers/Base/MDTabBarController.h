@@ -11,4 +11,5 @@
 
 @interface MDTabBarController : RDVTabBarController
 
+-(void)setupTabBarController;
 @end

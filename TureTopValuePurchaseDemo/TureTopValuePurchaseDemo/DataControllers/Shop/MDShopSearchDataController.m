@@ -7,6 +7,7 @@
 //
 
 #import "MDShopSearchDataController.h"
+#import "MDFluentDB.h"
 
 @implementation MDShopSearchDataController
 
@@ -42,6 +43,33 @@
     } failureBlock:^(NSError * _Nonnull error) {
         completion(NO,[NSString stringWithFormat:@"%@",error],nil,0);
     }];
+}
+
+
+/*!
+ *  更新记录
+ *
+ *  @param keyword 关键字
+ *  @param type    搜索类型
+ */
+-(void)updateRecordWithKeyword:(NSString*)keyword type:(MDSearchType)type completion:(void(^)(BOOL state))completion{
+    static NSString *tableName = @"md_search";
+    dispatch_queue_t concurrentQueue = dispatch_queue_create("search.concurrent.queue.update", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(concurrentQueue, ^{
+        if(![[MDFluentDB shareDB] isExistTable:tableName]){
+            [[MDFluentDB shareDB] executeNonQuery:[NSString stringWithFormat:@"CREATE TABLE %@ (id integer PRIMARY KEY AUTOINCREMENT,keyword text,type integer,datetime text) ",tableName]];
+        }
+        NSString *sql = @"";
+        if([[MDFluentDB shareDB] executeQuery:[NSString stringWithFormat:@"select * from %@ where keyword='%@' and type='%d' order by datetime desc;",tableName, keyword, (int)type]].count > 0){
+            sql = [NSString stringWithFormat:@"update %@ set datetime='%@' where keyword='%@' and type='%d'",tableName,[NSDate date],keyword,(int)type];
+        }else{
+            sql = [NSString stringWithFormat:@"insert into %@ (keyword,type,datetime) values('%@','%d','%@')",tableName,keyword,(int)type,[NSDate date]];
+        }
+        BOOL state = [[MDFluentDB shareDB] executeNonQuery:sql];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(completion) completion(state);
+        });
+    });
 }
 
 

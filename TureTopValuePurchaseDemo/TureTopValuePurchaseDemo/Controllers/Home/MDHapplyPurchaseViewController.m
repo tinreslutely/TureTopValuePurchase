@@ -8,6 +8,7 @@
 
 #import "MDHapplyPurchaseViewController.h"
 #import "MDHomeDataController.h"
+#import "MDMessageDataController.h"
 #import "MDNavigationController.h"
 #import "ImageCarouselView.h"
 #import "MDGoodsViewController.h"
@@ -21,6 +22,7 @@
 @implementation MDHapplyPurchaseViewController{
     UITableView *_mainTableView;
     MDHomeDataController *_dataController;
+    MDMessageDataController *_messageDataController;
     LDSearchBar *_searchBar;
     NSMutableArray *_mainModules;
     NSMutableArray *_likeProductArray;
@@ -53,14 +55,21 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    
+    if(APPDATA.isLogin){
+        [self makeNoReadState];
+    }
+    [self.navigationController setDelegate:self];
+    NSLog(@"state:%d",self.navigationController.navigationBarHidden);
+    if(((RDVTabBarController*)APPDELEGATE.window.rootViewController).tabBarHidden){
+        [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:YES];
-    if(APPDATA.isLogin){
-        [self makeNoReadState];
-    }
+    [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +80,7 @@
 -(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
     if([toVC isKindOfClass:[MDHapplyPurchaseViewController class]] || [toVC isKindOfClass:NSClassFromString(@"MDHomeViewController")]){
         [((MDNavigationController*)navigationController) setAlphaBar];
+        [((MDNavigationController*)navigationController) setNavigationBarHidden:NO];
         [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:NO];
         if(operation == UINavigationControllerOperationPop && [fromVC isKindOfClass:NSClassFromString(@"MDSearchViewController")]){
             return self.popAnimation;
@@ -118,7 +128,7 @@
 
 #pragma mark ImageCarouselViewDelegate
 -(void)imageCarouselView:(ImageCarouselView *)imageCarouselView didSelectItemAtIndex:(NSInteger)index{
-    MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_mainModules[1]).channelColumnDetails[index];
+    MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_mainModules[_mainModules.count-1]).channelColumnDetails[index];
     [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeShopList title:model.content parameters:@{@"shopId":[NSString stringWithFormat:@"%d",model.contentId]} isNeedLogin:YES loginTipBlock:nil];
 }
 
@@ -327,9 +337,11 @@
 }
 
 -(void)makeNoReadState{
-    [_dataController requestTotalDataWithUserId:APPDATA.userId completion:^(BOOL state, NSString *msg, int total) {
-        if(state){
-            [_searchBar.rightButton setImage:[UIImage imageNamed:(total > 0 ? @"hasmessage" : @"message")] forState:UIControlStateNormal];
+    [_messageDataController requestUnreadDataWithUserId:APPDATA.userId completion:^(BOOL state, NSString *msg, int messageNum, int noticeNum, int dtNum) {
+        if(messageNum + noticeNum + dtNum > 0){
+            [_searchBar.rightButton setImage:[UIImage imageNamed:@"msg-unread"] forState:UIControlStateNormal];
+        }else{
+            [_searchBar.rightButton setImage:[UIImage imageNamed:@"msg"] forState:UIControlStateNormal];
         }
     }];
 }
@@ -384,14 +396,12 @@
     if(cell == nil) return;
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
     int index = (int)[view.subviews indexOfObject:button];
-    NSLog(@"点击产品推荐的数据位置为%ld，%d",(unsigned long)indexPath.section,index);
     MDHomeRenovateChannelDetailModel *model = ((MDHomeRenovateChannelModel*)_mainModules[indexPath.section]).channelColumnDetails[index+1];
-//    MDPageCommon *common = [[MDPageCommon alloc] init];
-//    UIViewController *controller = [common controllerForPagePathWithURL:model.contentAddr currentController:self token:USER_GLOBAL.token];
-//    if(controller != nil){
-//        [controller setHidesBottomBarWhenPushed:YES];
-//        [self.navigationController pushViewController:controller animated:YES];
-//    }
+    UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.contentAddr currentController:self token:APPDATA.token];
+    if(controller != nil){
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
     
 }
 
@@ -411,6 +421,8 @@
  */
 -(void)initData{
     _dataController = [[MDHomeDataController alloc] init];
+    _messageDataController = [[MDMessageDataController alloc] init];
+    
     _likeProductArray = [[NSMutableArray alloc] init];
     _mainModules = [[NSMutableArray alloc] init];
     _bannerHeight = SCREEN_WIDTH*300/640;
@@ -427,6 +439,7 @@
  *  初始化界面
  */
 -(void)initView{
+    [self.navigationController setDelegate:self];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
@@ -793,12 +806,11 @@
         }
         [self.navigationController pushViewController:productsController animated:YES];
     }else{
-//        MDPageCommon *common = [[MDPageCommon alloc] init];
-//        UIViewController *controller = [common controllerForPagePathWithURL:model.columnLink currentController:self token:USER_GLOBAL.token];
-//        [controller setHidesBottomBarWhenPushed:YES];
-//        if(controller != nil){
-//            [self.navigationController pushViewController:controller animated:YES];
-//        }
+        UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.columnLink currentController:self token:APPDATA.token];
+        [controller setHidesBottomBarWhenPushed:YES];
+        if(controller != nil){
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 /**
@@ -807,12 +819,11 @@
  *  @param model banner图数据模型
  */
 -(void)navigatePageForBannerTapWithDetailModel:(MDHomeRenovateChannelDetailModel *)model{
-//    MDPageCommon *common = [[MDPageCommon alloc] init];
-//    UIViewController *controller = [common controllerForPagePathWithURL:model.contentAddr currentController:self token:USER_GLOBAL.token];
-//    [controller setHidesBottomBarWhenPushed:YES];
-//    if(controller != nil){
-//        [self.navigationController pushViewController:controller animated:YES];
-//    }
+    UIViewController *controller = [MDCommon controllerForPagePathWithURL:model.contentAddr currentController:self token:APPDATA.token];
+    [controller setHidesBottomBarWhenPushed:YES];
+    if(controller != nil){
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 

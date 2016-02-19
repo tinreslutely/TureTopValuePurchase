@@ -46,12 +46,12 @@
             completion(NO,[NSString stringWithFormat:@"%@",error],nil);
             return;
         }
-        NSString *stateCode = [dic objectForKey:@"state"];
-        if(![stateCode isEqualToString:@"200"]){
+        int stateCode = [[dic objectForKey:@"error"] intValue];
+        if(stateCode != 0){
             completion(NO,[dic objectForKey:@"result"],nil);
             return;
         }
-        MDUploadPicModel *model = [MDUploadPicModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+        MDUploadPicModel *model = [MDUploadPicModel mj_objectWithKeyValues:dic];
         [self submitMemberInformationDataWithUserId:userId token:token name:name value:model.relativeUrl completion:^(BOOL state, NSString *msg) {
             if(state) completion(YES,nil,model);
         }];

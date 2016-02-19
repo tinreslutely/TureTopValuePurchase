@@ -54,8 +54,11 @@
  *  配置window
  */
 -(void)setupWindow{
+    MDTabBarController *rootViewController = [[MDTabBarController alloc] init];
+    [rootViewController setupTabBarController];
+    
     self.window = [[UIWindow alloc] initWithFrame:SCREEN_BOUNDS];
-    [self.window setRootViewController:[[MDTabBarController alloc] init]];
+    [self.window setRootViewController:rootViewController];
     [self.window makeKeyAndVisible];
 }
 /*!

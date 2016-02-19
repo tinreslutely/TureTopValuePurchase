@@ -52,12 +52,12 @@
             completion(NO,[NSString stringWithFormat:@"%@",error],nil);
             return;
         }
-        NSString *stateCode = [dic objectForKey:@"state"];
-        if(![stateCode isEqualToString:@"200"]){
+        int stateCode = [[dic objectForKey:@"error"] intValue];
+        if(stateCode != 0){
             completion(NO,[dic objectForKey:@"result"],nil);
             return;
         }
-        MDUploadPicModel *model = [MDUploadPicModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+        MDUploadPicModel *model = [MDUploadPicModel mj_objectWithKeyValues:dic];
         completion(YES,nil,model);
     } failureBlock:^(NSError * _Nonnull error) {
         completion(NO,[NSString stringWithFormat:@"%@",error],nil);
