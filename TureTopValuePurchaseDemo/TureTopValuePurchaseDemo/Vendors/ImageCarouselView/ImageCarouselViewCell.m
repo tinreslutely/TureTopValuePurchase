@@ -10,43 +10,36 @@
 
 @implementation ImageCarouselViewCell
 
-@synthesize imageCarouseControl,imageView,titleLabel,imageCarouseId;
+@synthesize imageCarouselButtons;
 
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setupView];
+        imageCarouselButtons = [[NSMutableArray alloc] init];
     }
     
     return self;
 }
 
--(void)setupView{
+-(void)setContentWithImages:(NSArray*)images titles:(NSArray*)titles tags:(NSArray*)tags target:(id)target action:(SEL)action{
     float pointX = 0;
     float width = self.frame.size.width/3;
-    [self brindSubViewForControlWithPointX:pointX width:width];
-    pointX += width;
-    [self brindSubViewForControlWithPointX:pointX width:width];
-    pointX += width;
-    [self brindSubViewForControlWithPointX:pointX width:width];
-}
-
--(void) brindSubViewForControlWithPointX:(float)pointX width:(float)width{
-    
-    imageCarouseControl = [[UIControl alloc] initWithFrame:CGRectMake(pointX, 0, width, self.frame.size.height)];
-    [self addSubview:imageCarouseControl];
-    
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
-    [imageCarouseControl addSubview:imageView];
-    
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 30, width, 30)];
-    [titleLabel setBackgroundColor:UIColorFromRGBA(154,154, 154, 0.5)];
-    [titleLabel setTextColor:[UIColor whiteColor]];
-    [titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [imageCarouseControl addSubview:titleLabel];
-    [imageCarouseControl bringSubviewToFront:titleLabel];
+    ImageCarouselButton *button;
+    for (int i = 0; i < images.count; i++) {
+        button = [[ImageCarouselButton alloc] initWithFrame:CGRectMake(pointX, 0, width, self.frame.size.height)];
+        [button.imageView sd_setImageWithURL:[NSURL URLWithString:images[i]]];
+        if(titles.count > i){
+            [button.titleLabel setText:titles[i]];
+        }
+        if(tags.count > i){
+            [button setTag:[tags[i] intValue]];
+        }
+        [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:button];
+        [imageCarouselButtons addObject:button];
+        pointX += width;
+    }
 }
 
 @end

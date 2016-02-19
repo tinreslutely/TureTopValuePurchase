@@ -56,7 +56,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController setDelegate:self];
     [self initData];
     [self initView];
     [self makeNavigationBarAlphaForScrollWithscrollY:_mainTableView.contentOffset.y isFirst:YES];
@@ -69,10 +68,12 @@
     if(APPDATA.isLogin){
         [self makeNoReadState];
     }
-    
+    [self.navigationController setDelegate:self];
+    NSLog(@"Home state:%d",self.navigationController.navigationBarHidden);
     if(((RDVTabBarController*)APPDELEGATE.window.rootViewController).tabBarHidden){
         [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
     }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -379,9 +380,10 @@
  *  @param button 点击的按钮
  */
 -(void)rmMoreTap:(UIButton*)button{
-    UITableViewCell * cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (UITableViewCell*)[button superview] : (UITableViewCell*)[[[button superview] superview] superview];
+    UITableViewCell * cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (UITableViewCell*)[[button superview] superview] : (UITableViewCell*)[[[button superview] superview] superview];
     if(cell == nil) return;
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
+    if(indexPath == nil) return;
     MDHomeRenovateChannelModel *model = _channelList[indexPath.section];
     [self navigatePageWithChannelModel:model];
 }
@@ -645,14 +647,17 @@
     NSMutableArray *imageURLArray = [[NSMutableArray alloc] init];
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
     NSMutableArray *contentValueArray = [[NSMutableArray alloc] init];
+    int index = 0;
     for (MDHomeRenovateChannelDetailModel *item in array) {
         [imageURLArray addObject:item.picAddr];
         [titleArray addObject:item.content];
-        [contentValueArray addObject:[NSString stringWithFormat:@"%d",item.contentId]];
+        [contentValueArray addObject:[NSString stringWithFormat:@"%d",index]];
+        index ++;
     }
     [cell.titleLabel setText:model.columnName];
     [cell.imageScrollView setImageURLStringsGroup:imageURLArray];
     [cell.imageScrollView setTitlesGroup:titleArray];
+    [cell.imageScrollView setTagGroup:contentValueArray];
 }
 
 #pragma mark getters and setters

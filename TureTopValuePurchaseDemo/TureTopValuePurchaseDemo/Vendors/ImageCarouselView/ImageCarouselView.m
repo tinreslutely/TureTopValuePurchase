@@ -36,6 +36,7 @@ NSString * const CELL_ID = @"cycleCell";
 @property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) NSMutableArray *imagesGroup;
 @property (nonatomic, strong) NSMutableArray *imageTitlesGroup;
+@property (nonatomic, strong) NSMutableArray *imageTagGroup;
 @property (nonatomic, weak) NSTimer *timer;
 @property (nonatomic, assign) NSInteger totalItemsCount;
 @property (nonatomic, weak) UIControl *pageControl;
@@ -247,6 +248,22 @@ NSString * const CELL_ID = @"cycleCell";
     self.imageTitlesGroup = titleArray;
 }
 
+-(void)setTagGroup:(NSArray *)tagGroup{
+    _tagGroup = tagGroup;
+    NSMutableArray *tagArray = [[NSMutableArray alloc] init];
+    NSMutableArray *childArray;
+    for(int i = 0; i < tagGroup.count;){
+        childArray = [[NSMutableArray alloc] init];
+        for(int j = 0; j < _numberOfItemInSection; j++){
+            [childArray addObject:tagGroup[i]];
+            i++;
+            if(i == tagGroup.count) break;
+        }
+        [tagArray addObject:childArray];
+    }
+    self.imageTagGroup = tagArray;
+}
+
 - (void)setLocalizationImagesGroup:(NSArray *)localizationImagesGroup
 {
     _localizationImagesGroup = localizationImagesGroup;
@@ -256,11 +273,8 @@ NSString * const CELL_ID = @"cycleCell";
 #pragma mark - actions
 
 -(void)itemTap:(UIControl*)control{
-    ImageCarouselViewCell *cell = (ImageCarouselViewCell*)[control superview];
-    NSIndexPath *indexPath = [_mainView indexPathForCell:cell];
     if ([self.delegate respondsToSelector:@selector(imageCarouselView:didSelectItemAtIndex:)]) {
-        
-        [self.delegate imageCarouselView:self didSelectItemAtIndex:indexPath.item % self.imagesGroup.count];
+        [self.delegate imageCarouselView:self didSelectItemAtIndex:control.tag];
     }
 }
 
@@ -398,15 +412,13 @@ NSString * const CELL_ID = @"cycleCell";
 {
     ImageCarouselViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_ID forIndexPath:indexPath];
     long itemIndex = indexPath.item % self.imagesGroup.count;
-    NSArray *array = self.imagesGroup[itemIndex];
+    NSArray *imageArray = self.imagesGroup[itemIndex];
     NSArray *titleArray = self.imageTitlesGroup[itemIndex];
-    int index = 0;
-    NSString *imageURL = array[index];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
-    if(index != titleArray.count){
-        [cell.titleLabel setText:titleArray[index]];
+    NSArray *tagArray = self.imageTagGroup[itemIndex];
+    
+    if(imageArray > 0 && cell.imageCarouselButtons.count == 0){
+        [cell setContentWithImages:imageArray titles:titleArray tags:tagArray target:self action:@selector(itemTap:)];
     }
-    [cell.imageCarouseControl addTarget:self action:@selector(itemTap:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 

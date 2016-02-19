@@ -37,6 +37,9 @@ typedef enum {
 // 每张图片对应要显示的文字数组
 @property (nonatomic, strong) NSArray *titlesGroup;
 
+// 每个图片对应的值
+@property (nonatomic, strong) NSArray *tagGroup;
+
 
 
 

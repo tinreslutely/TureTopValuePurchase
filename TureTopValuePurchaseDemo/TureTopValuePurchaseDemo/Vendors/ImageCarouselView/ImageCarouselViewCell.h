@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageCarouselButton.h"
 
 @interface ImageCarouselViewCell : UICollectionViewCell
 
-@property (strong, nonatomic) UIControl *imageCarouseControl;
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) NSString *imageCarouseId;
-
+@property (strong, nonatomic) NSMutableArray<ImageCarouselButton*> *imageCarouselButtons;
+-(void)setContentWithImages:(NSArray*)images titles:(NSArray*)titles tags:(NSArray*)tags target:(id)target action:(SEL)action;
 @end

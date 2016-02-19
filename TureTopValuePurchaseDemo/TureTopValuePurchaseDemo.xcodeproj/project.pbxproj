@@ -49,6 +49,7 @@
 		B518D9E31C561A6D00E15656 /* MDCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B518D9E21C561A6D00E15656 /* MDCartTableViewCell.m */; };
 		B518D9E71C561B0000E15656 /* MDCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B518D9E61C561B0000E15656 /* MDCartModel.m */; };
 		B518D9EB1C561B6300E15656 /* MDCartDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518D9EA1C561B6300E15656 /* MDCartDataController.m */; };
+		B524BC8A1C76A4F1001646FE /* ImageCarouselButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B524BC891C76A4F1001646FE /* ImageCarouselButton.m */; };
 		B54AF8A01C59E6820047FEB6 /* MDSearchNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF89F1C59E6820047FEB6 /* MDSearchNormalTableViewCell.m */; };
 		B54AF8A31C5A03A10047FEB6 /* MDSearchDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF8A21C5A03A10047FEB6 /* MDSearchDataController.m */; };
 		B54AF8A61C5A069D0047FEB6 /* MDSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B54AF8A51C5A069D0047FEB6 /* MDSearchModel.m */; };
@@ -241,6 +242,8 @@
 		B518D9E61C561B0000E15656 /* MDCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCartModel.m; sourceTree = "<group>"; };
 		B518D9E91C561B6300E15656 /* MDCartDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCartDataController.h; sourceTree = "<group>"; };
 		B518D9EA1C561B6300E15656 /* MDCartDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCartDataController.m; sourceTree = "<group>"; };
+		B524BC881C76A4F1001646FE /* ImageCarouselButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCarouselButton.h; sourceTree = "<group>"; };
+		B524BC891C76A4F1001646FE /* ImageCarouselButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselButton.m; sourceTree = "<group>"; };
 		B54AF89E1C59E6820047FEB6 /* MDSearchNormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchNormalTableViewCell.h; sourceTree = "<group>"; };
 		B54AF89F1C59E6820047FEB6 /* MDSearchNormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchNormalTableViewCell.m; sourceTree = "<group>"; };
 		B54AF8A11C5A03A10047FEB6 /* MDSearchDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchDataController.h; sourceTree = "<group>"; };
@@ -1068,6 +1071,8 @@
 				B59E8A181C475272005CEA25 /* ImageCarouselView.m */,
 				B59E8A191C475272005CEA25 /* ImageCarouselViewCell.h */,
 				B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */,
+				B524BC881C76A4F1001646FE /* ImageCarouselButton.h */,
+				B524BC891C76A4F1001646FE /* ImageCarouselButton.m */,
 			);
 			path = ImageCarouselView;
 			sourceTree = "<group>";
@@ -1503,6 +1508,7 @@
 				B59A997C1C449ED600A8A6FC /* AppDelegate.m in Sources */,
 				B5D692D51C716FA000B62A48 /* MDPaymentDataController.m in Sources */,
 				B596381B1C633792001BC73F /* MDMessageDetailViewController.m in Sources */,
+				B524BC8A1C76A4F1001646FE /* ImageCarouselButton.m in Sources */,
 				B59A99D21C44B1BB00A8A6FC /* MDPersonalCenterViewController.m in Sources */,
 				08FD95E51C71F279003543B3 /* MDUploadPicModel.m in Sources */,
 				B5C6779E1C522DFC0020C71F /* MDLocationManager.m in Sources */,
