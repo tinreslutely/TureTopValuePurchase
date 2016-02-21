@@ -56,6 +56,19 @@
 
 
 #pragma mark action and event methods
+/**
+ *  返回上一个界面
+ */
+- (void)backTap
+{
+    if(topIndex == 2){
+        NSArray *array = self.navigationController.viewControllers;
+        [self.navigationController popToViewController:array[array.count - topIndex - 1] animated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 /**
  *  跳转 忘记密码 修改密码 界面
@@ -70,7 +83,7 @@
  */
 - (void)PushtoRegister
 {
-    [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeRegister title:@"用户注册" parameters:nil isNeedLogin:YES loginTipBlock:nil];
+    [MDCommon reshipWebURLWithNavigationController:self.navigationController pageType:MDWebPageURLTypeRegister title:@"用户注册" parameters:nil isNeedLogin:NO loginTipBlock:nil];
 }
 
 
@@ -124,6 +137,8 @@
  */
 -(void)initView{
     [self.navigationItem setTitle:@"登录"];
+    [self.leftButton removeTarget:self action:@selector(backTapped) forControlEvents:UIControlEventTouchDown];
+    [self.leftButton addTarget:self action:@selector(backTap) forControlEvents:UIControlEventTouchDown];
     [self.rightButton setTitle:@"注册" forState:UIControlStateNormal];
     [self.rightButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.rightButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
@@ -154,7 +169,9 @@
         make.top.equalTo(scrollContentView.mas_top).with.offset(64);
     }];
     _userTextField = [self addTextFieldWithView:loginView masEqual:loginView.mas_top offset:0 text:@"账户:" placeholder:@"邻里账户/手机号" isCarve:YES secureTextEntry:NO];
+    [_userTextField setReturnKeyType:UIReturnKeyNext];
     _passwordTextField = [self addTextFieldWithView:loginView masEqual:loginView.mas_bottom offset:-44 text:@"密码:" placeholder:@"密码" isCarve:NO secureTextEntry:YES];
+    [_passwordTextField setReturnKeyType:UIReturnKeyDone];
     
     
     _rememberButton = [UIButton buttonWithType:UIButtonTypeCustom];

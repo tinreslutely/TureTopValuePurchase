@@ -15,6 +15,7 @@
 
 @implementation LDSearchViewController{
     float _globalHeight;
+    UIButton *_doneButton;
 }
 
 @synthesize navigationView,searchText,progressView,checkTypeControl;
@@ -44,6 +45,7 @@
 }
 
 #pragma mark action and event methods
+
 /*!
  *  返回事件
  *
@@ -214,6 +216,7 @@
     [searchText setTextColor:[UIColor grayColor]];
     [searchText setFont:[UIFont systemFontOfSize:14]];
     [searchText setPlaceholder:@"搜索商品和店铺"];
+    [searchText setReturnKeyType:UIReturnKeySearch];
     [searchView addSubview:searchText];
     [searchText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(searchView.mas_top).with.offset(0);

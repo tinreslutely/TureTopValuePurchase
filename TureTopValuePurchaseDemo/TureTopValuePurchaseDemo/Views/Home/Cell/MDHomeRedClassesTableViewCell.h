@@ -10,10 +10,10 @@
 
 @interface MDHomeRedClassesTableViewCell : UITableViewCell
 
-@property(nonatomic,strong) UILabel *navTitleLabel;
-@property(nonatomic,strong) UIButton *bannerButtonView;
-@property(nonatomic,strong) UIView *productsView;
+@property(nonatomic,strong,nullable) UILabel *navTitleLabel;
+@property(nonatomic,strong,nullable) UIButton *bannerButtonView;
+@property(nonatomic,strong,nullable) UIView *productsView;
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier imageHeight:(float)imageHeight proImageHeight:(float)proImageHeight target:(_Nullable id)target rmMoreAction:(SEL)rmMoreAction rmImageAction:(SEL)rmImageAction rmProductDetailAction:(SEL)rmProductDetailAction;
+-(instancetype _Nullable)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString* _Nullable)reuseIdentifier imageHeight:(float)imageHeight proImageHeight:(float)proImageHeight target:(_Nullable id)target rmMoreAction:(SEL _Nullable)rmMoreAction rmImageAction:(SEL _Nullable)rmImageAction rmProductDetailAction:(SEL _Nullable)rmProductDetailAction;
 
 @end

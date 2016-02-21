@@ -176,7 +176,7 @@
                 height = _bannerHeight + 156;
                 break;
             case 2:
-                height = _rmShopHeight + 30;
+                height = _rmShopHeight + 40;
                 break;
             default:
                 break;
@@ -624,13 +624,13 @@
 -(void)entrustdProductRMCell:(MDHomeRedClassesTableViewCell*)cell  channelModel:(MDHomeRenovateChannelModel*)model{
     [cell.navTitleLabel setText:model.columnName];
     if(model.channelColumnDetails.count > 0){
-        [cell.bannerButtonView sd_setImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:((MDHomeRenovateChannelDetailModel *)model.channelColumnDetails[0]).picAddr width:SCREEN_WIDTH height:_imageHeight]] forState:UIControlStateNormal];
+        [cell.bannerButtonView sd_setBackgroundImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:((MDHomeRenovateChannelDetailModel *)model.channelColumnDetails[0]).picAddr width:SCREEN_WIDTH height:_imageHeight]]  forState:UIControlStateNormal];
     }
     for(int i = 1;i< model.channelColumnDetails.count && i < cell.productsView.subviews.count + 1;i++){
         MDHomeRenovateChannelDetailModel *item = model.channelColumnDetails[i];
         UIButton *button = cell.productsView.subviews[i-1];
         if(button != nil){
-            [button sd_setImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:item.picAddr width:_proImageHeight height:_proImageHeight]] forState:UIControlStateNormal];
+            [button sd_setBackgroundImageWithURL:[NSURL URLWithString:[MDCommon imageURLStringForNetworkStatus:item.picAddr width:_proImageHeight height:_proImageHeight]] forState:UIControlStateNormal];
         }
     }
 }
@@ -648,6 +648,7 @@
     NSMutableArray *contentValueArray = [[NSMutableArray alloc] init];
     int index = 0;
     for (MDHomeRenovateChannelDetailModel *item in array) {
+        NSLog(@"%@",item.picAddr);
         [imageURLArray addObject:item.picAddr];
         [titleArray addObject:item.content];
         [contentValueArray addObject:[NSString stringWithFormat:@"%d",index]];

@@ -68,6 +68,7 @@
     //添加一个图片
     bannerButtonView = [[UIButton alloc] init];
     [bannerButtonView addTarget:target action:rmImageAction forControlEvents:UIControlEventTouchUpInside];
+    [bannerButtonView.imageView setContentMode:UIViewContentModeScaleToFill];
     [self addSubview: bannerButtonView];
     [bannerButtonView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(imageHeight);
@@ -89,14 +90,17 @@
     float width = SCREEN_WIDTH/3;
     float point_x = 0;
     UIButton *productButton = [[UIButton alloc] initWithFrame:CGRectMake(point_x, 0, width, proImageHeight)];
+    [productButton.imageView setContentMode:UIViewContentModeScaleToFill];
     [productButton addTarget:target action:rmProductDetailAction forControlEvents:UIControlEventTouchUpInside];
     [productsView addSubview:productButton];
     point_x += width;
     productButton = [[UIButton alloc] initWithFrame:CGRectMake(point_x, 0, width, proImageHeight)];
+    [productButton.imageView setContentMode:UIViewContentModeScaleToFill];
     [productButton addTarget:target action:rmProductDetailAction forControlEvents:UIControlEventTouchUpInside];
     [productsView addSubview:productButton];
     point_x += width;
     productButton = [[UIButton alloc] initWithFrame:CGRectMake(point_x, 0, width, proImageHeight)];
+    [productButton.imageView setContentMode:UIViewContentModeScaleToFill];
     [productButton addTarget:target action:rmProductDetailAction forControlEvents:UIControlEventTouchUpInside];
     [productsView addSubview:productButton];
 }

@@ -149,8 +149,8 @@
             [headCell.consigneeShopLabel setText:[NSString stringWithFormat:@"%ld",_mainPersonCenterModel.shopCollectionCount]];
         }else{
             [headCell.headImageView setImage:[UIImage imageNamed:@"activity_main_mylinli_bannerhead"]];
-            [headCell.nameButton setTitle:@"您尚未登录超值购，请" forState:UIControlStateNormal];
-            [headCell.roleButton setTitle:@"[登录/注册]" forState:UIControlStateNormal];
+            [headCell.nameButton setTitle:@"您尚未登录超值购，更多精彩" forState:UIControlStateNormal];
+            [headCell.roleButton setTitle:@"请 [登录/注册]" forState:UIControlStateNormal];
             [headCell.roleImageView setHidden:YES];
             [headCell.consigneeProductLabel setText:@"0"];
             [headCell.consigneeShopLabel setText:@"0"];

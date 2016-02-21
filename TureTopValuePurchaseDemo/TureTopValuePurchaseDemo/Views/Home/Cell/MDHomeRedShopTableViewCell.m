@@ -48,7 +48,7 @@
         make.height.mas_equalTo(30);
     }];
     
-    imageScrollView = [[ImageCarouselView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 100)];
+    imageScrollView = [[ImageCarouselView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_WIDTH/3)];
     [imageScrollView setBackgroundColor:[UIColor whiteColor]];
     imageScrollView.infiniteLoop = YES;
     imageScrollView.pageControlStyle = ImageCarouselViewPageContolStyleAnimated;

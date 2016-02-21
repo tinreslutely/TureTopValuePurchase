@@ -47,7 +47,7 @@
     [nameButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [self.contentView addSubview:nameButton];
     [nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 25));
+        make.size.mas_equalTo(CGSizeMake(230, 25));
         make.left.equalTo(headView.mas_right).with.offset(8);
         make.top.equalTo(self.contentView.mas_top).with.offset(45);
     }];

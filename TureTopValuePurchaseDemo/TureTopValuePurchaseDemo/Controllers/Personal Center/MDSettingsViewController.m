@@ -144,7 +144,7 @@
                 [label setText:__APP_VERSION];
                 break;
             case 2:
-                [cell.textLabel setText:@"关于铭道超值购"];
+                [cell.textLabel setText:@"关于超值购"];
                 break;
             case 3:
                 [cell.textLabel setText:@"客服热线"];

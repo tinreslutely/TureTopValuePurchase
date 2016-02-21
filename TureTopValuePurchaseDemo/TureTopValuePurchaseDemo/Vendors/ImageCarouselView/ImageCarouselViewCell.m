@@ -27,7 +27,7 @@
     float width = self.frame.size.width/3;
     ImageCarouselButton *button;
     for (int i = 0; i < images.count; i++) {
-        button = [[ImageCarouselButton alloc] initWithFrame:CGRectMake(pointX, 0, width, self.frame.size.height)];
+        button = [[ImageCarouselButton alloc] initWithFrame:CGRectMake(pointX, 0, self.frame.size.height, self.frame.size.height)];
         [button.imageView sd_setImageWithURL:[NSURL URLWithString:images[i]]];
         if(titles.count > i){
             [button.titleLabel setText:titles[i]];

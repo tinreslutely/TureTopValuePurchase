@@ -54,7 +54,6 @@
         controller.loginAlterBlock = ^(){
             _requestURL = [MDCommon appendParameterForAppWithURL:_requestURL];
             if(APPDATA.isLogin){
-                NSLog(@"登陆后的请求路径：%@",_requestURL);
                 [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]]];
                 _needLogin = NO;
             }
@@ -163,12 +162,21 @@
 
 -(void)showAlertdialog{
     if(__IPHONE_SYSTEM_VERSION >= 8){
+        __weak typeof(self) weakSelf = self;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未登录，请登录" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-           
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+            MDLoginViewController *controller = [[MDLoginViewController alloc] init];
+            controller.topIndex = 2;
+            controller.loginAlterBlock = ^(){
+                _requestURL = [MDCommon appendParameterForAppWithURL:_requestURL];
+                if(APPDATA.isLogin){
+                    [_mainWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_requestURL]]];
+                    _needLogin = NO;
+                }
+            };
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+            return;
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
     }else{

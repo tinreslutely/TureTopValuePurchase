@@ -195,6 +195,7 @@
         make.height.mas_equalTo(64);
     }];
     _searchView = (UITextField*)[[_navigationView viewWithTag:1001] viewWithTag:1003];
+    [_searchView setReturnKeyType:UIReturnKeySearch];
     [_searchView setDelegate:self];
     [self.rightButton setImage:[UIImage imageNamed:@"fun_sortway"] forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(showWayTap) forControlEvents:UIControlEventTouchDown];
