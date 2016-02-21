@@ -25,6 +25,7 @@
 
 +(void)POST:(NSString*)URLString parameters:(NSDictionary*)params sucessBlock:(void(^)(id  _Nullable responseObject))sucessBlock failureBlock:(void(^)(NSError * _Nonnull error))failureBlock{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"text/html",@"text/plain"]];
     [manager POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

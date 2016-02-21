@@ -77,7 +77,7 @@
                     menuModel = [[MDDropdownMenuModel alloc] init];
                     menuModel.code = [NSString stringWithFormat:@"%d",categoryModel.id];
                     menuModel.title = categoryModel.industryName;
-                    menuModel.expand = [ imageURL stringByAppendingString: categoryModel.typeCover];
+                    menuModel.expand = categoryModel.typeCover;
                     menuModel.isNetworking = YES;
                     [rightArray addObject:menuModel];
                 }
@@ -193,7 +193,7 @@
     if(indexPath.section != 0){
         MDFacesShopModel *model = _shopsArray[indexPath.row];
         MDFacesShopTableViewCell *shopCell = (MDFacesShopTableViewCell*)cell;
-        [shopCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",[imageURL stringByAppendingString:model.logo]]] placeholderImage:[UIImage imageNamed:@"loading"]];
+        [shopCell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@_300x300",model.logo]] placeholderImage:[UIImage imageNamed:@"loading"]];
         [shopCell.titleLabel setText:model.companyName];
         [shopCell.subLabel setText:[NSString stringWithFormat:@"全单送%d%%",model.returnRatio]];
         [shopCell.typeLabel setText:model.industryName];
@@ -311,7 +311,7 @@
                 menuModel = [[MDDropdownMenuModel alloc] init];
                 menuModel.code = [NSString stringWithFormat:@"%d",categoryModel.id];
                 menuModel.title = categoryModel.industryName;
-                menuModel.expand = [ imageURL stringByAppendingString: categoryModel.typeCover];
+                menuModel.expand = categoryModel.typeCover;
                 menuModel.isNetworking = YES;
                 [array addObject:menuModel];
             }
@@ -327,7 +327,7 @@
                     menuModel = [[MDDropdownMenuModel alloc] init];
                     menuModel.code = [NSString stringWithFormat:@"%d",categoryModel.id];
                     menuModel.title = categoryModel.industryName;
-                    menuModel.expand = [ imageURL stringByAppendingString: categoryModel.typeCover];
+                    menuModel.expand = categoryModel.typeCover;
                     menuModel.isNetworking = YES;
                     [array addObject:menuModel];
                 }

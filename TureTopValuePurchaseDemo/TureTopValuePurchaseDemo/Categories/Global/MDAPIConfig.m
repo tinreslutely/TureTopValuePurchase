@@ -61,7 +61,7 @@
         self.markReadMessageApiURLString = [apiURL stringByAppendingString:@"/appinter/message/setMsgRead.do"];//消息标记已读
         self.markReadNotifyApiURLString = [apiURL stringByAppendingString:@"/appinter/message/setNoticeRead.do"];//通知标记已读
         self.paymentOrderInformationApiURLString = [apiURL stringByAppendingString:@"/appinter/order/getPayInfo.do"];//支付订单信息
-        self.submitpaymentOrderApiURLString = [apiURL stringByAppendingString:@"/apppay/pay.do"];//订单支付
+        self.submitpaymentOrderApiURLString = [payURL stringByAppendingString:@"/apppay/pay.do"];//订单支付
         self.cancelPaymentOrderApiURLString = [apiURL stringByAppendingString:@"/apppay/calcelPay.do"];//取消订单
         self.walletBalanceApiURLString = [apiURL stringByAppendingString:@"/finance/wallet/getWalletBalance.do"];//获取电子钱包余额
         self.cardBalanceApiURLString = [apiURL stringByAppendingString:@"/finance/card/getCardBalance.do"];//获取卡包余额

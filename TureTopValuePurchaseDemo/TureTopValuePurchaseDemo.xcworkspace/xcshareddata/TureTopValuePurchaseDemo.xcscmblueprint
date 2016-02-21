@@ -1,0 +1,28 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DFA6FC1A6ADCEE0A14760C61D77E63BAD6A460D8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DFA6FC1A6ADCEE0A14760C61D77E63BAD6A460D8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ADB0F74C-D5DB-4873-AA65-21D171D2C329",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DFA6FC1A6ADCEE0A14760C61D77E63BAD6A460D8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TureTopValuePurchaseDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TureTopValuePurchaseDemo\/TureTopValuePurchaseDemo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tinreslutely\/TureTopValuePurchase.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DFA6FC1A6ADCEE0A14760C61D77E63BAD6A460D8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tinreslutely\/TureTopValuePurchaseDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DFA6FC1A6ADCEE0A14760C61D77E63BAD6A460D8"
+    }
+  ]
+}

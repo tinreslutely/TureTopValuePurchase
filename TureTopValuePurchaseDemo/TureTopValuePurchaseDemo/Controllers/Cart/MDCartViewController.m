@@ -42,7 +42,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self initData];
     [self setupMainView];
 }
@@ -255,6 +254,10 @@
         }else{
             [self noneDataStateView];
         }
+        if(_mainTableView.hidden){
+            [_cartFuncitonView setHidden:NO];
+            [_mainTableView setHidden:NO];
+        }
         [_mainTableView.mj_header endRefreshing];
     }];
 }
@@ -296,6 +299,8 @@
  *  @param button 购物车选中按钮
  */
 -(void)cartChecked:(CheckBoxButton*)button{
+    
+    NSLog(@"cartChecked tap");
     MDCartTableViewCell *cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (MDCartTableViewCell*)[[[[button superview] superview] superview] superview] : (MDCartTableViewCell*)[[[[[button superview] superview] superview] superview] superview];
     if(![cell isKindOfClass:[MDCartTableViewCell class]]) return;
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
@@ -319,7 +324,8 @@
  *  @param button 店铺按钮
  */
 -(void)shopChecked:(CheckBoxButton*)button{
-    MDCartTableViewCell *cell = (MDCartTableViewCell*)[button superview];
+    NSLog(@"shopChecked tap");
+    MDCartTableViewCell *cell = __IPHONE_SYSTEM_VERSION >= 8.0 ? (MDCartTableViewCell*)[button superview]: (MDCartTableViewCell*)[[button superview] superview];
     NSIndexPath *indexPath = [_mainTableView indexPathForCell:cell];
     MDCartShopModel *shopModel =  _mainCartArray[indexPath.section];
     if(button.checked){//当前选中
@@ -347,6 +353,7 @@
  *  @param button 全局全选按钮
  */
 -(void)allCartChecked:(CheckBoxButton*)button{
+    NSLog(@"allCartChecked tap");
     button.checked = !button.checked;
     [_mainCheckedArray removeAllObjects];
     if(button.checked){
@@ -461,7 +468,7 @@
     if([title isEqualToString:@"去登录"]){
         [self.navigationController pushViewController:[[MDLoginViewController alloc] init] animated:YES];
     }else if([title isEqualToString:@"去逛逛"]){
-        [self.tabBarController setSelectedIndex:tab_home_index];
+        [(UITabBarController*)APPDELEGATE.window.rootViewController setSelectedIndex:tab_home_index];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
@@ -564,20 +571,6 @@
         [self.leftButton setHidden:YES];
     }
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    
-    
-    //添加一个未登录提示视图
-    _noneStateView = [[UIView alloc] init];
-    [_noneStateView setBackgroundColor:[UIColor whiteColor]];
-    [_noneStateView setHidden:YES];
-    [self.view addSubview:_noneStateView];
-    [_noneStateView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
-    }];
-    
-    [self bringNoLoginStateForViewWithSuperView:_noneStateView];
-    
     BOOL hasTabBar = (!self.tabBarController.tabBar.isHidden);
     int bottomInsert = hasTabBar ? 44 : 0;
     //添加一个有数据的视图
@@ -592,6 +585,21 @@
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(64, 0, bottomInsert, 0));
     }];
     [self bringCartFunctionViewWithSuperView:self.view hasTabBar:hasTabBar];
+    [_cartFuncitonView setHidden:YES];
+    [_mainTableView setHidden:YES];
+    
+    //添加一个未登录提示视图
+    _noneStateView = [[UIView alloc] init];
+    [_noneStateView setBackgroundColor:[UIColor whiteColor]];
+    [_noneStateView setHidden:YES];
+    [self.view addSubview:_noneStateView];
+    [_noneStateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
+    }];
+    
+    [self bringNoLoginStateForViewWithSuperView:_noneStateView];
+    
+    
     [self refreshData];
 }
 

@@ -69,7 +69,6 @@
         [self makeNoReadState];
     }
     [self.navigationController setDelegate:self];
-    NSLog(@"Home state:%d",self.navigationController.navigationBarHidden);
     if(((RDVTabBarController*)APPDELEGATE.window.rootViewController).tabBarHidden){
         [((RDVTabBarController*)APPDELEGATE.window.rootViewController) setTabBarHidden:NO];
     }

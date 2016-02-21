@@ -30,7 +30,7 @@
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     progressView = [[LDProgressView alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:progressView];
+    //[self.navigationController.view addSubview:progressView];
     
     MDNavigationController *navigationController = (MDNavigationController*)self.navigationController;
     [navigationController setNormalBar];
@@ -40,12 +40,12 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
+    [progressView removeFromSuperview];
     [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    [progressView removeFromSuperview];
     // Dispose of any resources that can be recreated.
 }
 

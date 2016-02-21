@@ -11,16 +11,17 @@
 
 @implementation LDProgressView{
     MMMaterialDesignSpinner *_spinnerView;
+    UIView *_superView;
     int _viewSize;
 }
 
 -(instancetype)initWithView:(UIView*)view{
+    _superView = view;
     int pointX = (SCREEN_WIDTH - 30)/2;
     int pointY = (SCREEN_HEIGHT - 30)/2;
     _viewSize = 30;
     if(self = [super initWithFrame:CGRectMake(pointX, pointY, _viewSize, _viewSize)]){
         [self setupView];
-        [self setHidden:YES];
     }
     return self;
 }
@@ -39,12 +40,12 @@
 }
 
 -(void)show{
-    [self setHidden:NO];
+    [_superView addSubview:self];
     [_spinnerView startAnimating];
 }
 
 -(void)hide{
-    [self setHidden: YES];
+    [self removeFromSuperview];
     [_spinnerView stopAnimating];
 }
 @end

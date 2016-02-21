@@ -118,6 +118,7 @@
     if(controller == nil) return NO;
     if([controller isKindOfClass:[MDLoginViewController class]]){
         _needLogin = YES;
+        [self.progressView hide];
         return NO;
     }
     [self.navigationController pushViewController:controller animated:YES];

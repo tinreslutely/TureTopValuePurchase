@@ -82,10 +82,6 @@
     _isDroping = YES;
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
-}
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!_isDroping) return;
     if(scrollView.contentOffset.y > _transStartY && _navigationView.transform.ty == 0){

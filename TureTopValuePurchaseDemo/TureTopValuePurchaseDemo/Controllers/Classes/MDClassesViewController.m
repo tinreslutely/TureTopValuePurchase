@@ -141,7 +141,7 @@
     for (MDClassesModel *model in _firstArray) {
         meun=[[rightMeun alloc] init];
         meun.meunName = model.sysTypeName;
-        if(model.typeCover != nil) meun.urlName = [imageURL stringByAppendingString: model.typeCover];
+        if(model.typeCover != nil) meun.urlName = model.typeCover;
         meun.ID = [NSString stringWithFormat:@"%d",model.typeId];
         [tableArray addObject:meun];
     }
@@ -167,7 +167,7 @@
         for (MDClassesModel *smodel in model.secondTypes) {
             smeun=[[rightMeun alloc] init];
             smeun.meunName = smodel.sysTypeName;
-            if(smodel.typeCover != nil) smeun.urlName = [imageURL stringByAppendingString: smodel.typeCover];
+            if(smodel.typeCover != nil) smeun.urlName = smodel.typeCover;
             smeun.ID = [NSString stringWithFormat:@"%d",smodel.typeId];
             [nextArray addObject:smeun];
             

@@ -120,7 +120,6 @@
     }
 }
 -(void)setAlphaBar{
-    NSLog(@"_alphaViewHidden:%d",_alphaView.hidden);
     _alphaView.backgroundColor = UIColorFromRGBA(251, 77, 2, 1);
     _alphaView.alpha = 0.001;
     [_bottomBorder setBackgroundColor:UIColorFromRGBA(251, 77, 2, 1)];
