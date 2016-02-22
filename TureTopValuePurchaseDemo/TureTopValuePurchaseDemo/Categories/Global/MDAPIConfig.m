@@ -62,11 +62,11 @@
         self.markReadNotifyApiURLString = [apiURL stringByAppendingString:@"/appinter/message/setNoticeRead.do"];//通知标记已读
         self.paymentOrderInformationApiURLString = [apiURL stringByAppendingString:@"/appinter/order/getPayInfo.do"];//支付订单信息
         self.submitpaymentOrderApiURLString = [payURL stringByAppendingString:@"/apppay/pay.do"];//订单支付
-        self.cancelPaymentOrderApiURLString = [apiURL stringByAppendingString:@"/apppay/calcelPay.do"];//取消订单
+        self.cancelPaymentOrderApiURLString = [payURL stringByAppendingString:@"/apppay/calcelPay.do"];//取消订单
         self.walletBalanceApiURLString = [apiURL stringByAppendingString:@"/finance/wallet/getWalletBalance.do"];//获取电子钱包余额
         self.cardBalanceApiURLString = [apiURL stringByAppendingString:@"/finance/card/getCardBalance.do"];//获取卡包余额
-        self.walletRechargeApiURLString = [apiURL stringByAppendingString:@"/app/recharge/walletRecharge.do"];//电子钱包充值
-        self.cardRechargeApiURLString = [apiURL stringByAppendingString:@"/app/recharge/cardRecharge.do"];//卡包充值
+        self.walletRechargeApiURLString = [payURL stringByAppendingString:@"/app/recharge/walletRecharge.do"];//电子钱包充值
+        self.cardRechargeApiURLString = [payURL stringByAppendingString:@"/app/recharge/cardRecharge.do"];//卡包充值
         self.facesBannefrApiURLString = [apiURL stringByAppendingString:@"/appinter/face/getFTFBanners.do"];
     }
     return self;

@@ -9,14 +9,16 @@
 #ifndef TureTopValuePurchase_Prefix_pch
 #define TureTopValuePurchase_Prefix_pch
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "MDEnum.h"
+#import "MDCommon.h"
 #import "AppDelegate.h"
 #import "AppConfig.h"
 #import "MDAPIConfig.h"
 #import "MDPageConfig.h"
 #import "MDAppData.h"
 #import "GlobalMacros.h"
-#import "MDEnum.h"
 #import "MDHttpManager.h"
 #import "MDUserDefaultHelper.h"
 
@@ -33,5 +35,4 @@
 #import "MDWebViewController.h"
 
 #import "LDUtils.h"
-#import "MDCommon.h"
 #endif /* TureTopValuePurchase_Prefix_pch */

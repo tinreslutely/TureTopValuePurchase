@@ -10,6 +10,10 @@
 #import "MDTabBarController.h"
 #import "Reachability.h"
 #import "MDLocationManager.h"
+#import "AFNetworking.h"
+#import "WXApi.h"
+#import "MDWechatPaymentManager.h"
+#import "MDCheckVersionManager.h"
 
 @interface AppDelegate ()
 
@@ -24,8 +28,9 @@
     
     [self setupWindow];
     [self setupCheckNetwork];
-    
-    [[MDLocationManager sharedManager] startUpdatingLocation];
+    [[MDLocationManager sharedManager] startUpdatingLocation];//开始定位
+    [[MDCheckVersionManager sharedManager] checkedVersionForApp];//开始检查版本
+    [WXApi registerApp:WeChat_AppID withDescription:@"weixin"];//注册微信支付
     return YES;
 }
 
@@ -48,6 +53,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     
 }
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [WXApi handleOpenURL:url delegate:[MDWechatPaymentManager sharedWechatPaymentManager]];
+}
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:[MDWechatPaymentManager sharedWechatPaymentManager]];
+}
+
 
 #pragma mark private methods
 /*!

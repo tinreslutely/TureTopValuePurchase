@@ -92,6 +92,9 @@
 		B59E8A1B1C475272005CEA25 /* ImageCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A181C475272005CEA25 /* ImageCarouselView.m */; };
 		B59E8A1C1C475272005CEA25 /* ImageCarouselViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */; };
 		B5A0B2B21C4C909600C8DD6D /* LDSearchPopTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */; };
+		B5A837F51C7AD5E300E527B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A837F41C7AD5E300E527B2 /* SystemConfiguration.framework */; };
+		B5A837F81C7ADB4600E527B2 /* MDWechatPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A837F71C7ADB4600E527B2 /* MDWechatPaymentManager.m */; };
+		B5A837FB1C7ADDE400E527B2 /* MDCheckVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A837FA1C7ADDE400E527B2 /* MDCheckVersionManager.m */; };
 		B5B67CA91C4629F600E7A902 /* LDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B67CA81C4629F600E7A902 /* LDSearchBar.m */; };
 		B5C677841C51C5780020C71F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C677831C51C5780020C71F /* Reachability.m */; };
 		B5C677861C51C7860020C71F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C677851C51C7860020C71F /* CoreTelephony.framework */; };
@@ -331,6 +334,11 @@
 		B59E8A1A1C475272005CEA25 /* ImageCarouselViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCarouselViewCell.m; sourceTree = "<group>"; };
 		B5A0B2B01C4C909600C8DD6D /* LDSearchPopTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchPopTransition.h; sourceTree = "<group>"; };
 		B5A0B2B11C4C909600C8DD6D /* LDSearchPopTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchPopTransition.m; sourceTree = "<group>"; };
+		B5A837F41C7AD5E300E527B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B5A837F61C7ADB4600E527B2 /* MDWechatPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWechatPaymentManager.h; sourceTree = "<group>"; };
+		B5A837F71C7ADB4600E527B2 /* MDWechatPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWechatPaymentManager.m; sourceTree = "<group>"; };
+		B5A837F91C7ADDE400E527B2 /* MDCheckVersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCheckVersionManager.h; sourceTree = "<group>"; };
+		B5A837FA1C7ADDE400E527B2 /* MDCheckVersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCheckVersionManager.m; sourceTree = "<group>"; };
 		B5B67CA41C45E2EA00E7A902 /* MDEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDEnum.h; sourceTree = "<group>"; };
 		B5B67CA71C4629F600E7A902 /* LDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDSearchBar.h; sourceTree = "<group>"; };
 		B5B67CA81C4629F600E7A902 /* LDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDSearchBar.m; sourceTree = "<group>"; };
@@ -427,6 +435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A837F51C7AD5E300E527B2 /* SystemConfiguration.framework in Frameworks */,
 				B5D692E01C719EB300B62A48 /* libc++.tbd in Frameworks */,
 				B5D692DE1C719E9F00B62A48 /* libz.tbd in Frameworks */,
 				B518D9CC1C5606ED00E15656 /* Accelerate.framework in Frameworks */,
@@ -575,6 +584,7 @@
 		35EDC44EDBC14BCDEB06F646 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5A837F41C7AD5E300E527B2 /* SystemConfiguration.framework */,
 				B5D692DF1C719EB300B62A48 /* libc++.tbd */,
 				B5D692DD1C719E9F00B62A48 /* libz.tbd */,
 				B518D9CB1C5606ED00E15656 /* Accelerate.framework */,
@@ -873,6 +883,8 @@
 		B59A99AF1C44A28900A8A6FC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B5A837F61C7ADB4600E527B2 /* MDWechatPaymentManager.h */,
+				B5A837F71C7ADB4600E527B2 /* MDWechatPaymentManager.m */,
 				B5C677971C522DFC0020C71F /* MD5Hepler.h */,
 				B5C677981C522DFC0020C71F /* MD5Hepler.m */,
 				B5C677991C522DFC0020C71F /* MDLocationManager.h */,
@@ -883,6 +895,8 @@
 				B5995CC21C50CF50006B5697 /* MDDataCache.m */,
 				B5995CC41C50DA3D006B5697 /* MDFluentDB.h */,
 				B5995CC51C50DA3D006B5697 /* MDFluentDB.m */,
+				B5A837F91C7ADDE400E527B2 /* MDCheckVersionManager.h */,
+				B5A837FA1C7ADDE400E527B2 /* MDCheckVersionManager.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1351,7 +1365,7 @@
 				TargetAttributes = {
 					B59A99731C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = S9997395XD;
+						DevelopmentTeam = ESPTK63FMU;
 					};
 					B59A998C1C449ED600A8A6FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -1543,6 +1557,7 @@
 				B5C677841C51C5780020C71F /* Reachability.m in Sources */,
 				B518D9EB1C561B6300E15656 /* MDCartDataController.m in Sources */,
 				B5045C0E1C756D3A00304E8B /* MDShopSearchManyCollectionViewCell.m in Sources */,
+				B5A837F81C7ADB4600E527B2 /* MDWechatPaymentManager.m in Sources */,
 				B59638181C631DB0001BC73F /* MDMessageDataController.m in Sources */,
 				B5E0B5981C5777DD0083D87C /* MDPersonCenterOrderTableViewCell.m in Sources */,
 				08FD95C51C704326003543B3 /* MDFacesShopTableViewCell.m in Sources */,
@@ -1572,6 +1587,7 @@
 				B59638151C631CBD001BC73F /* MDMessageModel.m in Sources */,
 				08FD95E01C71F10F003543B3 /* PhotoTweakView.m in Sources */,
 				B518D9D31C560D8D00E15656 /* MDShopDataController.m in Sources */,
+				B5A837FB1C7ADDE400E527B2 /* MDCheckVersionManager.m in Sources */,
 				B57AB8351C747B0B00409FCE /* MDShopSearchViewController.m in Sources */,
 				B59B82521C4F7C7000BF9AB9 /* MDHttpManager.m in Sources */,
 				B5D692E31C71BEE400B62A48 /* MDSettingsViewController.m in Sources */,
@@ -1715,7 +1731,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TureTopValuePurchaseDemo/Vendors/SDKExport",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.MicroValuePurchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1738,7 +1754,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TureTopValuePurchaseDemo/Vendors/SDKExport",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.TureTopValuePurchaseDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TureTop.MicroValuePurchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

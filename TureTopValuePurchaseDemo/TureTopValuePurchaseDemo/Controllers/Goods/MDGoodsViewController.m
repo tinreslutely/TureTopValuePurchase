@@ -144,6 +144,11 @@
 
 -(void)showWayTap{
     _firstRow = !_firstRow;
+    if(_firstRow){
+        [self.rightButton setImage:[UIImage imageNamed:@"fun_sortway"] forState:UIControlStateNormal];
+    }else{
+        [self.rightButton setImage:[UIImage imageNamed:@"fun_sortwayscend"] forState:UIControlStateNormal];
+    }
     [_mainCollectionView reloadData];
 }
 

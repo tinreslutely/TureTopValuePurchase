@@ -76,7 +76,7 @@
     [geoCoder reverseGeocodeLocation:_currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if(placemarks > 0){
             _placemark = [placemarks firstObject];
-            [MDUserDefaultHelper saveForKey:locationCityKey value:[_placemark locality]];
+            if(APPDATA.locationCity != [_placemark locality])[MDUserDefaultHelper saveForKey:locationCityKey value:[_placemark locality]];
             for (locationUpdatedBlock block in _successBlockArray) {
                 block();
             }

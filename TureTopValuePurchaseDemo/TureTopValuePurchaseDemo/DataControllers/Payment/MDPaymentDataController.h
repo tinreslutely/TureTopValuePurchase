@@ -22,4 +22,6 @@
 -(void)requestWalletCardBalanceDataWithUserId:(NSString* _Nullable)userId type:(MDBalanceType)type completion:(void(^ _Nullable)(BOOL state, NSString * _Nullable msg, MDPaymentModel * _Nullable model))completion;
 
 -(void)submitCardRechargeWithRechargeType:(MDRechargeType)rechargeType userId:(NSString* _Nullable)userId payType:(int)payType payAmount:(float)payAmount payPwd:(NSString* _Nullable)payPwd completion:(void(^ _Nullable)(BOOL state, NSString *  _Nullable msg, MDSubmitPaymentOrderModel *  _Nullable model))completion;
+
+-(void)cancelPaymentWithUserId:(NSString* _Nullable)userId mergeCode:(NSString*)mergeCode completion:(void(^ _Nullable)(BOOL state, NSString * _Nullable msg))completion;
 @end

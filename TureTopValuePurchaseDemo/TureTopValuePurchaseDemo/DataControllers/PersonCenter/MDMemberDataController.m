@@ -53,10 +53,15 @@
         }
         MDUploadPicModel *model = [MDUploadPicModel mj_objectWithKeyValues:dic];
         [self submitMemberInformationDataWithUserId:userId token:token name:name value:model.relativeUrl completion:^(BOOL state, NSString *msg) {
-            if(state) completion(YES,nil,model);
+            if(state){
+                completion(YES,nil,model);
+            }else{
+                completion(NO,msg,nil);
+            }
         }];
     } failureBlock:^(NSError * _Nonnull error) {
         completion(NO,[NSString stringWithFormat:@"%@",error],nil);
+        NSLog(@"%@",[NSString stringWithFormat:@"%@",error]);
     }];
 }
 

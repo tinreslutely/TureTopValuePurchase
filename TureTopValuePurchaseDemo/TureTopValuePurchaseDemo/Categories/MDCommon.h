@@ -6,8 +6,6 @@
 //  Copyright © 2016年 铭道超值购. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface MDCommonDelegate : NSObject<UIAlertViewDelegate>
 
 @end
@@ -32,4 +30,6 @@
 +(void)checkedVersionForAppWithUpdateWithController:(UIViewController* _Nullable)controller isShowNewVersionMessage:(BOOL)isShowNewVersionMessage;
 
 +(UIViewController* _Nullable)controllerForPagePathWithURL:(NSString* _Nullable)url currentController:(UIViewController* _Nullable)currentController token:(NSString* _Nullable)token;
+
++(void)UpdateVersion;
 @end

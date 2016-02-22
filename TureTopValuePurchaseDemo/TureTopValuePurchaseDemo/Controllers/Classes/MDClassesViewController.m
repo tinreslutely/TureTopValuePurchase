@@ -18,6 +18,7 @@
 
 @implementation MDClassesViewController{
     MDClassesDataController *_dataController;
+    MultilevelMenu * _mainMenuView;
     NSArray *_firstArray;
     NSMutableArray *_secondArray;
     
@@ -30,6 +31,15 @@
     
     [self initData];
     [self initView];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(_firstArray && _firstArray.count == 0){
+        [self initDataWithCompletion:^{
+            [self initMenu];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +74,7 @@
 #pragma mark private methods
 -(void)initData{
     _dataController = [[MDClassesDataController alloc] init];
+    _firstArray = [[NSArray alloc] init];
 }
 /**
  *  初始化视图
@@ -71,13 +82,7 @@
 -(void)initView{
     [self.navigationItem setTitle:@"类目"];
     [self.leftButton setHidden:YES];
-    [self initDataWithCompletion:^{
-        MultilevelMenu * menuView=[[MultilevelMenu alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-108) tableData:[self convertDataForFirstArray] collectionData:[self convertDataForSecondArray] ];
-        menuView.needToScorllerIndex=0;
-        menuView.isRecordLastScroll=YES;
-        menuView.delegate = self;
-        [self.view addSubview:menuView];
-    }];
+    
 }
 
 /**
@@ -94,7 +99,7 @@
             MDClassesModel *categoryModel = [_firstArray firstObject];
             if(categoryModel != nil){
                 [self requestDataForSecondWithTypeId:categoryModel.typeId categoryType:categoryModel.categoryType completion:^{
-                    completion();
+                    if(completion) completion();
                 }];
             }
         }
@@ -123,11 +128,11 @@
  */
 -(void)initMenu{
     //默认是 选中第一行
-    MultilevelMenu * view=[[MultilevelMenu alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-108) tableData:[self convertDataForFirstArray] collectionData:[self convertDataForSecondArray] ];
-    view.needToScorllerIndex=0;
-    view.isRecordLastScroll=YES;
-    view.delegate = self;
-    [self.view addSubview:view];
+    _mainMenuView=[[MultilevelMenu alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-108) tableData:[self convertDataForFirstArray] collectionData:[self convertDataForSecondArray] ];
+    _mainMenuView.needToScorllerIndex=0;
+    _mainMenuView.isRecordLastScroll=YES;
+    _mainMenuView.delegate = self;
+    [self.view addSubview:_mainMenuView];
 }
 
 /**
